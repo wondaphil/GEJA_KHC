@@ -1,0 +1,38 @@
+﻿@model IEnumerable<GEJA_KHC_WEB.Models.MemberService>
+
+@{
+    ViewBag.Title = "አገልግሎት";
+}
+<style>
+    /* To vertically align in the middle any row span other than 1 */
+    td[rowspan]:not([rowspan="1"]) {
+        vertical-align: middle;
+    }
+</style>
+
+<table class="table table-condensed table-bordered" style="font-size:medium">
+    @*<tr>
+        <th colspan="2">
+            አገልግሎት
+        </th>
+    </tr>*@
+
+    @foreach (var group in Model.GroupBy(s => s.ServiceTypeId))
+    {
+        <tr>
+            <td rowspan="@(group.Count() + 1)">
+                @GEJA_KHC_WEB.ViewModels.DbViewModel.GetServiceType((int)@group.Key).ServiceTypeName
+            </td>
+        </tr>
+
+        foreach (var item in group)
+        {
+            <tr>
+                <th>
+                    @*@Html.DisplayFor(modelItem => item.ServiceId)*@
+                    @GEJA_KHC_WEB.ViewModels.DbViewModel.GetService((int)item.ServiceId).ServiceName
+                </th>
+            </tr>
+        }
+    }
+    </table>

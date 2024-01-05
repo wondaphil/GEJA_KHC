@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "የመረጃ ስረዛ ስህተት";
+}
+
+<h2>የመረጃ ስረዛ ስህተት</h2>
+
+@{
+    int errorCode = ViewBag.ErrorCode;
+    HtmlString message1;
+    HtmlString message2;
+}
+@switch (errorCode)
+{
+    //Group
+    case 1:
+        message1 = new HtmlString("የምድብ መረጃ መሰረዝ አልተቻለም!");
+        message2 = new HtmlString("ሊሰርዙ እየሞከሩ ያሉት <b>ምድብ</b> በሥሩ አንድ ወይም ከዚያ በላይ <b>አባላት</b> አሉት። <br /><br />ስለዚህ በቅድሚያ እነዚያን አባላት ወደ ሌላ ምድብ ያዘዋውሯቸው ወይም ይሰርዟቸው። ከዚያ እንደገና ይሞክሩ።");
+        break;
+
+    //Membership Means
+    case 2:
+        message1 = new HtmlString("የአባልነት መንገድ መረጃ መሰረዝ አልተቻለም!");
+        message2 = new HtmlString("ሊሰርዙ እየሞከሩ ያሉት <b>የአባልነት መንገድ</b> በሥሩ አንድ ወይም ከዚያ በላይ <b>አባላት</b> አሉት። <br /><br />ስለዚህ በቅድሚያ እነዚያን አባላት ወደ ሌላ የአባልነት መንገድ ያዘዋውሯቸው ወይም ይሰርዟቸው። ከዚያ እንደገና ይሞክሩ።");
+        break;
+
+    //Job
+    case 3:
+        message1 = new HtmlString("የሥራ ዘርፍ መሰረዝ አልተቻለም!");
+        message2 = new HtmlString("ሊሰርዙ እየሞከሩ ያሉት <b>የሥራ ዘርፍ</b> በሥሩ አንድ ወይም ከዚያ በላይ <b>አባላት</b> አሉት። <br /><br />ስለዚህ በቅድሚያ እነዚያን አባላት ወደ ሌላ የሥራ ዘርፍ ያዘዋውሯቸው ወይም ይሰርዟቸው። ከዚያ እንደገና ይሞክሩ።");
+        break;
+
+    //Education Level
+    case 4:
+        message1 = new HtmlString("የትምህርት ደረጃ መረጃ መሰረዝ አልተቻለም!");
+        message2 = new HtmlString("ሊሰርዙ እየሞከሩ ያሉት <b>የትምህርት ደረጃ</b> በሥሩ አንድ ወይም ከዚያ በላይ <b>አባላት</b> አሉት። <br /><br />ስለዚህ በቅድሚያ እነዚያን አባላት ወደ ሌላ የትምህርት ደረጃ ያዘዋውሯቸው ወይም ይሰርዟቸው። ከዚያ እንደገና ይሞክሩ።");
+        break;
+
+    //Field of Study
+    case 5:
+        message1 = new HtmlString("የትምህርት መስክ መረጃ መሰረዝ አልተቻለም!");
+        message2 = new HtmlString("ሊሰርዙ እየሞከሩ ያሉት <b>የትምህርት መስክ</b> በሥሩ አንድ ወይም ከዚያ በላይ <b>አባላት</b> አሉት። <br /><br />ስለዚህ በቅድሚያ እነዚያን አባላት ወደ ሌላ የትምህርት መስክ ያዘዋውሯቸው ወይም ይሰርዟቸው። ከዚያ እንደገና ይሞክሩ።");
+        break;
+
+    //Service
+    case 6:
+        message1 = new HtmlString("የአገልግሎት ዘርፍ መረጃ መሰረዝ አልተቻለም!");
+        message2 = new HtmlString("ሊሰርዙ እየሞከሩ ያሉት <b>የአገልግሎት ዘርፍ</b> በሥሩ አንድ ወይም ከዚያ በላይ <b>አባላት</b> አሉት። <br /><br />ስለዚህ በቅድሚያ እነዚያን አባላት ወደ ሌላ አገልግሎት ዘርፍ ያዘዋውሯቸው ወይም ይሰርዟቸው። ከዚያ እንደገና ይሞክሩ።");
+        break;
+
+    //Subcity
+    case 7:
+        message1 = new HtmlString("የክፍለ ከተማ መረጃ መሰረዝ አልተቻለም!");
+        message2 = new HtmlString("ሊሰርዙ እየሞከሩ ያሉት <b>ክፍለ ከተማ</b> በሥሩ አንድ ወይም ከዚያ በላይ <b>አባላት</b> አሉት። <br /><br />ስለዚህ በቅድሚያ እነዚያን አባላት ወደ ሌላ ክፍለ ከተማ ያዘዋውሯቸው ወይም ይሰርዟቸው። ከዚያ እንደገና ይሞክሩ።");
+        break;
+
+    //House Ownership Type
+    case 8:
+        message1 = new HtmlString("የቤት ይዞታ መረጃ መሰረዝ አልተቻለም!");
+        message2 = new HtmlString("ሊሰርዙ እየሞከሩ ያሉት <b>የቤት ይዞታ</b> በሥሩ አንድ ወይም ከዚያ በላይ <b>አባላት</b> አሉት። <br /><br />ስለዚህ በቅድሚያ እነዚያን አባላት ወደ ሌላ የቤት ይዞታ ያዘዋውሯቸው ወይም ይሰርዟቸው። ከዚያ እንደገና ይሞክሩ።");
+        break;
+
+    default:
+        message1 = new HtmlString("ያልታወቀ ስህተት");
+        message2 = new HtmlString("ያልታወቀ ስህተት ተፈጥሯል! እባክዎን እንደገና ይሞክሩ።");
+        break;
+}
+
+<h3 style="color: red"><u>@message1</u></h3>
+<h4>@message2</h4>
+<br />
+<a href="javascript:history.back()" class="btn btn-primary"><span class="glyphicon glyphicon-backward"></span> ወደ ኋላ ተመለስ</a>

@@ -1,0 +1,11 @@
+﻿@using (Html.BeginForm("_FindMember", "Search", FormMethod.Get))
+{
+    <table align="right">
+        <tr>
+            <td style="padding: 5px; font-size:medium">@Html.TextBox("fullname", null, new { @class = "control-control" })</td>
+            <td style="padding: 5px">
+                <button type="submit" id="showMemberInfo" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> ፈልግ</button>
+            </td>
+        </tr>
+    </table>
+}

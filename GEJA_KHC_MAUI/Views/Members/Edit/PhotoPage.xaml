@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GEJA_KHC_MAUI.Views.PhotoPage"
+             Title="የአባል ፎቶግራፍ"
+             IconImageSource="photo.png" >
+    <ScrollView>
+        <VerticalStackLayout Padding="10,0,10,0" VerticalOptions="StartAndExpand" Spacing="0">
+            <Frame BackgroundColor="{AppThemeBinding Light=White,Dark={StaticResource Black}}" BorderColor="{AppThemeBinding Light=White,Dark={StaticResource Black}}">
+                <Label x:Name="lblMemberName" FontSize="{OnIdiom Phone=Medium,Tablet=28,Desktop=Medium}"
+                       VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" />
+            </Frame>
+            <Entry x:Name="entryMemberId" Text="{Binding MemberId}" IsVisible="False" />
+
+            <Grid ColumnSpacing="20" RowSpacing="20" Padding="50,25,50,50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <VerticalStackLayout Grid.Row="2" Grid.Column="0" HorizontalOptions="Center" BackgroundColor="Transparent"  
+                    WidthRequest="{OnIdiom Phone=150,Tablet=220,Desktop=150}" HeightRequest="{OnIdiom Phone=150,Tablet=150,Desktop=150}" >
+                    <Button ImageSource="icon_image.png" Clicked="btnChoosePhotoFile_Clicked" 
+                        BackgroundColor="Transparent" BorderColor="White" Scale="{OnIdiom Phone=1.2,Tablet=1.6,Desktop=1.2}" />
+                    <Label Text="ከጋለሪ ምረጥ" FontSize="{OnIdiom Phone=Medium,Tablet=28,Desktop=Medium}" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Row="2" Grid.Column="1" HorizontalOptions="Center" BackgroundColor="Transparent"  
+                    WidthRequest="{OnIdiom Phone=150,Tablet=220,Desktop=150}" HeightRequest="{OnIdiom Phone=150,Tablet=150,Desktop=150}" >
+                    <Button ImageSource="icon_camera.png" Clicked="btnCapturePhoto_Clicked" 
+                        BackgroundColor="Transparent" BorderColor="White" Scale="{OnIdiom Phone=1.2,Tablet=1.6,Desktop=1.2}" />
+                    <Label Text="ፎቶ አንሳ" FontSize="{OnIdiom Phone=Medium,Tablet=28,Desktop=Medium}" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <Image x:Name="imgSelectedPhoto" Source="{Binding PhotoStream,Mode=TwoWay}" Grid.Row="1" Grid.Column="1" HeightRequest="{OnIdiom Phone=250,Tablet=450,Desktop=250}" />
+            <Entry x:Name="entryPhotoFilePath" Text="{Binding PhotoFilePath}" IsVisible="false" HorizontalOptions="Center"/>
+            
+            <!--<Label x:Name="lblStatus" />-->
+
+            <Grid ColumnSpacing="20" RowSpacing="20" Padding="50,50,50,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Row="0" Grid.Column="0" Padding="5,5,5,5" Text="ሴቭ አድርግ" Clicked="btnSave_Clicked" Command="{Binding SaveCommand}"  
+                        FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" WidthRequest="{OnIdiom Phone=150,Tablet=200,Desktop=150}" HorizontalOptions="End" />
+                <Button Grid.Row="0" Grid.Column="1" Padding="5,5,5,5" Text="ተወው" Clicked="btnCancel_Clicked" 
+                        FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" WidthRequest="{OnIdiom Phone=150,Tablet=200,Desktop=150}" HorizontalOptions="Start" />
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

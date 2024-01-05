@@ -1,0 +1,90 @@
+﻿@model GEJA_KHC_WEB.ViewModels.MemberViewModel
+
+@{
+    ViewBag.Title = "የአባላት ዝርዝር";
+}
+
+<h2>የአባላት ዝርዝር</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+                <div class="col-md-offset-2 col-md-6 col-xs-9">
+                    <div class="form-horizontal">
+                        <div class="form-group form-group-lg">
+                            <label for="ddlGroup" class="control-label col-lg-2 col-md-3 col-xs-4">ምድብ</label>
+                            <div class="col-lg-9 col-md-8 col-xs-8">
+                                @*@Html.DropDownList("ddlGroup", (List<SelectListItem>)ViewBag.Groups, new { @class = "form-control" })*@
+                                @Html.DropDownList("ddlGroup", new SelectList(ViewBag.Groups, "Value", "Text", ViewBag.GroupId), htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2 col-xs-3" align="right">
+                    <a class="btn btn-primary" data-toggle="tooltip" title="ከንደገና አሳይ" id="refresh"> <span class="glyphicon glyphicon-refresh"></span> </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="membersList">
+        <!-- Members list -->
+        @*@if (Model != null)
+        {
+            @Html.Partial("_GetMemberProfile", Model, new ViewDataDictionary());
+        }*@
+    </div>
+}
+
+<div id="wait" align="center" style="display: none">
+    <img src="~/images/ajax-loader-big.gif" />
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#ddlGroup').change(function () {
+            var selGroupId = $('#ddlGroup option:selected').val();
+            $('#membersList').empty(); // clear the members list place holder
+
+            if (selGroupId != "-1") //if some group is selected
+            {
+                if (selGroupId == "0")
+                {
+                    $.ajax({
+                        url: '@Url.Action("_GetMemberListAll", "MemberProfile")',
+                        type: 'GET',
+                        dataType: 'html',
+                        beforeSend: function () { $('#wait').show(); },
+                        complete: function () { $('#wait').hide(); },
+                        success: function (data) {
+                            $('#membersList').html(data);
+                        }
+                    });
+                }
+                else {
+                    $.ajax({
+                        url: '@Url.Action("_GetMemberListByGroup", "MemberProfile")',
+                        data: { groupid: selGroupId },
+                        type: 'GET',
+                        dataType: 'html',
+                        beforeSend: function () { $('#wait').show(); },
+                        complete: function () { $('#wait').hide(); },
+                        success: function (data) {
+                            $('#membersList').html(data);
+                        }
+                    });
+                }
+            }
+        });
+
+        $('#refresh').click(function () {
+            $('#ddlGroup').trigger('change');
+        });
+    });
+</script>

@@ -1,0 +1,163 @@
+﻿@model IEnumerable<GEJA_KHC_WEB.Models.SubcityByGroup>
+@using GEJA_KHC_WEB.ViewModels
+
+<hr />
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title panel-info">የአባላት ብዛት በ<b>ክፍለ ከተማ</b> በየ<b>ምድቡ</b></h3>
+    </div>
+
+    <div class="panel-body">
+        <br />
+        <br />
+        <table class="table table-striped table-condensed table-responsive table-bordered centeredtable display compact hover" style="font-size: medium" id="tblmembertypecensusbydistrict">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GroupName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Total)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Unknown)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Lideta)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AddisKetema)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.KolfeKeraniyo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Arada)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Gulele)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Kirkos)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Yeka)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Bole)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NifasSilkLafto)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AkakiKality)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LemiKura)
+                    </th>
+
+                </tr>
+            </thead>
+           
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th>
+                            @Html.DisplayFor(modelItem => item.GroupName)
+                        </th>
+                        <th>
+                            @Html.DisplayFor(modelItem => item.Total)
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Unknown)
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Lideta)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AddisKetema)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.KolfeKeraniyo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Arada)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Gulele)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Kirkos)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Yeka)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Bole)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NifasSilkLafto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AkakiKality)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LemiKura)
+                        </td>
+                    </tr>
+                }
+                <tr style="background-color: #e9e9e9; font-style: italic">
+                    <th><i>ጠቅላላ በሁሉም ምድቦች</i></th>
+                    <th>@Model.Sum(m => m.Total)</th>
+                    <th>@Model.Sum(m => m.Unknown)</th>
+                    <th>@Model.Sum(m => m.Lideta)</th>
+                    <th>@Model.Sum(m => m.AddisKetema)</th>
+                    <th>@Model.Sum(m => m.KolfeKeraniyo)</th>
+                    <th>@Model.Sum(m => m.Arada)</th>
+                    <th>@Model.Sum(m => m.Gulele)</th>
+                    <th>@Model.Sum(m => m.Kirkos)</th>
+                    <th>@Model.Sum(m => m.Yeka)</th>
+                    <th>@Model.Sum(m => m.Bole)</th>
+                    <th>@Model.Sum(m => m.NifasSilkLafto)</th>
+                    <th>@Model.Sum(m => m.AkakiKality)</th>
+                    <th>@Model.Sum(m => m.LemiKura)</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer">
+        <h3 class="panel-title">በጠቅላላ  <b>@Model.Count()</b> ምድቦች እና <b>@Model.Sum(m => m.Total)</b> አባላት </h3>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#tblmembertypecensusbydistrict').dataTable({
+            paging: false,
+            pageLength: 15,
+            bLengthChange: true,
+            scrollY: 400,
+            searching: false,
+            oLanguage: {
+                sSearch: "<span style='font-size: large'> ፈልግ</span>",
+                sLengthMenu: "<span style='font-size: medium'>በ1 ገጽ የሚታዩ መረጃዎች _MENU_ </span>",
+                oPaginate: {
+                    sNext: "<span style='font-size: large'> ወደ ፊት →</span>",
+                    sPrevious: "<span style='font-size: large'> ← ወደ ኋላ</span>"
+                },
+                sZeroRecords: "<span style='font-size: large'>ያስገቡትን ፊደላት የሚያሟላ መረጃ የለም</span>",
+                sEmptyTable: "<span style='font-size: large'>ምንም መረጃ የለም</span>",
+                sInfo: "",
+            },
+            select: true,
+            dom: 'lBfrtip',
+            //order: [[1, "asc"]] // sort by the second column (BridgeNo)
+            buttons: [
+                { extend: "copy", className: "btn btn-sm btn-primary", text: "<span style='font-size: medium'>ኮፒ አድርግ</span>" },
+                { extend: "excel", className: "btn btn-sm btn-primary", text: "<span style='font-size: medium'>ወደ Excel</span>" },
+                { extend: "pdf", className: "btn btn-sm btn-primary", text: "<span style='font-size: medium'>ወደ PDF</span>" },
+                { extend: "print", className: "btn btn-sm btn-primary", text: "<span style='font-size: medium'>ፕሪንት</span>" }
+            ]
+        });
+    });
+</script>

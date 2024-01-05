@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GEJA_KHC_MAUI.Views.MemberPage"
+             Title="አባላት">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="አዲስ" IconImageSource="icon_add_white.png" Clicked="OnNewMember" Order="Primary" Priority="0" />
+        <ToolbarItem Text="የአባላት ዝርዝር" Clicked="OnMemberList" Order="Secondary" Priority="0" />
+    </ContentPage.ToolbarItems>
+
+    <VerticalStackLayout VerticalOptions="Fill" Margin="20,35,20,20">
+        <SearchBar x:Name="searchMember" Text="" Placeholder="አባል ፈልግ..." SearchButtonPressed="SearchBar_SearchButtonPressed"
+                TextChanged="searchMember_TextChanged" Focused="searchMember_Focused" Unfocused="searchMember_Unfocused" HorizontalOptions="Center"
+                FontSize="{OnIdiom Phone=Medium,Tablet=Large,Desktop=Medium }" WidthRequest="{OnIdiom Phone=350, Tablet=450, Desktop=450 }" >
+        </SearchBar>
+
+        <ListView x:Name="listviewMemberResult" Margin="35,0,0,0" IsVisible="false" HorizontalOptions="Center"
+                     ItemTapped="listviewMemberResult_ItemTapped" WidthRequest="{OnIdiom 350, Phone=350, Tablet=450, Desktop=450 }" >
+        </ListView>
+
+        <Grid ColumnSpacing="20" RowSpacing="20" >
+            <ImageButton Source="icon_list.png" Padding="5,5,5,5" HorizontalOptions="Center" WidthRequest="250" 
+                    Clicked="OnMemberList" HeightRequest="{OnIdiom Phone=120,Tablet=150, Desktop=120}" 
+                    BorderColor="{AppThemeBinding Light=White,Dark={StaticResource DarkPrimary}}" >
+            </ImageButton>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

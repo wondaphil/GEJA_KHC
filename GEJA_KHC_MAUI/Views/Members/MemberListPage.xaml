@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GEJA_KHC_MAUI.Views.MemberListPage"
+             Title="የአባላት ዝርዝር">
+
+    <ScrollView>
+        <VerticalStackLayout VerticalOptions="Fill" Margin="20,20,20,20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*" />
+                    <ColumnDefinition Width="70*" />
+                </Grid.ColumnDefinitions>
+                
+                <Label Text="ምድብ" FontSize="{OnIdiom Phone=Large,Tablet=28,Desktop=Medium}" Padding="0,0,20,0"
+                       HorizontalOptions="End" VerticalOptions="Center" />
+                <Picker x:Name="ddlGroup" SelectedIndexChanged="OnGroupChange" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold"
+                        Title="{OnIdiom Phone='ምድብ ይምረጡ',Tablet='ምድብ ይምረጡ',Desktop=''}" FontSize="{OnIdiom Phone=Large,Tablet=28,Desktop=Medium}"/>
+            </Grid>
+
+            <ActivityIndicator IsVisible="{Binding LoadingInProgress}" IsRunning="{Binding LoadingInProgress}" HeightRequest="{OnIdiom Phone=50, Tablet=80,Desktop=80}" Margin="20" Color="{StaticResource Primary}" />
+            <Label IsVisible="{Binding LoadingInProgress}" Text="{Binding LoadingStatusText}" Padding="5,5,5,5" HeightRequest="100" HorizontalOptions="Center" 
+                   FontFamily="Nyala" FontAttributes="Italic" FontSize="{OnIdiom Phone=16, Tablet=22, Desktop=16 }" TextColor="{StaticResource Primary}" />
+            
+            <Label x:Name="lblGridTitle" FontAttributes="Italic,Bold" FontSize="{OnIdiom Phone=16, Tablet=22, Desktop=16 }" HorizontalOptions="Center"/>
+
+            <!--<ListView x:Name="memberListView" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label FontSize="{OnIdiom Phone=Medium, Tablet=28, Desktop=Medium }" Text="{Binding FullName}" />
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>-->
+
+            <ListView SeparatorColor="AliceBlue" x:Name="memberListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding FullName}" TextColor="Black" 
+                              Detail="{Binding MemberId}" DetailColor="Gray">
+                        </TextCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

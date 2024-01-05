@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "የአባል መሰረዣ";
+}
+
+<h2>የአባል መሰረዣ ከነሙሉ ዝርዝር መረጃው</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <hr />
+
+    <table>
+        <tr>
+            <td style="padding: 5px"><b>የአባል ስም ወይም መለያ ቁጥር ያስገቡ: </b></td>
+            <td style="padding: 5px">@Html.TextBox("FullName", null, new { @class = "control-control" })</td>
+            <td style="padding: 5px">
+                <button type="button" id="searchMember" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> አባል ፈልግ</button>
+            </td>
+        </tr>
+    </table>
+    <hr />
+    <div class="col-xs-12">
+        <div id="memberPartial">
+            <!-- Member info displays here -->
+        </div>
+    </div>
+}
+
+<div id="wait" align="center" style="display: none">
+    <img src="~/images/searching.gif" width="150" />
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#FullName').autocomplete({
+            source: '@Url.Action("GetMemberListContaining", "Search")',
+            minLength: 3, // works only after 3 character are entered
+            select: function (event, ui) {
+                $('#FullName').val(ui.item.value);
+                $('#searchMember').trigger('click');
+            }
+        });
+
+        // Select all text on focus
+        $("#FullName").click(function () {
+            $(this).select();
+        });
+
+        $('#searchMember').click(function () {
+            var enteredFullName = $('#FullName').val();
+            $('#error').text("");
+            $('#memberPartial').empty(); // clear the member location place holder
+
+            if (enteredFullName == "") // if input is not entered
+            {
+                $('#error').text("እባክዎን ሙሉ ስም ያስገቡ");
+            }
+            else {
+                //alert("Hello");
+                $.ajax({
+                    url: '@Url.Action("Delete", "Members")',
+                    data: { fullname: enteredFullName },
+                    type: 'GET',
+                    dataType: 'html',
+                    beforeSend: function () { $('#wait').show(); },
+                    complete: function () { $('#wait').hide(); },
+                    success: function (data) {
+                        $('#memberPartial').html(data);
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+

@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "የአባል መረጃ መፈለጊያ";
+}
+
+<h2>የአባል መረጃ መፈለጊያ</h2>
+
+<div class="row">
+    <hr />
+    <div style="margin-right: auto; margin-left: auto;">
+        <table>
+            <tr>
+                <td style="padding: 5px; font-size:medium"><b>የአባል ስም ወይም መለያ ቁጥር ያስገቡ: </b></td>
+            </tr>
+            <tr>
+                <td style="padding: 5px; font-size:medium">@Html.TextBox("Term", null, new { @class = "control-control" })</td>
+                <td style="padding: 5px">
+                    <button type="button" id="showMemberInfo" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> ፈልግ</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div id="memberInfoPartial">
+    <!-- Member info displays here -->
+</div>
+
+<div class="row">
+    <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12" align="center" id="wait" style="display: none">
+        <img src="~/images/searching.gif" width="150" />
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#Term').autocomplete({
+            source: '@Url.Action("GetMemberListContaining", "Search")',
+            minLength: 3, // works only after 3 character are entered
+            select: function (event, ui) {
+                $('#Term').val(ui.item.value);
+                $('#showMemberInfo').trigger('click');
+            }
+        });
+        
+        // Select all text on focus
+        $("#Term").click(function () {
+            $(this).select();
+        });
+
+        $('#showMemberInfo').click(function () {
+            var enteredTerm = $('#Term').val();
+
+            $('#error').text("");
+            $('#memberInfoPartial').empty(); // clear the member info place holder
+            
+            if (enteredTerm == "") // if input is not entered
+            {
+                $('#error').text("እባክዎን ፊደል ያስገቡ!");
+            }
+            else {
+                $.ajax({
+                    url: '@Url.Action("_FindMember", "Search")',
+                    data: { fullname: enteredTerm },
+                    type: 'GET',
+                    dataType: 'html',
+                    beforeSend: function () { $('#wait').show(); },
+                    complete: function () { $('#wait').hide(); },
+                    success: function (data) {
+                        $('#memberInfoPartial').html(data);
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+

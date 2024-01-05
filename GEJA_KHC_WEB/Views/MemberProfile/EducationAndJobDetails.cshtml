@@ -1,0 +1,43 @@
+﻿@model GEJA_KHC_WEB.Models.EducationAndJobInfo
+
+<table class="table">
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.EducationLevelId)
+        </td>
+
+        <th>
+            @TempData["EducationLevel"]
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.FieldOfStudyId)
+        </td>
+
+        <th>
+            @TempData["FieldOfStudy"]
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.JobId)
+        </td>
+
+        <th>
+            @TempData["Job"]
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.JobTypeId)
+        </td>
+
+        <th>
+            @TempData["JobType"]
+        </th>
+    </tr>
+</table>

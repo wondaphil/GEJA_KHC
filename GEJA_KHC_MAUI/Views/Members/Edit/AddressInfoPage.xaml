@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GEJA_KHC_MAUI.Views.AddressInfoPage"
+             Title="የአድራሻ መረጃ"
+             IconImageSource="address.png" >
+    <ScrollView>
+        <VerticalStackLayout Padding="10,0,10,0" VerticalOptions="StartAndExpand" Spacing="0">
+            <Frame BackgroundColor="{AppThemeBinding Light=White,Dark={StaticResource Black}}" BorderColor="{AppThemeBinding Light=White,Dark={StaticResource Black}}">
+                <Label x:Name="lblMemberName" FontSize="{OnIdiom Phone=Medium,Tablet=28,Desktop=Medium}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" />
+            </Frame>
+            <Grid Padding="20,0,20,0" ColumnSpacing="5" RowSpacing="15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*" />
+                    <ColumnDefinition Width="60*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Entry x:Name="entryMemberId" IsVisible="False" />
+
+                <Label Text="ክ/ከተማ" Grid.Row="1" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" >
+                    <Picker x:Name="ddlSubcity" Grid.Row="1" Grid.Column="1" Title="{OnIdiom Phone='ይምረጡ',Tablet='ይምረጡ',Desktop=''}" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" />
+                </Frame>
+
+                <Label Text="ወረዳ" Grid.Row="2" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1" >
+                    <Entry x:Name="entryWoreda" Grid.Row="2" Grid.Column="1" Keyboard="Numeric" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" 
+                           Placeholder="የአባሉን የመኖሪያ ወረዳ ያስገቡ" Text="{Binding Woreda}" />
+                </Frame>
+
+                <Label Text="ቀበሌ" Grid.Row="3" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" >
+                        <Entry x:Name="entryKebele" Grid.Row="3" Grid.Column="1" Keyboard="Numeric" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" 
+                               Placeholder="የአባሉን የመኖሪያ ቀበሌ ያስገቡ" Text="{Binding Kebele}" />
+                </Frame>
+
+                <Label Text="የቤት ቁጥር" Grid.Row="4" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="1" >
+                    <Entry x:Name="entryHouseNo" Grid.Row="4" Grid.Column="1" Keyboard="Numeric" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" 
+                           Placeholder="የአባሉን የመኖሪያ የቤት ቁ. ያስገቡ" Text="{Binding HouseNo}" />
+                </Frame>
+
+                <Label Text="የቤቱ ይዞታ" Grid.Row="5" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="1" >
+                    <Picker x:Name="ddlHouseOwnershipType" Grid.Row="5" Grid.Column="1" Title="{OnIdiom Phone='ይምረጡ',Tablet='ይምረጡ',Desktop=''}" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" />
+                </Frame>
+
+                <Label Text="የቤት ስልክ" Grid.Row="6" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="1" >
+                    <Entry x:Name="entryHomePhoneNo" Grid.Row="6" Grid.Column="1" Keyboard="Numeric" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" 
+                           Placeholder="የመኖሪያ ቤት ስልክ ካለ ያስገቡ" Text="{Binding HomePhoneNo}" />
+                </Frame>
+
+                <Label Text="የቢሮ ስልክ" Grid.Row="7" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="1" >
+                    <Entry x:Name="entryOfficePhoneNo" Grid.Row="7" Grid.Column="1" Keyboard="Numeric" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" 
+                           Placeholder="የመስሪያ ቤት ስልክ ካለ ያስገቡ" Text="{Binding OfficePhoneNo}" />
+                </Frame>
+
+                <Label Text="የሞባይል ስልክ" Grid.Row="8" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="1" >
+                    <Entry x:Name="entryMobilePhoneNo" Grid.Row="8" Grid.Column="1" Keyboard="Numeric" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" 
+                           Placeholder="የአባሉን የሞባይል ስልክ ቁ. ያስገቡ" Text="{Binding MobilePhoneNo}" />
+                </Frame>
+
+                <Label Text="ኢሜይል" Grid.Row="9" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="1" >
+                    <Entry x:Name="entryEmail" Grid.Row="9" Grid.Column="1" Keyboard="Numeric" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" 
+                           Placeholder="የአባሉን ኢሜይል አድራሻ ካለ ያስገቡ" Text="{Binding Email}" />
+                </Frame>
+
+            </Grid>
+
+            <Grid ColumnSpacing="20" RowSpacing="20" Padding="50,25,50,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Row="0" Padding="5,5,5,5" Text="ሴቭ አድርግ" Clicked="btnSave_Clicked" Command="{Binding SaveCommand}" 
+                        FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" WidthRequest="{OnIdiom Phone=150,Tablet=200,Desktop=150}" HorizontalOptions="End" />
+                <Button Grid.Column="1" Padding="5,5,5,5" Text="ተወው" Clicked="btnCancel_Clicked" 
+                        FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" WidthRequest="{OnIdiom Phone=150,Tablet=200,Desktop=150}" HorizontalOptions="Start" />
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

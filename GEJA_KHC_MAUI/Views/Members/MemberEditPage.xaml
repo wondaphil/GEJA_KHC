@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="GEJA_KHC_MAUI.Views.MemberEditPage"
+            xmlns:local="clr-namespace:GEJA_KHC_MAUI.Views"
+            Title="መረጃ ማስተካከያ">
+    
+    <!--<local:MemberInfoPage />-->
+
+    <!--<NavigationPage Title="ፎቶ" IconImageSource="photo.png">
+        <x:Arguments>
+            <local:PhotoPage />
+        </x:Arguments>
+    </NavigationPage>-->
+    
+    <!--<local:AddressInfoPage />-->
+    <!--<local:FamilyInfoPage />
+    <local:EducationAndJobInfoPage />
+    <local:ServicePage />-->
+
+    <VerticalStackLayout>
+        <Grid ColumnSpacing="10" RowSpacing="{OnIdiom Phone=10,Tablet=10,Desktop=20}" Padding="{OnIdiom Phone='0',Tablet='0',Desktop='0,50,0,0'}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="60*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Text="ምድብ"
+                    VerticalTextAlignment="Center" HorizontalOptions="End" FontAttributes="Bold" FontSize="{OnIdiom Phone=Large,Tablet=28,Desktop=Medium}" />
+            <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="1" HorizontalOptions="Start" >
+                <Picker Grid.Row="0" Grid.Column="1" x:Name="ddlGroup" Margin="5" HorizontalOptions="Start" FontSize="{OnIdiom Phone=Large,Tablet=28,Desktop=Medium}" Title="{OnIdiom Phone='ምድብ ይምረጡ',Tablet='ምድብ ይምረጡ',Desktop=''}" 
+                    VerticalTextAlignment="Center" SelectedIndexChanged="ddlGroup_SelectedIndexChanged" WidthRequest="{OnIdiom Phone=250,Tablet=350,Desktop=350}"/>
+            </Frame>
+            
+            <Label Grid.Row="1" Grid.Column="0" Text="አባል"
+                    VerticalTextAlignment="Center" HorizontalOptions="End" FontAttributes="Bold" FontSize="{OnIdiom Phone=Large,Tablet=28,Desktop=Medium}" />
+            <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" HorizontalOptions="Start" >
+                <Picker Grid.Row="1" Grid.Column="1" x:Name="ddlMember" Margin="5" HorizontalOptions="Start" FontSize="{OnIdiom Phone=Large,Tablet=28,Desktop=Medium}" Title="{OnIdiom Phone='አባል ይምረጡ',Tablet='አባል ይምረጡ',Desktop=''}"
+                    VerticalTextAlignment="Center" SelectedIndexChanged="ddlMember_SelectedIndexChanged" WidthRequest="{OnIdiom Phone=250,Tablet=350,Desktop=350}"/>
+            </Frame>
+        </Grid>
+
+        <Grid x:Name="grdButtons" IsVisible="false" Margin="10,20,10,10" RowSpacing="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{OnIdiom Phone='50*',Tablet='50*',Desktop='30*'}" />
+                <ColumnDefinition Width="{OnIdiom Phone='50*',Tablet='50*',Desktop='30*'}" />
+                <ColumnDefinition Width="{OnIdiom Phone='0',Tablet='0',Desktop='30*'}" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <VerticalStackLayout Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" BackgroundColor="{AppThemeBinding Light=AliceBlue,Dark={StaticResource DarkPrimary}}" 
+                    WidthRequest="{OnIdiom Phone=150,Tablet=220,Desktop=150}" HeightRequest="{OnIdiom Phone=150,Tablet=150,Desktop=150}" >
+                <Button x:Name="btnMemberInfo" ImageSource="{OnIdiom Phone=personal.png,Tablet=personal.png,Desktop=personal.png}"
+                    BackgroundColor="Transparent" BorderColor="White" Clicked="btnMemberInfo_Clicked" Scale="{OnIdiom Phone=1.2,Tablet=1.5,Desktop=1.2}" />
+                <Label Text="መሠረታዊ" FontSize="{OnIdiom Phone=Medium,Tablet=28,Desktop=Medium}" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Row="0" Grid.Column="1" 
+                    HorizontalOptions="Center" BackgroundColor="{AppThemeBinding Light=AliceBlue,Dark={StaticResource DarkPrimary}}"  
+                    WidthRequest="{OnIdiom Phone=150,Tablet=220,Desktop=150}" HeightRequest="{OnIdiom Phone=150,Tablet=150,Desktop=150}" >
+                <Button x:Name="btnMemberPhoto" ImageSource="{AppThemeBinding Light=photo.png,Dark=photo.png}"
+                    BackgroundColor="Transparent" BorderColor="White" Clicked="btnMemberPhoto_Clicked" Scale="{OnIdiom Phone=1.2,Tablet=1.5,Desktop=1.2}" />
+                <Label Text="ፎቶ" FontSize="{OnIdiom Phone=Medium,Tablet=28,Desktop=Medium}" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Row="{OnIdiom Phone=1,Tablet=1,Desktop=0}" Grid.Column="{OnIdiom Phone=0,Tablet=0,Desktop=3}" 
+                    HorizontalOptions="Center" BackgroundColor="{AppThemeBinding Light=AliceBlue,Dark={StaticResource DarkPrimary}}"  
+                    WidthRequest="{OnIdiom Phone=150,Tablet=220,Desktop=150}" HeightRequest="{OnIdiom Phone=150,Tablet=150,Desktop=150}" >
+                <Button x:Name="btnAddressInfo" ImageSource="{AppThemeBinding Light=address.png,Dark=address.png}"
+                    BackgroundColor="Transparent" BorderColor="White" Clicked="btnAddressInfo_Clicked" Scale="{OnIdiom Phone=1.2,Tablet=1.5,Desktop=1.2}" />
+                <Label Text="አድራሻ" FontSize="{OnIdiom Phone=Medium,Tablet=28,Desktop=Medium}" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Row="{OnIdiom Phone=1,Tablet=1,Desktop=1}" Grid.Column="{OnIdiom Phone=1,Tablet=1,Desktop=0}" 
+                    HorizontalOptions="Center" BackgroundColor="{AppThemeBinding Light=AliceBlue,Dark={StaticResource DarkPrimary}}"  
+                    WidthRequest="{OnIdiom Phone=150,Tablet=220,Desktop=150}" HeightRequest="{OnIdiom Phone=150,Tablet=150,Desktop=150}" >
+                <Button x:Name="btnFamilyInfo" ImageSource="{AppThemeBinding Light=family.png,Dark=family.png}"
+                    BackgroundColor="Transparent" BorderColor="White" Clicked="btnFamilyInfo_Clicked" Scale="{OnIdiom Phone=1.2,Tablet=1.5,Desktop=1.2}" />
+                <Label Text="ቤተሰብ" FontSize="{OnIdiom Phone=Medium,Tablet=28,Desktop=Medium}" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Row="{OnIdiom Phone=2,Tablet=2,Desktop=1}" Grid.Column="{OnIdiom Phone=0,Tablet=0,Desktop=1}" 
+                    HorizontalOptions="Center" BackgroundColor="{AppThemeBinding Light=AliceBlue,Dark={StaticResource DarkPrimary}}"  
+                    WidthRequest="{OnIdiom Phone=150,Tablet=220,Desktop=150}" HeightRequest="{OnIdiom Phone=150,Tablet=150,Desktop=150}" >
+                <Button x:Name="btnEducationAndJobInfo" ImageSource="{AppThemeBinding Light=education.png,Dark=education.png}"
+                    BackgroundColor="Transparent" BorderColor="White" Clicked="btnEducationAndJobInfo_Clicked" Scale="{OnIdiom Phone=1.5,Tablet=1.2,Desktop=1.2}" />
+                <Label Text="ትምህርት/ሥራ" FontSize="{OnIdiom Phone=Medium,Tablet=28,Desktop=Medium}" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Row="{OnIdiom Phone=2,Tablet=2,Desktop=1}" Grid.Column="{OnIdiom Phone=1,Tablet=1,Desktop=3}" 
+                    HorizontalOptions="Center" BackgroundColor="{AppThemeBinding Light=AliceBlue,Dark={StaticResource DarkPrimary}}"  
+                    WidthRequest="{OnIdiom Phone=150,Tablet=220,Desktop=150}" HeightRequest="{OnIdiom Phone=150,Tablet=150,Desktop=150}" >
+                <Button x:Name="btnServiceInfo" ImageSource="{AppThemeBinding Light=service.png,Dark=service.png}" 
+                    BackgroundColor="Transparent" BorderColor="White" Clicked="btnServiceInfo_Clicked" Scale="{OnIdiom Phone=1.2,Tablet=1.5,Desktop=1.2}" />
+                <Label Text="አገልግሎት" FontSize="{OnIdiom Phone=Medium,Tablet=28,Desktop=Medium}" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </Grid>
+    </VerticalStackLayout>
+
+</ContentPage>

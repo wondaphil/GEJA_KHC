@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GEJA_KHC_MAUI.Views.GroupListPage"
+             Title="የምድቦች ዝርዝር">
+    <VerticalStackLayout VerticalOptions="Fill" Margin="20,35,20,20">
+        <Label x:Name="lblGridTitle" FontAttributes="Italic" FontSize="{OnIdiom Phone=Medium,Tablet=Large,Desktop=Medium}"/>
+        <ListView x:Name="groupListView" HeightRequest="350">
+            <ListView.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="40*"/>
+                        <ColumnDefinition Width="30*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="ቁ." Grid.Column="0" FontAttributes="Bold" FontSize="{OnIdiom Phone=Medium,Tablet=Large,Desktop=Medium}" Padding="0,5,5,15" />
+                    <Label Text="ምድብ" Grid.Column="1" FontAttributes="Bold" FontSize="{OnIdiom Phone=Medium,Tablet=Large,Desktop=Medium}" Padding="0,5,5,15" />
+                    <Label Text="ተጠሪ" Grid.Column="2" FontAttributes="Bold" FontSize="{OnIdiom Phone=Medium,Tablet=Large,Desktop=Medium}" Padding="0,5,5,15" />
+                    <Label Text="ማብራሪያ" Grid.Column="3" FontAttributes="Bold" FontSize="{OnIdiom Phone=Medium,Tablet=Large,Desktop=Medium}" Padding="0,5,5,15" />
+                </Grid>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="20*"/>
+                                <ColumnDefinition Width="40*"/>
+                                <ColumnDefinition Width="30*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=Large,Desktop=Medium}" Text="{Binding GroupId}" />
+                            <Label Grid.Column="1" FontSize="{OnIdiom Phone=Medium,Tablet=Large,Desktop=Medium}" Text="{Binding GroupName}" />
+                            <Label Grid.Column="2" FontSize="{OnIdiom Phone=Medium,Tablet=Large,Desktop=Medium}" Text="{Binding Pastor}" />
+                            <Label Grid.Column="3" FontSize="{OnIdiom Phone=Medium,Tablet=Large,Desktop=Medium}"  Text="{Binding Remark}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentPage>

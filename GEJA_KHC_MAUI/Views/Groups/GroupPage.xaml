@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GEJA_KHC_MAUI.Views.GroupPage"
+             Title="ምድቦች">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="አዲስ" IconImageSource="icon_add_white.png" Clicked="OnNewGroup" Order="Primary" Priority="0" />
+        <ToolbarItem Text="የምድቦች ዝርዝር" Clicked="OnGroupList" Order="Secondary" Priority="0" />
+    </ContentPage.ToolbarItems>
+
+    <VerticalStackLayout VerticalOptions="Fill" Margin="20,35,20,20">
+        <SearchBar x:Name="searchGroup" Text="" Placeholder="ምድብ ፈልግ..." SearchButtonPressed="SearchBar_SearchButtonPressed"
+                TextChanged="searchGroup_TextChanged" Focused="searchGroup_Focused" Unfocused="searchGroup_Unfocused" HorizontalOptions="Center"
+                FontSize="{OnIdiom Phone=Body, Tablet=Large }" WidthRequest="{OnIdiom Phone=350, Tablet=450, Desktop=450 }" >
+        </SearchBar>
+
+        <ListView x:Name="listviewGroupResult" Margin="35,0,0,0" IsVisible="false" HorizontalOptions="Center"
+                     ItemTapped="listviewGroupResult_ItemTapped" WidthRequest="{OnIdiom Phone=350, Tablet=450, Desktop=450 }" >
+        </ListView>
+
+        <Grid ColumnSpacing="20" RowSpacing="20" >
+            <ImageButton Source="icon_list.png" Padding="5,5,5,5" HorizontalOptions="Center" WidthRequest="250" 
+                    Clicked="OnGroupList" HeightRequest="{OnIdiom Phone=120,Tablet=150, Desktop=120}" 
+                    BorderColor="{AppThemeBinding Light=White,Dark={StaticResource DarkPrimary}}" >
+            </ImageButton>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

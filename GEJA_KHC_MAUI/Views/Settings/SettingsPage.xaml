@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GEJA_KHC_MAUI.Views.SettingPage"
+             Title="መቼቶች">
+    <StackLayout VerticalOptions="Fill" HorizontalOptions="Center" Margin="20,35,20,20">
+        <Grid ColumnSpacing="20" RowSpacing="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <VerticalStackLayout Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" BackgroundColor="Transparent" 
+                        WidthRequest="{OnIdiom Phone=150,Tablet=220,Desktop=150}" HeightRequest="{OnIdiom Phone=150,Tablet=150,Desktop=150}" >
+                <Button ImageSource="{AppThemeBinding Light=icon_server.png,Dark=icon_server_white.png}" HorizontalOptions="Center" 
+                        BackgroundColor="Transparent" BorderColor="{AppThemeBinding Light=White, Dark={StaticResource DarkPrimary}}" Clicked="btnServerAddressPage_Clicked" Scale="{OnIdiom Phone=1.2,Tablet=1.5,Desktop=1.2}" />
+                <Label Text="የሰርቨር አድራሻ" FontSize="{OnIdiom Phone=Medium,Tablet=Large,Desktop=Medium}" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+            </VerticalStackLayout>
+        </Grid>
+
+    </StackLayout>
+</ContentPage>

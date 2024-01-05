@@ -1,0 +1,114 @@
+﻿@model GEJA_KHC_WEB.Models.Service
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "NewServiceForm", onsubmit = "return ValidateDataEntry()" }))
+{
+    <hr />
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="row">
+            <h4 align="center">አዲስ የአገልግሎት ዘርፍ መመዝገቢያ</h4>
+            <hr />
+            <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @*Holds a unique Service id*@
+                @Html.HiddenFor(model => model.ServiceId)
+
+                <div class="form-group form-group-lg required">
+                    @Html.LabelFor(model => model.ServiceName, htmlAttributes: new { @class = "control-label col-sm-6 col-xs-4" })
+                    <div class="col-sm-6 col-xs-6">
+                        @Html.EditorFor(model => model.ServiceName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ServiceName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group-lg">
+                    @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-sm-6 col-xs-4" })
+                    <div class="col-sm-6 col-xs-6">
+                        @*@Html.TextAreaFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control", @rows = 15, style = "width: 100%; max-width: 100%" } })*@
+                        @Html.TextAreaFor(model => model.Remark, htmlAttributes: new { @class = "form-control", @rows = 5, style = "width: 100%; max-width: 100%" })
+                        @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group form-group-lg">
+            <div class="col-md-offset-3 col-sm-offset-4 col-xs-offset-0 col-lg-8 col-md-10 col-sm-12 col-xs-10">
+                <div class="col-md-2 col-sm-2 col-xs-4">
+                    <button type="button" id="registerService" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> ሴቭ አድርግ</button>
+                </div>
+                <div class="col-sm-2 col-xs-4">
+                    <button type="reset" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span> ባዶ አድርግ</button>
+                </div>
+                <div class="col-sm-2 col-xs-4">
+                    <button type="button" id="cancel" class="btn btn-primary"><span class="glyphicon glyphicon-backward"></span> ተወው</button>
+                </div>
+                <div class="col-sm-7 col-xs-10">
+                    <div id="validationStatus" class="text-success" style="font-size: large">
+                        <!-- Validation status text appears here-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        function ValidateDataEntry() {
+            if ($('#ServiceName').val() == "")
+                return false;
+
+            return true;
+        }
+
+        //Add event handler
+        $("#registerService").on("click", function () {
+            if (!ValidateDataEntry()) {
+                if ($('#validationStatus').hasClass("text-success"))
+                    $('#validationStatus').removeClass("text-success");
+                $('#validationStatus').addClass("text-danger");
+                $('#validationStatus').text("እባክዎን * የተደረገባቸውን መረጃዎች በሙሉ ያስገቡ");
+                return;
+            }
+
+            var service = {};
+
+            service.ServiceId = $("#ServiceId").val();
+            service.ServiceName = $("#ServiceName").val();
+            service.Remark = $("#Remark").val();
+
+            //alert(JSON.stringify(service))
+            
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("AddNewService", "Services")',
+                data: '{service:' + JSON.stringify(service) + '}',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (data) {
+                    //alert("Success");
+                    //alert(data.Status);
+                    var statusmessageid;
+                    
+                    if (data.Status != 2627 && data.Status != 2601)  // error due to unique key constraint violation
+                        statusmessageid = 0; //StatusMessageId.AddDataSuccess = 0
+                    else 
+                        statusmessageid = 3; //StatusMessageId.AddDataError = 3
+
+                    window.location.href = "/Services/Index?messageId=" + statusmessageid;
+                },
+                error: function (xhr) {
+                    //$('#status').text(xhr.status);
+                    alert("Error");
+                }
+            });
+        });
+
+
+        $("#cancel").on("click", function () {
+            window.location.href = "/Services";
+        });
+    });
+</script>

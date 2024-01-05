@@ -1,0 +1,118 @@
+﻿@model GEJA_KHC_WEB.Models.MemberPhoto
+
+@{
+    ViewBag.Title = "የአባል ፎቶ";
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "photoForm", enctype = "multipart/form-data" }))
+
+{
+    <hr />
+    <h4 align="center" class="text-danger"><b>ፎቶ አልገባም። እባክዎን ያስገቡ!</b></h4>
+    <hr />
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*@Html.HiddenFor(model => model.MemberId)*@
+        <input type="hidden" id="MemberId" value="@TempData["MemberId"]" />
+
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-4 col-xs-4">
+                <div class="form-group form-group">
+                    @Html.LabelFor(model => model.Photo, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div>
+                        @*@Html.EditorFor(model => model.PhotoFilePath, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @*<img src="@Model.PhotoFilePath" id="photo" style="width: 100%" />*@
+                        <img src="" id="photo" style="width: 100%" />
+                        @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-md-offset-0 col-sm-offset-2 col-sm-4 col-xs-offset-1 col-xs-7">
+                <div class="form-group form-group-sm">
+                    <label for="txtPhotoFilePath" class="col-md-12 col-sm-10">የፎቶ ፋይል ይምረጡ</label>
+                    <input type="file" class="col-md-12 col-sm-10" id="txtPhotoFilePath" accept="image/*" />
+                </div>
+                <div class="form-group form-group">
+                    <div class="col-md-offset-2">
+                        <br /><br />
+                        <button type="button" id="saveMemberPhoto" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> ሴቭ አድርግ</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="reset" id="resetMemberPhoto" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span> ባዶ አድርግ</button>
+                        <div id="statusMemberPhoto" class="success">
+                            <!-- Save success or failure status text appears here-->
+                        </div>
+                        <div id="uploadprogress" align="center" style="display: none">
+                            <img src="~/images/ajax-loader-small.gif" /> ፎቶው እየተጫነ ነው...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        $('#saveMemberPhoto').on('click', function () {
+            var MemberId = $('#MemberId').val();
+            var PhotoFilePath = $("#txtPhotoFilePath");
+            var photoFileName = PhotoFilePath.val().replace(/^.*[\\\/]/, '');
+            var fullPhotoPath = '/photos/' + photoFileName;
+
+            var fileUpload = $("#txtPhotoFilePath").get(0);
+            var files = fileUpload.files;
+            var formData = new FormData();
+
+            formData.append(files[0].name, files[0]);
+            //alert("files[0].name: " + files[0].name);
+            //alert(MemberId + "\n" + fullPhotoPath);
+
+            // Add member data as keys to FormData object
+            formData.append('MemberId', MemberId);
+            formData.append('PhotoFilePath', fullPhotoPath);
+
+            //alert(PhotoFilePath.val());
+
+            if ($("#txtPhotoFilePath").val() != "" && $("#txtPhotoFilePath").val() != null) {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("MemberPhotoSave", "Members")',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json',
+                    data: formData,
+                    beforeSend: function () { $('#uploadprogress').show(); },
+                    complete: function () { $('#uploadprogress').hide(); },
+                    success: function (data) {
+                        $("#photo").attr("src", fullPhotoPath);
+                        
+                        if ($('#statusMemberPhoto').hasClass("text-danger"))
+                            $('#statusMemberPhoto').removeClass("text-danger");
+                        $('#statusMemberPhoto').addClass("text-success");
+                        $('#statusMemberPhoto').text("የመረጡት ፎቶ በትክክል ሴቭ ተደርጓል");
+                    },
+                    error: function (xhr) {
+                        if ($('#statusMemberPhoto').hasClass("text-success"))
+                            $('#statusMemberPhoto').removeClass("text-success");
+                        $('#statusMemberPhoto').addClass("text-danger");
+                        $('#statusMemberPhoto').text("የመረጡት ፎቶ በትክክል ሴቭ አልተደረገም (Error Code = " + xhr.status + ")");
+                    }
+                });
+
+            }
+            else {
+                if ($('#statusMemberPhoto').hasClass("text-success"))
+                    $('#statusMemberPhoto').removeClass("text-success");
+                $('#statusMemberPhoto').addClass("text-danger");
+                $('#statusMemberPhoto').text("እባክዎን ፎቶ ይምረጡ");
+            }
+        });
+
+        $('#resetMemberPhoto').on('click', function () {
+            $('#photoForm').trigger("reset"); // triger the normal reset function
+            $('#statusMemberPhoto').text("");
+        });
+    });
+</script>

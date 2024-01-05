@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GEJA_KHC_MAUI.Views.ReportsPage"
+             Title="ሪፖርቶች">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="እንደገና አሳይ" IconImageSource="icon_reload.png" Order="Primary" Priority="0" Clicked="OnRefreshClicked" />
+        <ToolbarItem Text="የሪፖርት መረጃ ከንደገና አውርድ" Order="Secondary" Priority="1" Clicked="OnReloadReportDataClicked" />
+    </ContentPage.ToolbarItems>
+    
+    <ScrollView>
+        <StackLayout VerticalOptions="Fill" Margin="20,35,20,20">
+            <ActivityIndicator IsVisible="{Binding LoadingInProgress}" IsRunning="{Binding LoadingInProgress}" HeightRequest="{OnIdiom Phone=50, Tablet=80,Desktop=80}" Margin="20" Color="{StaticResource Primary}" />
+            <Label IsVisible="{Binding LoadingInProgress}" Text="{Binding LoadingStatusText}" Padding="5,5,5,5" HeightRequest="100" HorizontalOptions="Center" 
+                   FontSize="{OnIdiom Phone=16, Tablet=22, Desktop=16 }" TextColor="{StaticResource Primary}" />
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*" />
+                    <ColumnDefinition Width="20*" />
+                </Grid.ColumnDefinitions>
+   
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Picker x:Name="ddlReportType" Title="Select Report Type" Grid.ColumnSpan="2" SelectedIndexChanged="OnReportTypeChange" HorizontalOptions="Center"
+                    WidthRequest="{OnIdiom Phone=350,Tablet=450,Desktop=450}" FontSize="{OnIdiom Phone=Medium,Tablet=Large,Desktop=18}" />
+            </Grid>
+
+            <Label x:Name="labelTitle" FontSize="{OnIdiom Phone=Medium, Tablet=Title, Desktop=Title}" FontAttributes="Bold" HorizontalTextAlignment="Center" Margin="0,20,0,0" />
+            <ListView x:Name="listviewReport" IsVisible="true" IsEnabled="False"  >
+                <!--
+                <ListView.HeaderTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50*" />
+                                <ColumnDefinition Width="50*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="lblHeader1" Text="Header1" Grid.Column="0" FontAttributes="Bold" Padding="0,5,5,15" />
+                            <Label x:Name="lblHeader2" Text="Header1" Grid.Column="1" FontAttributes="Bold" Padding="0,5,5,15" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50*" />
+                                    <ColumnDefinition Width="50*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label x:Name="lblBody1" Grid.Column="0" Text="{Binding Group}" />
+                                <Label x:Name="lblBody2" Grid.Column="1" Text="{Binding MemberCount}" />
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.FooterTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50*" />
+                                <ColumnDefinition Width="50*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="lblFooter1" Text="TOTAL" Grid.Column="0" FontAttributes="Bold" Padding="0,5,5,15" />
+                            <Label x:Name="lblFooter2" Text="1000" Grid.Column="1" FontAttributes="Bold" Padding="0,5,5,15" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.FooterTemplate>
+                -->
+            </ListView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

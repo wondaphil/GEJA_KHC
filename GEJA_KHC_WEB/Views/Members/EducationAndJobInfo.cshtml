@@ -1,0 +1,124 @@
+﻿@model GEJA_KHC_WEB.Models.EducationAndJobInfo
+
+@{
+    ViewBag.Title = "የአባል የትምህርትና የሥራ መረጃ";
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "educJobInfoForm" }))
+{
+    <hr />
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*@Html.HiddenFor(model => model.MemberId)*@
+        <input type="hidden" id="MemberId" value="@TempData["MemberId"]" />
+
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-md-6 col-xs-6">
+                <div class="form-group form-group required">
+                    @Html.LabelFor(model => model.EducationLevelId, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("EducationLevelId", new SelectList((List<SelectListItem>)TempData["EducationLevelId"], "Value", "Text", Model.EducationLevelId), htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.EducationLevelId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group required">
+                    @Html.LabelFor(model => model.FieldOfStudyId, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("FieldOfStudyId", new SelectList((List<SelectListItem>)TempData["FieldOfStudyId"], "Value", "Text", Model.FieldOfStudyId), htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.FieldOfStudyId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-md-6 col-xs-6">
+                <div class="form-group form-group required">
+                    @Html.LabelFor(model => model.JobId, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("JobId", new SelectList((List<SelectListItem>)TempData["JobId"], "Value", "Text", Model.JobId), htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.JobId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group required">
+                    @Html.LabelFor(model => model.JobTypeId, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("JobTypeId", new SelectList((List<SelectListItem>)TempData["JobTypeId"], "Value", "Text", Model.JobTypeId), htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.JobTypeId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group form-group">
+            <div class="col-md-offset-2 col-md-6">
+                <br /><br />
+                <button type="button" id="saveEducJobInfo" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> ሴቭ አድርግ</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="reset" id="resetEducJobInfo" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span> ባዶ አድርግ</button>
+                <div id="statusEducJobInfo" class="success">
+                    <!-- Save success or failure status text appears here-->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        function ValidateDataEntry(addrInfo) {
+            if ($('#EducationLevelId').val() == "0" || $('#FieldOfStudyId').val() == "0" ||
+                        $('#JobId').val() == "0" || $('#JobTypeId').val() == "0")
+                return false;
+
+            return true;
+        }
+
+        $('#saveEducJobInfo').on('click', function () {
+            var educJobInfo = {};
+
+            educJobInfo.MemberId = $('#MemberId').val();
+            educJobInfo.EducationLevelId = $('#EducationLevelId').val();
+            educJobInfo.FieldOfStudyId = $('#FieldOfStudyId').val();
+            educJobInfo.JobId = $('#JobId').val();
+            educJobInfo.JobTypeId = $('#JobTypeId').val();
+            
+            //alert(JSON.stringify(educJobInfo));
+
+            if (ValidateDataEntry(educJobInfo)) {
+                $.ajax({
+                    type: 'POST',
+                    cache: false,
+                    url: '@Url.Action("EducationAndJobInfoSave", "Members")',
+                    data: '{educJobInfo:' + JSON.stringify(educJobInfo) + '}',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'html', //'json',
+                    success: function (data) {
+                        if ($('#statusEducJobInfo').hasClass("text-danger"))
+                            $('#statusEducJobInfo').removeClass("text-danger");
+                        $('#statusEducJobInfo').addClass("text-success");
+                        $('#statusEducJobInfo').text("ያስገቡት/ያስተካከሉት መረጃ በትክክል ሴቭ ተደርጓል");
+                    },
+                    error: function (xhr) {
+                        if ($('#statusEducJobInfo').hasClass("text-success"))
+                            $('#statusEducJobInfo').removeClass("text-success");
+                        $('#statusEducJobInfo').addClass("text-danger");
+                        $('#statusEducJobInfo').text("ያስገቡት/ያስተካከሉት መረጃ በትክክል ሴቭ አልተደረገም");
+                    }
+                });
+            }
+            else {
+                if ($('#statusEducJobInfo').hasClass("text-success"))
+                    $('#statusEducJobInfo').removeClass("text-success");
+                $('#statusEducJobInfo').addClass("text-danger");
+                $('#statusEducJobInfo').text("እባክዎን * ምልክት ያለባቸውን ሳጥኖች ያስገቡ/ይምረጡ");
+            }
+        });
+
+        $('#resetEducJobInfo').on('click', function () {
+            $('#educJobInfoForm').trigger("reset"); // triger the normal reset function
+            $('#statusEducJobInfo').text("");
+        });
+    });
+</script>

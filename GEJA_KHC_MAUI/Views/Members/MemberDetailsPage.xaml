@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GEJA_KHC_MAUI.Views.MemberDetailsPage"
+             Title="የአባል ዝርዝር መረጃ">
+    <ScrollView>
+        <Grid VerticalOptions="FillAndExpand" RowSpacing="{OnIdiom Phone=15,Tablet=0,Desktop=10 }" ColumnSpacing="5" Margin="20,20,20,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="70*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{OnIdiom Phone=150,Tablet=250,Desktop=250}" />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition Height="{OnIdiom Phone=50,Tablet=50,Desktop=50 }" />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition Height="{OnIdiom Phone=50,Tablet=100,Desktop=50 }" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Image Source="{Binding PhotoStream}" Grid.ColumnSpan="2" HorizontalOptions="Center" HeightRequest="{OnIdiom Phone=150,Tablet=250,Desktop=250}" Margin="15,15,15,15" />
+
+            <Label Text="መለያ ቁ." Grid.Row="1" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" />
+            <Label Text="{Binding MemberId}" Grid.Row="1" Grid.Column="1" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" FontAttributes="Bold" />
+
+            <Label Text="ሙሉ ስም" Grid.Row="2" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }"  />
+            <Label Text="{Binding FullName}" Grid.Row="2" Grid.Column="1" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" FontAttributes="Bold" />
+
+            <Label Text="የእናት ስም" Grid.Row="3" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" />
+            <Label Text="{Binding MotherName}" Grid.Row="3" Grid.Column="1" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" FontAttributes="Bold" />
+
+            <Label Text="ፆታ" Grid.Row="4" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" />
+            <Label Text="{Binding Gender}" Grid.Row="4" Grid.Column="1" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" FontAttributes="Bold" />
+
+            <Label Text="የትውልድ ቀን" Grid.Row="5" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" />
+            <Label Text="{Binding BirthDate}" Grid.Row="5" Grid.Column="1" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" FontAttributes="Bold" />
+
+            <Label Text="የትውልድ ወር" Grid.Row="6" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" />
+            <Label Text="{Binding BirthMonth}" Grid.Row="6" Grid.Column="1" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" FontAttributes="Bold" />
+
+            <Label Text="የትውልድ ዘመን" Grid.Row="7" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" />
+            <Label Text="{Binding BirthYear}" Grid.Row="7" Grid.Column="1" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" FontAttributes="Bold" />
+
+            <Label Text="ምድብ" Grid.Row="8" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" />
+            <Label Text="{Binding Group}" Grid.Row="8" Grid.Column="1" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" FontAttributes="Bold" />
+
+            <Label Text="የአባልነት መንገድ" Grid.Row="9" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" />
+            <Label Text="{Binding MembershipMeans}" Grid.Row="9" Grid.Column="1" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" FontAttributes="Bold" />
+
+            <Label Text="የአባልነት ቀን" Grid.Row="10" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" />
+            <Label Text="{Binding MembershipDate}" Grid.Row="10" Grid.Column="1" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" FontAttributes="Bold" />
+
+            <Label Text="የአባልነት ወር" Grid.Row="11" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" />
+            <Label Text="{Binding MembershipMonth}" Grid.Row="11" Grid.Column="1" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" FontAttributes="Bold" />
+
+            <Label Text="የአባልነት ዘመን" Grid.Row="12" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" />
+            <Label Text="{Binding MembershipYear}" Grid.Row="12" Grid.Column="1" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" FontAttributes="Bold" />
+
+            <Label Text="አገልግሎት ከሌለ ምክንያት" Grid.Row="13" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" />
+            <Label Text="{Binding NoServiceReason}" Grid.Row="13" Grid.Column="1" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" FontAttributes="Bold" />
+
+            <Label Text="ማብራሪያ" Grid.Row="14" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" />
+            <Label Text="{Binding Remark}" Grid.Row="14" Grid.Column="1" FontSize="{OnIdiom Phone=Medium,Tablet=22,Desktop=Small }" FontAttributes="Bold" />
+        </Grid>
+    </ScrollView>
+</ContentPage>

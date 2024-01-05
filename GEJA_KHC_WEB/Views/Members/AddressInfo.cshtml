@@ -1,0 +1,168 @@
+﻿@model GEJA_KHC_WEB.Models.AddressInfo
+
+@{
+    ViewBag.Title = "የአባል አድራሻ መረጃ";
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "addressInfoForm" }))
+{
+    <hr />
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*@Html.HiddenFor(model => model.MemberId)*@
+        <input type="hidden" id="MemberId" value="@TempData["MemberId"]" />
+
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-md-6 col-xs-6">
+                <div class="form-group form-group required">
+                    @Html.LabelFor(model => model.SubcityId, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("SubcityId", new SelectList((List<SelectListItem>)TempData["SubcityId"], "Value", "Text", Model.SubcityId), htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SubcityId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group">
+                    @Html.LabelFor(model => model.Woreda, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.Woreda, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Woreda, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group">
+                    @Html.LabelFor(model => model.Kebele, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.Kebele, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Kebele, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group">
+                    @Html.LabelFor(model => model.HouseNo, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.HouseNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.HouseNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group">
+                    @Html.LabelFor(model => model.HouseOwnershipId, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("HouseOwnershipTypeId", new SelectList((List<SelectListItem>)TempData["HouseOwnershipTypeId"], "Value", "Text", Model.HouseOwnershipId), htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.HouseOwnershipId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-md-6 col-xs-6">
+                <div class="form-group form-group">
+                    @Html.LabelFor(model => model.HomePhoneNo, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.HomePhoneNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.HomePhoneNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group">
+                    @Html.LabelFor(model => model.OfficePhoneNo, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.OfficePhoneNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.OfficePhoneNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group">
+                    @Html.LabelFor(model => model.MobilePhoneNo, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.MobilePhoneNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MobilePhoneNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group form-group">
+            <div class="col-md-offset-2 col-md-6">
+                <br /><br />
+                <button type="button" id="saveAddressInfo" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> ሴቭ አድርግ</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="reset" id="resetAddressInfo" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span> ባዶ አድርግ</button>
+                <div id="statusAddressInfo" class="success">
+                    <!-- Save success or failure status text appears here-->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        function ValidateDataEntry(addrInfo) {
+            if ($('#SubcityId').val() == "0")
+                return false;
+
+            return true;
+        }
+
+        $('#saveAddressInfo').on('click', function () {
+            var addrInfo = {};
+            alert($('#HouseOwnershipTypeId').val());
+            addrInfo.MemberId = $('#MemberId').val();
+            addrInfo.SubcityId = $('#SubcityId').val();
+            addrInfo.Woreda = $('#Woreda').val().trim();
+            addrInfo.Kebele = $('#Kebele').val().trim();
+            addrInfo.HouseNo = $('#HouseNo').val().trim();
+            addrInfo.HouseOwnershipId = $('#HouseOwnershipTypeId').val();
+            addrInfo.HomePhoneNo = $('#HomePhoneNo').val().trim();
+            addrInfo.OfficePhoneNo = $('#OfficePhoneNo').val().trim();
+            addrInfo.MobilePhoneNo = $('#MobilePhoneNo').val().trim();
+            addrInfo.Email = $('#Email').val().trim();
+            
+            //alert(JSON.stringify(addrInfo));
+
+            if (ValidateDataEntry(addrInfo)) {
+                $.ajax({
+                    type: 'POST',
+                    cache: false,
+                    url: '@Url.Action("AddressInfoSave", "Members")',
+                    data: '{addressInfo:' + JSON.stringify(addrInfo) + '}',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'html', //'json',
+                    success: function (data) {
+                        if ($('#statusAddressInfo').hasClass("text-danger"))
+                            $('#statusAddressInfo').removeClass("text-danger");
+                        $('#statusAddressInfo').addClass("text-success");
+                        $('#statusAddressInfo').text("ያስገቡት/ያስተካከሉት መረጃ በትክክል ሴቭ ተደርጓል");
+                    },
+                    error: function (xhr) {
+                        if ($('#statusAddressInfo').hasClass("text-success"))
+                            $('#statusAddressInfo').removeClass("text-success");
+                        $('#statusAddressInfo').addClass("text-danger");
+                        $('#statusAddressInfo').text("ያስገቡት/ያስተካከሉት መረጃ በትክክል ሴቭ አልተደረገም");
+                    }
+                });
+            }
+            else {
+                if ($('#statusAddressInfo').hasClass("text-success"))
+                    $('#statusAddressInfo').removeClass("text-success");
+                $('#statusAddressInfo').addClass("text-danger");
+                $('#statusAddressInfo').text("እባክዎን * ምልክት ያለባቸውን ሳጥኖች ያስገቡ/ይምረጡ");
+            }
+        });
+
+        $('#resetAddressInfo').on('click', function () {
+            $('#addressInfoForm').trigger("reset"); // triger the normal reset function
+            $('#statusAddressInfo').text("");
+        });
+    });
+</script>

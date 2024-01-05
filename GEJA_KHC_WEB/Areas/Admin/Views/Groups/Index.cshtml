@@ -1,0 +1,321 @@
+﻿@model IEnumerable<GEJA_KHC_WEB.Models.Group>
+
+@{
+    ViewBag.Title = "ምድቦች";
+}
+
+<h2>ምድቦች</h2>
+
+<p id="statusmessage" class="@ViewBag.TextColor" style="font-size: large">@ViewBag.StatusMessage</p>
+
+<div class="panel panel-primary" id="grouplist">
+    <div class="panel-heading">
+        <h3 class="panel-title panel-info">የምድቦች ዝርዝር</h3>
+    </div>
+
+    <div class="panel-body">
+        <table class="table table-striped table-condensed table-bordered centeredtable" style="font-size: medium" id="tblGroup">
+            <tr>
+                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GroupName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Pastor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Remark)
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="hidden" value="@item.GroupId" />  <!-- Unique Id of Group -->
+                    </td>
+                    <td class="GroupName">
+                        <span>@item.GroupName</span>
+                        <input type="text" value="@item.GroupName" style="display:none; width:50%; max-width:50%" size="5" />
+                    </td>
+                    <td class="Pastor">
+                        <span>@item.Pastor</span>
+                        <input type="text" value="@item.Pastor" style="display:none; width:50%; max-width:50%" size="5" />
+                    </td>
+                    <td class="Remark">
+                        <span>@item.Remark</span>
+                        <input type="text" value="@item.Remark" style="display:none" size="30" />
+                    </td>
+                    <td>
+                        <a class="Edit glyphicon glyphicon-edit" href="javascript:;" data-toggle="tooltip" title="Edit"></a>
+                        <a class="Update glyphicon glyphicon-ok" href="javascript:;" style="display:none" data-toggle="tooltip" title="አስተካክል"></a>
+                        <a class="Confirm glyphicon glyphicon-ok" href="javascript:;" style="display:none" data-toggle="tooltip" title="አረጋግጥ"></a>
+                    </td>
+                    <td>
+                        <a class="Cancel glyphicon glyphicon-remove" href="javascript:;" style="display:none" data-toggle="tooltip" title="ተወው"></a>
+                        <a class="Delete glyphicon glyphicon-trash" href="javascript:;" data-toggle="tooltip" title="ሰርዝ"></a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <div class="panel-footer">
+        <h3 class="panel-title">የምድቦች ብዛት: <b>@Model.Count()</b> </h3>
+    </div>
+</div>
+
+<div id="newPartial">
+    <!-- New group partial displays here-->
+</div>
+
+<p>
+    <button id="new" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> አዲስ ምድብ መዝግብ </button>
+</p>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //New event handler.
+        $("#new").on("click", function () {
+            // clear the status message
+            $('#statusmessage').text("");
+
+            $.ajax({
+                url: '@Url.Action("NewGroupPartial", "Groups")',
+                type: 'GET',
+                dataType: 'html',
+                success: function (data) {
+                    $('#newPartial').html(data);
+                }
+            });
+            $('#new').hide();
+            $('#grouplist').hide();
+        });
+
+        //Edit event handler.
+        $("body").on("click", "#tblGroup .Edit", function () {
+            // clear the status message
+            $('#statusmessage').text("");
+
+            var row = $(this).closest("tr");
+            $("td", row).each(function () {
+                if ($(this).find("input").length > 0) {
+                    $(this).find("input").show();
+                    $(this).find("span").hide();
+                }
+            });
+            row.find(".Update").show();
+            row.find(".Cancel").show();
+            row.find(".Delete").hide();
+            $(this).hide();
+        });
+
+        //Update event handler.
+        $("body").on("click", "#tblGroup .Update", function () {
+            var row = $(this).closest("tr");
+
+            var oldGroup = {};
+            oldGroup.GroupId = row.find('input[type=hidden]').val();
+            oldGroup.GroupName = row.find(".GroupName").find("span").html();
+            oldGroup.Pastor = row.find(".Pastor").find("span").html();
+            oldGroup.Remark = row.find(".Remark").find("span").html();
+
+            $("td", row).each(function () {
+                if ($(this).find("input").length > 0) {
+                    var span = $(this).find("span");
+                    var input = $(this).find("input");
+                    span.html(input.val());
+                    span.show();
+                    input.hide();
+                }
+            });
+
+            row.find(".Edit").show();
+            row.find(".Delete").show();
+            row.find(".Cancel").hide();
+            $(this).hide();
+
+            var group = {};
+            group.GroupId = row.find('input[type=hidden]').val();
+            group.GroupName = row.find(".GroupName").find("span").html();
+            group.Pastor = row.find(".Pastor").find("span").html();
+            group.Remark = row.find(".Remark").find("span").html();
+
+            //alert(JSON.stringify(oldGroup));
+            //alert(JSON.stringify(group));
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("UpdateGroup", "Groups")',
+                data: '{grp:' + JSON.stringify(group) + '}',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json', //'text', //'html',
+                success: function (data) {
+                    //alert("Status: " + data.Status);
+                    var statusmessageid;
+                    var statuscolor;
+
+                    if (data.Status != 2627 && data.Status != 2601) { // error due to unique key constraint violation
+                        statusmessageid = 1; //StatusMessageId.UpdateDataSuccess = 1
+                        statuscolor = "text-success";
+
+                        $("td", row).each(function () {
+                            if ($(this).find("input").length > 0) {
+                                var span = $(this).find("span");
+                                var input = $(this).find("input");
+                                //span.html(input.val());
+                                span.show();
+                                input.hide();
+                            }
+                        });
+                    }
+                    else {
+                        statusmessageid = 4; //StatusMessageId.UpdateDataError = 4
+                        statuscolor = "text-danger";
+
+                        // Revert to old data
+                        row.find(".GroupName").find("span").html(oldGroup.GroupName);
+                        row.find(".Pastor").find("span").html(oldGroup.Pastor);
+                        row.find(".Remark").find("span").html(oldGroup.Remark);
+                        row.find(".GroupName").find("input").val(oldGroup.GroupName);
+                        row.find(".Pastor").find("input").val(oldGroup.Pastor);
+                        row.find(".Remark").find("input").val(oldGroup.Remark);
+                    }
+
+                    $.ajax({
+                        type: "GET",
+                        url: '/StatusMessage/GetStatusMessage',
+                        data: { id: statusmessageid }, //StatusMessageId.UpdateDataSuccess = 1
+                        dataType: "json",
+                        success: function (data) {
+                            $.each(data, function (i, item) {
+                                if ($('#statusmessage').hasClass("text-danger"))
+                                    $('#statusmessage').removeClass("text-danger");
+
+                                if ($('#statusmessage').hasClass("text-success"))
+                                    $('#statusmessage').removeClass("text-success");
+
+                                $('#statusmessage').addClass(statuscolor);
+
+                                $('#statusmessage').text(item.Message); // set the status message
+                            });
+                        },
+                    });
+                },
+                error: function (xhr) {
+                    //$('#status').text(xhr.status);
+                }
+
+            });
+        });
+
+        //Cancel event handler.
+        $("body").on("click", "#tblGroup .Cancel", function () {
+            var row = $(this).closest("tr");
+            $("td", row).each(function () {
+                if ($(this).find("input").length > 0) {
+                    var span = $(this).find("span");
+                    var input = $(this).find("input");
+                    input.val(span.html());
+                    span.show();
+                    input.hide();
+                }
+            });
+            row.find(".Edit").show();
+            row.find(".Delete").show();
+            row.find(".Update").hide();
+            row.find(".Confirm").hide();
+            $(this).hide();
+        });
+
+        //Delete event handler.
+        $("body").on("click", "#tblGroup .Delete", function () {
+            // clear the status message
+            $('#statusmessage').text("");
+
+            var row = $(this).closest("tr");
+            row.find(".Edit").hide();
+            row.find(".Confirm").show();
+            row.find(".Cancel").show();
+            row.find(".Delete").hide();
+            $(this).hide();
+        });
+
+        //Confirm event handler.
+        $("body").on("click", "#tblGroup .Confirm", function () {
+            var row = $(this).closest("tr");
+            var id = row.find('input[type=hidden]').val();
+            //alert(id);
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("DeleteGroup", "Groups")',
+                data: '{Id: ' + id + '}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    //alert("Status: " + data.Status);
+                    var statusmessageid;
+                    var statuscolor;
+                    if (data.Status == 0) { // no error 
+                        statusmessageid = 2; // StatusMessageId.DeleteDataSuccess = 2
+                        statuscolor = "text-success";
+                        if ($("#tblGroup tr").length > 2) {
+                            row.remove();
+
+                        } else {
+                            row.find("span").html('&nbsp;');
+                        }
+                    }
+                    else if (data.Status == 547) { // error due to foreign key constraint violation
+                        statusmessageid = 7; // StatusMessageId.ForeignKeyConstraintError = 7
+                        statuscolor = "text-danger";
+
+                        row.find(".Edit").show();
+                        row.find(".Delete").show();
+                        row.find(".Confirm").hide();
+                        row.find(".Update").hide();
+                        row.find(".Cancel").hide();
+                    }
+                    else {
+                        statusmessageid = 5; // StatusMessageId.DeleteDataError = 5
+                        statuscolor = "text-danger";
+
+                        row.find(".Edit").show();
+                        row.find(".Delete").show();
+                        row.find(".Confirm").hide();
+                        row.find(".Update").hide();
+                        row.find(".Cancel").hide();
+                    }
+
+                    
+                    $.ajax({
+                        type: "GET",
+                        url: '/StatusMessage/GetStatusMessage',
+                        data: { id: statusmessageid }, 
+                        dataType: "json",
+                        success: function (data) {
+                            $.each(data, function (i, item) {
+                                if ($('#statusmessage').hasClass("text-danger"))
+                                    $('#statusmessage').removeClass("text-danger");
+
+                                if ($('#statusmessage').hasClass("text-success"))
+                                    $('#statusmessage').removeClass("text-success");
+
+                                $('#statusmessage').addClass(statuscolor);
+
+                                $('#statusmessage').text(item.Message); // set the status message
+                            });
+                        },
+                    });
+                },
+                error: function (xhr) {
+                    //$('#status').text(xhr.status);
+                    alert("Error");
+
+                }
+            });
+        });
+    });
+</script>

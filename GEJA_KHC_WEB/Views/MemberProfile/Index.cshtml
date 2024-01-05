@@ -1,0 +1,109 @@
+﻿@model GEJA_KHC_WEB.ViewModels.MemberViewModel
+    
+@{
+    ViewBag.Title = "የአባል መረጃ ማሳያ";
+}
+
+<h2>የአባል መረጃ ማሳያ</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <div class="form-horizontal">
+                        <div class="form-group form-group-lg">
+                            <label class="control-label col-lg-2 col-md-3 col-sm-4">ምድብ</label>
+                            <div class="col-lg-9 col-md-8 col-sm-8">
+                                @*@Html.DropDownList("ddlGroup", (List<SelectListItem>)ViewBag.Groups, new { @class = "form-control" })*@
+                                @Html.DropDownList("ddlGroup", new SelectList(ViewBag.Groups, "Value", "Text", ViewBag.GroupId), htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="form-horizontal">
+                        <div class="form-group form-group-lg">
+                            <label class="control-label col-lg-2 col-md-3 col-sm-4">አባል</label>
+                            <div class="col-lg-9 col-md-8 col-sm-8">
+                                @*@Html.DropDownList("ddlMember", (List<SelectListItem>)ViewBag.Members, new { @class = "form-control" })*@
+                                @Html.DropDownList("ddlMember", new SelectList(ViewBag.Members, "Value", "Text", TempData["MemberId"]), htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6" align="right">
+                    <a class="btn btn-primary" data-toggle="tooltip" title="ከንደገና አሳይ" id="refresh"> <span class="glyphicon glyphicon-refresh"></span> </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="memberDetails">
+        <!-- Member Detail-->
+        @if (Model != null)
+        {
+            @Html.Partial("_GetMemberProfile", Model, new ViewDataDictionary());
+        }
+    </div>
+}
+
+<div id="wait" align="center" style="display: none">
+    <img src="~/images/ajax-loader-big.gif" />
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#ddlGroup').change(function () {
+            var selGroupId = $('#ddlGroup option:selected').val();
+            $('#ddlMember option').remove(); //empty the member dropdown list
+            $('#memberDetails').empty(); // clear the member place holder
+
+            if (selGroupId != "0") //if some group is selected
+            {
+                $.ajax({
+                    url: '@Url.Action("GetMembersDDL", "DropDownList")',
+                    data: { groupid: selGroupId },
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        var markup = '<option value="0" id="noselect"> --አባል ይምረጡ--</option>';
+                        $.each(data, function (i, member) {
+                            markup += '<option value="' + member.Value + '">' + member.Text + '</option>'
+                            $('#ddlMember').html(markup);
+                        });
+                    }
+                });
+            }
+        });
+
+        $('#ddlMember').change(function () {
+            var selMemberId = $('#ddlMember option:selected').val();
+            $('#memberDetails').empty(); // clear the member place holder
+            //alert(selMemberId);
+            if (selMemberId != "0") //if some member is selected
+            {
+                $.ajax({
+                    url: '@Url.Action("_GetMemberProfile", "MemberProfile")',
+                    data: { id: selMemberId },
+                    type: 'GET',
+                    dataType: 'html',
+                    beforeSend: function () { $('#wait').show(); },
+                    complete: function () { $('#wait').hide(); },
+                    success: function (data) {
+                        $('#memberDetails').html(data);
+                    }
+                });
+            }
+        });
+
+        $('#refresh').click(function () {
+            $('#ddlMember').trigger('change');
+        });
+    });
+</script>

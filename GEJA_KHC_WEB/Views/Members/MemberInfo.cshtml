@@ -1,0 +1,222 @@
+﻿@model GEJA_KHC_WEB.Models.Member
+
+@{
+    ViewBag.Title = "የአባል መሠረታዊ  መረጃ";
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "memberInfoForm" }))
+{
+    <hr />
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*@Html.HiddenFor(model => model.MemberId)*@
+        <input type="hidden" id="MemberId" value="@TempData["MemberId"]" />
+
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-md-6 col-xs-6">
+                <div class="form-group form-group required">
+                    @Html.LabelFor(model => model.MemberId, htmlAttributes: new { @class = "control-label col-md-5", @style = "color: red;" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.MemberId, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", style = "color: red; border: 2px solid red;" } })
+                        @Html.ValidationMessageFor(model => model.MemberId, "", new { @class = "text-danger", style = "color: red" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group required">
+                    @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group">
+                    @Html.LabelFor(model => model.MotherName, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.MotherName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MotherName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group">
+                    @Html.LabelFor(model => model.GenderId, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("GenderId", new SelectList((List<SelectListItem>)TempData["GenderId"], "Value", "Text", Model.GenderId), htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.GenderId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group">
+                    @Html.LabelFor(model => model.BirthDate, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("BirthDate", new SelectList((List<SelectListItem>)TempData["DateList"], "Value", "Text", Model.BirthDate), htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group">
+                    @Html.LabelFor(model => model.BirthMonthId, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("BirthMonthId", new SelectList((List<SelectListItem>)TempData["BirthMonthId"], "Value", "Text", Model.BirthMonthId), htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.BirthMonthId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group">
+                    @Html.LabelFor(model => model.BirthYear, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("BirthYear", new SelectList((List<SelectListItem>)TempData["YearList"], "Value", "Text", Model.GenderId), htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.BirthYear, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-md-6 col-xs-6">
+                <div class="form-group form-group required">
+                    @Html.LabelFor(model => model.GroupId, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-4">
+                        @Html.DropDownList("GroupId", new SelectList((List<SelectListItem>)TempData["GroupId"], "Value", "Text", Model.GroupId), htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.GroupId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group">
+                    @Html.LabelFor(model => model.MembershipDate, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-4">
+                        @Html.DropDownList("MembershipDate", new SelectList((List<SelectListItem>)TempData["DateList"], "Value", "Text", Model.GenderId), htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MembershipDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group">
+                    @Html.LabelFor(model => model.MembershipMonthId, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-4">
+                        @Html.DropDownList("MembershipMonthId", new SelectList((List<SelectListItem>)TempData["MembershipMonthId"], "Value", "Text", Model.MembershipMonthId), htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MembershipMonthId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group">
+                    @Html.LabelFor(model => model.MembershipYear, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-4">
+                        @Html.DropDownList("MembershipYear", new SelectList((List<SelectListItem>)TempData["YearList"], "Value", "Text", Model.GenderId), htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MembershipYear, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group">
+                    @Html.LabelFor(model => model.MembershipMeansId, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-7">
+                        @Html.DropDownList("MembershipMeansId", new SelectList((List<SelectListItem>)TempData["MembershipMeansId"], "Value", "Text", Model.MembershipMeansId), htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MembershipMeansId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group">
+                    @Html.LabelFor(model => model.NoServiceReason, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.NoServiceReason, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NoServiceReason, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group form-group">
+                    @Html.LabelFor(model => model.Remark, "ማብራሪያ", htmlAttributes: new { @class = "control-label col-md-3 col-5 col-xs-10" })
+                    <div class="col-md-9 col-xs-12">
+                        @Html.TextAreaFor(model => model.Remark, htmlAttributes: new { @class = "form-control", @rows = 5, style = "width: 100%; max-width: 100%" })
+                        @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-xs-6">
+                <div class="form-group form-group">
+                    <div class="col-md-offset-2 col-md-6">
+                        <br /><br />
+                        <button type="button" id="saveMemberInfo" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> ሴቭ አድርግ</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="reset" id="resetMemberInfo" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span> ባዶ አድርግ</button>
+                        <div id="statusMemberInfo" class="success">
+                            <!-- Save success or failure status text appears here-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        function ValidateDataEntry(memberInfo) {
+            if (memberInfo.MemberId == "" || memberInfo.FullName == "")
+                return false;
+
+            return true;
+        }
+
+        $('#saveMemberInfo').on('click', function () {
+            var memberInfo = {};
+
+            memberInfo.MemberId = $('#MemberId').val().trim();
+            memberInfo.FullName = $('#FullName').val().trim();
+            memberInfo.MotherName = $('#MotherName').val().trim();
+            memberInfo.GenderId = $('#GenderId').val();
+            memberInfo.BirthDate = $('#BirthDate').val();
+            memberInfo.BirthMonthId = $('#BirthMonthId').val();
+            memberInfo.BirthYear = $('#BirthYear').val();
+            memberInfo.GroupId = $('#GroupId').val();
+            memberInfo.MembershipDate = $('#MembershipDate').val();
+            memberInfo.MembershipMonthId = $('#MembershipMonthId').val();
+            memberInfo.MembershipYear = $('#MembershipYear').val();
+            memberInfo.MembershipMeansId = $('#MembershipMeansId').val();
+            memberInfo.NoServiceReason = $('#NoServiceReason').val().trim();
+            memberInfo.Remark = $('#Remark').val();
+
+            //alert(JSON.stringify(memberInfo));
+
+            if (ValidateDataEntry(memberInfo)) {
+                $.ajax({
+                    type: 'POST',
+                    cache: false,
+                    url: '@Url.Action("MemberInfoSave", "Members")',
+                    data: '{member:' + JSON.stringify(memberInfo) + '}',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'html', //'json',
+                    success: function (data) {
+                        if ($('#statusMemberInfo').hasClass("text-danger"))
+                            $('#statusMemberInfo').removeClass("text-danger");
+                        $('#statusMemberInfo').addClass("text-success");
+                        $('#statusMemberInfo').text("ያስገቡት/ያስተካከሉት መረጃ በትክክል ሴቭ ተደርጓል");
+                    },
+                    error: function (xhr) {
+                        if ($('#statusMemberInfo').hasClass("text-success"))
+                            $('#statusMemberInfo').removeClass("text-success");
+                        $('#statusMemberInfo').addClass("text-danger");
+                        $('#statusMemberInfo').text("ያስገቡት/ያስተካከሉት መረጃ በትክክል ሴቭ አልተደረገም");
+                    }
+                });
+                
+            }
+            else {
+                if ($('#statusMemberInfo').hasClass("text-success"))
+                    $('#statusMemberInfo').removeClass("text-success");
+                $('#statusMemberInfo').addClass("text-danger");
+                $('#statusMemberInfo').text("እባክዎን * የተደረገባቸውን መረጃዎች በሙሉ ያስገቡ/ይምረጡ");
+            }
+        });
+
+        $('#resetMemberInfo').on('click', function () {
+            $('#memberInfoForm').trigger("reset"); // triger the normal reset function
+            $('#statusMemberInfo').text("");
+        });
+    });
+</script>

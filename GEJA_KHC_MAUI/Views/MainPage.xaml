@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GEJA_KHC_MAUI.Views.MainPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="እርዳታ" IconImageSource="icon_help.png" Order="Default" Priority="0" Clicked="OnHelpClicked" />
+        <ToolbarItem Text="ውጣ" IconImageSource="icon_logout.png" Order="Secondary" Priority="1" Clicked="OnLogoutClicked" />
+        <ToolbarItem Text="ዝጋ" IconImageSource="icon_exit.png" Order="Secondary"  Priority="2" Clicked="OnExitClicked" />
+        <ToolbarItem Text="ስለ..." IconImageSource="icon_info.png" Order="Secondary" Priority="3" Clicked="OnAboutClicked" />
+    </ContentPage.ToolbarItems>
+
+    <VerticalStackLayout
+        Spacing="25"
+        Padding="30,0"
+        VerticalOptions="Center">
+
+        <Label Text="የጌጃ ቃለ ሕይወት ቤተክርስቲያን" 
+                FontAttributes="Bold" 
+                FontFamily="Lessan"
+                HorizontalOptions="CenterAndExpand"
+                FontSize="{OnIdiom Phone=30,Tablet=45,Desktop=30}" />
+
+        <Label Text="Geja Kale Hiwot Church" 
+                FontAttributes="Bold" 
+                FontFamily="OpenSansOpenSansSemiBold"
+                HorizontalOptions="CenterAndExpand"
+                FontSize="{OnIdiom Phone=25,Tablet=40,Desktop=30}" />
+
+        <Image
+            Source="geja_khc.png"
+            SemanticProperties.Description="Cute dot net bot waving hi to you!"
+            HeightRequest="{OnIdiom Phone=200,Tablet=400,Desktop=200}"
+            HorizontalOptions="Center" />
+
+        <Label
+            Text="የአባላት መረጃ"
+            SemanticProperties.HeadingLevel="Level1"
+            FontSize="{OnIdiom Phone=32,Tablet=40,Desktop=30}"
+            FontAttributes="Bold"
+            FontFamily="Abay"
+            HorizontalOptions="Center" />
+
+    </VerticalStackLayout>
+    
+</ContentPage>

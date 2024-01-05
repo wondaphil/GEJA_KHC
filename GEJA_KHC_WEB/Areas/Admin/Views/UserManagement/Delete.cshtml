@@ -1,0 +1,48 @@
+﻿@model GEJA_KHC_WEB.Areas.Admin.ViewModels.UserRoleViewModel
+
+@{
+    ViewBag.Title = "የተጠቃሚ መሰረዢያ";
+}
+
+<h2>የተጠቃሚ መሰረዢያ</h2>
+
+<h3>ይህንን ተጠቃሚ ለመሰረዝ እርግጠኛ ነዎት??</h3>
+<div>
+    <h4>User Details:</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Role.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-warning-sign"></span> Delete</button>
+            <a href="@Url.Action("Index")" class="btn btn-primary"><span class="glyphicon glyphicon-backward"></span> Go to Users' List</a>
+        </div>
+    }
+</div>

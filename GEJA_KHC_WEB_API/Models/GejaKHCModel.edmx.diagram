@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="422a8b6d2d6441ddb895e84fbac434ce" Name="Diagram1" ZoomLevel="95">
+        <EntityTypeShape EntityType="Geja_KHC_Model.AddressInfo" Width="1.5" PointX="5.25" PointY="4.75" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.EducationAndJobInfo" Width="1.5" PointX="8.25" PointY="9.125" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.EducationLevel" Width="1.5" PointX="6" PointY="29.625" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.FamilyInfo" Width="1.5" PointX="5.25" PointY="12.5" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.FieldOfStudy" Width="1.5" PointX="6" PointY="21.875" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.Group" Width="1.5" PointX="0.75" PointY="12.875" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.HouseOwnershipType" Width="1.5" PointX="3" PointY="4.375" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.Job" Width="1.5" PointX="6" PointY="1.75" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.JobType" Width="1.5" PointX="6" PointY="19.25" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.MaritalStatus" Width="1.5" PointX="3" PointY="19.625" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.MemberService" Width="1.5" PointX="5.25" PointY="9.375" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.MembershipMeans" Width="1.5" PointX="0.75" PointY="6.25" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.Month" Width="1.5" PointX="0.75" PointY="9.625" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.Service" Width="1.5" PointX="3" PointY="17" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.ServiceType" Width="1.5" PointX="3" PointY="14.375" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.Subcity" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="Geja_KHC_Model.FK_AddressInfo_HouseOwnershipType" />
+        <AssociationConnector Association="Geja_KHC_Model.FK_AddressInfo_Subcity" />
+        <AssociationConnector Association="Geja_KHC_Model.FK_EducationAndJobInfo_EducationLevel" />
+        <AssociationConnector Association="Geja_KHC_Model.FK_EducationAndJobInfo_FieldOfStudy" />
+        <AssociationConnector Association="Geja_KHC_Model.FK_EducationAndJobInfo_Job" />
+        <AssociationConnector Association="Geja_KHC_Model.FK_EducationAndJobInfo_JobType" />
+        <AssociationConnector Association="Geja_KHC_Model.FK_FamilyInfo_MaritalStatus" />
+        <AssociationConnector Association="Geja_KHC_Model.FK_MemberService_Service" />
+        <AssociationConnector Association="Geja_KHC_Model.FK_MemberService_ServiceType" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.Gender" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.EducationLevelByGroup" Width="1.5" PointX="7.375" PointY="4.75" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.GenderByGroup" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.MaritalStatusByGroup" Width="1.5" PointX="9.375" PointY="3.75" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.MembershipMeansByGroup" Width="1.5" PointX="10.375" PointY="7.75" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.SubcityByGroup" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.Member" Width="1.5" PointX="3" PointY="7.375" />
+        <AssociationConnector Association="Geja_KHC_Model.FK_AddressInfo_Member" />
+        <AssociationConnector Association="Geja_KHC_Model.FK_EducationAndJobInfo_Member" />
+        <AssociationConnector Association="Geja_KHC_Model.FK_FamilyInfo_Member" />
+        <AssociationConnector Association="Geja_KHC_Model.FK_Member_Gender" />
+        <AssociationConnector Association="Geja_KHC_Model.FK_Member_Group" />
+        <AssociationConnector Association="Geja_KHC_Model.FK_MembeMembershipMonth" />
+        <AssociationConnector Association="Geja_KHC_Model.FK_Member_BirthMonth" />
+        <AssociationConnector Association="Geja_KHC_Model.FK_Member_MembershipMeans" />
+        <AssociationConnector Association="Geja_KHC_Model.FK_MemberService_Member" />
+        <EntityTypeShape EntityType="Geja_KHC_Model.MemberPhoto" Width="1.5" PointX="5.25" PointY="25.25" />
+        <AssociationConnector Association="Geja_KHC_Model.FK_MemberPhoto_Member" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

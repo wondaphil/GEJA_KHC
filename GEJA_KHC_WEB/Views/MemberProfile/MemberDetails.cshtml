@@ -1,0 +1,93 @@
+﻿@model GEJA_KHC_WEB.Models.Member
+
+<table class="table">
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.FullName)
+        </td>
+
+        <th>
+            @Html.DisplayFor(model => model.FullName)
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.MotherName)
+        </td>
+
+        <th>
+            @Html.DisplayFor(model => model.MotherName)
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.GenderId)
+        </td>
+
+        <th>
+            @TempData["Gender"]
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            የትውልድ ቀን
+        </td>
+
+        <th>
+            @TempData["BirthMonth"] @Model.BirthDate/@Model.BirthYear
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.GroupId)
+        </td>
+
+        <th>
+            @TempData["Group"]
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            የአባልነት ጊዜ
+        </td>
+
+        <th>
+            @TempData["MembershipMonth"] @Model.MembershipDate/@Model.MembershipYear
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.MembershipMeansId)
+        </td>
+
+        <th>
+            @TempData["MembershipMeans"]
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.NoServiceReason)
+        </td>
+
+        <th>
+            @Html.DisplayFor(model => model.NoServiceReason)
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Remark)
+        </td>
+
+        <th>
+            @Html.DisplayFor(model => model.Remark)
+        </th>
+    </tr>
+</table>

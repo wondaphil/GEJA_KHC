@@ -1,0 +1,309 @@
+﻿@model GEJA_KHC_WEB.ViewModels.MemberViewModel
+
+@{
+    ViewBag.Title = "የአባላት መረጃ ማስገቢያ/ማስተካከያ";
+}
+
+<h2>የአባላት መረጃ ማስገቢያ/ማስተካከያ</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="panel panel-primary">
+        @*<div class="panel-heading">
+                <h3 class="panel-title panel-info">Please select <b>District</b>, <b>Section</b>, <b>Road Segment</b> and <b>Bridge</b> from the dropdown list</h3>
+            </div>*@
+        <div class="panel-body">
+
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <div class="form-horizontal">
+                        <div class="form-group form-group-lg">
+                            <label class="control-label col-lg-2 col-md-3 col-sm-4">ምድብ</label>
+                            <div class="col-lg-9 col-md-8 col-sm-8">
+                                @*@Html.DropDownList("ddlGroup", (List<SelectListItem>)ViewBag.Groups, new { @class = "form-control" })*@
+                                @Html.DropDownList("ddlGroup", new SelectList(ViewBag.Groups, "Value", "Text", ViewBag.GroupId), htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="form-horizontal">
+                        <div class="form-group form-group-lg">
+                            <label class="control-label col-lg-2 col-md-3 col-sm-4">አባል</label>
+                            <div class="col-lg-9 col-md-8 col-sm-8">
+                                @*@Html.DropDownList("ddlMember", (List<SelectListItem>)ViewBag.Members, new { @class = "form-control" })*@
+                                @Html.DropDownList("ddlMember", new SelectList(ViewBag.Members, "Value", "Text", TempData["MemberId"]), htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6" align="right">
+                    <a class="btn btn-primary" data-toggle="tooltip" title="ከንደገና አሳይ" id="refresh"> <span class="glyphicon glyphicon-refresh"></span> </a>
+                </div>
+            </div>
+        </div>
+        <div id="memberpartial">
+            <!-- Member Partial-->
+        </div>
+    </div>
+}
+
+<!-- Tab Buttons -->
+<ul id="tabstrip" class="nav nav-tabs" role="tablist" style="font-size: large">
+    <li class="active">
+        <a href="#_MemberInfoTab" role="tab" data-toggle="tab">የአባል መረጃ</a>
+    </li>
+    <li>
+        <a href="#_MemberPhotoTab" role="tab" data-toggle="tab">የአባል ፎቶ</a>
+    </li>
+    <li>
+        <a href="#_AddressInfoTab" role="tab" data-toggle="tab">አድራሻ</a>
+    </li>
+    <li>
+        <a href="#_FamilyInfoTab" role="tab" data-toggle="tab">የቤተሰብ መረጃ</a>
+    </li>
+    <li>
+        <a href="#_EducationAndJobInfoTab" role="tab" data-toggle="tab">ትምህርትና ሥራ</a>
+    </li>
+    <li>
+        <a href="#_MemberServiceTab" role="tab" data-toggle="tab">የአገልግሎት ሁኔታ</a>
+    </li>
+</ul>
+
+<!-- Tab Content Containers -->
+<div class="tab-content">
+    <div class="tab-pane fade in active" id="_MemberInfoTab">
+        <div id="memberInfo">
+            <!-- Member Informations display here -->
+            @if (Model != null)
+            {
+                if (Model.MemberInfo == null)
+                {
+                    @Html.Partial("MemberInfoNew", Model.MemberInfo, new ViewDataDictionary());
+                }
+                else
+                {
+                    @Html.Partial("MemberInfo", Model.MemberInfo);
+                }
+            }
+        </div>
+        <div id="waitMemberInfo" align="center" style="display: none">
+            <img src="~/images/ajax-loader-big.gif" />
+        </div>
+    </div>
+    <div class="tab-pane fade" id="_MemberPhotoTab">
+        <div id="memberPhoto">
+            <!-- Member Photo display here -->
+            @if (Model != null)
+            {
+                if (Model.MemberPhoto == null)
+                {
+                    @Html.Partial("MemberPhotoNew", Model.MemberPhoto, new ViewDataDictionary());
+                }
+                else
+                {
+                    @Html.Partial("MemberPhoto", Model.MemberPhoto);
+                }
+            }
+        </div>
+        <div id="waitMemberPhoto" align="center" style="display: none">
+            <img src="~/images/ajax-loader-big.gif" />
+        </div>
+    </div>
+    <div class="tab-pane fade" id="_AddressInfoTab">
+        <div id="addressInfo">
+            <!-- Address Informations display here -->
+            @if (Model != null)
+            {
+                if (Model.AddressInfo == null)
+                {
+                    @Html.Partial("AddressInfoNew", Model.AddressInfo, new ViewDataDictionary());
+                }
+                else
+                {
+                    @Html.Partial("AddressInfo", Model.AddressInfo);
+                }
+            }
+        </div>
+        <div id="waitAddressInfo" align="center" style="display: none">
+            <img src="~/images/ajax-loader-big.gif" />
+        </div>
+    </div>
+    <div class="tab-pane fade" id="_FamilyInfoTab">
+        <div id="familyInfo">
+            <!-- Family Informations display here -->
+            @if (Model != null)
+            {
+                if (Model.FamilyInfo == null)
+                {
+                    @Html.Partial("FamilyInfoNew", Model.FamilyInfo, new ViewDataDictionary());
+                }
+                else
+                {
+                    @Html.Partial("FamilyInfo", Model.FamilyInfo);
+                }
+            }
+        </div>
+        <div id="waitFamilyInfo" align="center" style="display: none">
+            <img src="~/images/ajax-loader-big.gif" />
+        </div>
+    </div>
+    <div class="tab-pane fade" id="_EducationAndJobInfoTab">
+        <div id="educationAndJobInfo">
+            <!-- Education and Job Informations display here -->
+            @if (Model != null)
+            {
+                if (Model.EducationAndJobInfo == null)
+                {
+                    @Html.Partial("EducationAndJobInfoNew", Model.EducationAndJobInfo, new ViewDataDictionary());
+                }
+                else
+                {
+                    @Html.Partial("EducationAndJobInfo", Model.EducationAndJobInfo);
+                }
+            }
+        </div>
+        <div id="waitEducationAndJobInfo" align="center" style="display: none">
+            <img src="~/images/ajax-loader-big.gif" />
+        </div>
+    </div>
+    <div class="tab-pane fade" id="_MemberServiceTab">
+        <div id="memberService">
+            <!-- Service informations display here -->
+            @if (Model != null)
+            {
+                @Html.Partial("MemberService", Model.MemberService);
+            }
+        </div>
+        <div id="waitMemberService" align="center" style="display: none">
+            <img src="~/images/ajax-loader-big.gif" />
+        </div>
+    </div>
+</div>
+
+@*<div id="wait" align="center" style="display: none">
+    <img src="~/images/ajax-loader-big.gif" />
+</div>*@
+
+<script>
+    $(document).ready(function () {
+        function ClearAll() {
+            $('#memberInfo').empty(); // clear the member info tab
+            $('#memberPhoto').empty(); // clear the member photo tab
+            $('#addressInfo').empty(); // clear the address info tab
+            $('#familyInfo').empty(); // clear the family info tab
+            $('#educationAndJobInfo').empty(); // clear the education and job info tab
+            $('#memberService').empty(); // clear the member service tab
+        }
+
+        $('#ddlGroup').change(function () {
+            var selGroupId = $('#ddlGroup option:selected').val();
+            $('#ddlMember option').remove(); //empty the member dropdown list
+            $('#memberpartial').empty(); // clear the member place holder
+
+            if (selGroupId != "0") //if some group is selected
+            {
+                $.ajax({
+                    url: '@Url.Action("GetMembersDDL", "DropDownList")',
+                    data: { groupid: selGroupId },
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        var markup = '<option value="0" id="noselect"> --አባል ይምረጡ--</option>';
+                        $.each(data, function (i, member) {
+                            markup += '<option value="' + member.Value + '">' + member.Text + '</option>'
+                            $('#ddlMember').html(markup);
+                        });
+                    }
+                });
+            }
+        });
+
+        $('#ddlMember').change(function () {
+            var selMemberId = $('#ddlMember option:selected').val();
+            ClearAll();
+            if (selMemberId != "0") //if some member is selected
+            {
+                $.ajax({
+                    url: '@Url.Action("MemberInfo", "Members")',
+                    data: { memberid: selMemberId },
+                    type: 'GET',
+                    dataType: 'html',
+                    beforeSend: function () { $('#waitMemberInfo').show(); },
+                    complete: function () { $('#waitMemberInfo').hide(); },
+                    success: function (data) {
+                        $('#memberInfo').html(data);
+                    }
+                });
+
+                $.ajax({
+                    url: '@Url.Action("MemberPhoto", "Members")',
+                    data: { memberid: selMemberId },
+                    type: 'GET',
+                    dataType: 'html',
+                    beforeSend: function () { $('#waitMemberPhoto').show(); },
+                    complete: function () { $('#waitMemberPhoto').hide(); },
+                    success: function (data) {
+                        $('#memberPhoto').html(data);
+                    }
+                });
+
+                $.ajax({
+                    url: '@Url.Action("AddressInfo", "Members")',
+                    data: { memberid: selMemberId },
+                    type: 'GET',
+                    dataType: 'html',
+                    beforeSend: function () { $('#waitAddressInfo').show(); },
+                    complete: function () { $('#waitAddressInfo').hide(); },
+                    success: function (data) {
+                        $('#addressInfo').html(data);
+                    }
+                });
+
+                $.ajax({
+                    url: '@Url.Action("FamilyInfo", "Members")',
+                    data: { memberid: selMemberId },
+                    type: 'GET',
+                    dataType: 'html',
+                    beforeSend: function () { $('#waitFamilyInfo').show(); },
+                    complete: function () { $('#waitFamilyInfo').hide(); },
+                    success: function (data) {
+                        $('#familyInfo').html(data);
+                    }
+                });
+
+                $.ajax({
+                    url: '@Url.Action("EducationAndJobInfo", "Members")',
+                    data: { memberid: selMemberId },
+                    type: 'GET',
+                    dataType: 'html',
+                    beforeSend: function () { $('#waitEducationAndJobInfo').show(); },
+                    complete: function () { $('#waitEducationAndJobInfo').hide(); },
+                    success: function (data) {
+                        $('#educationAndJobInfo').html(data);
+                    }
+                });
+
+                $.ajax({
+                    url: '@Url.Action("MemberService", "Members")',
+                    data: { memberid: selMemberId },
+                    type: 'GET',
+                    dataType: 'html',
+                    beforeSend: function () { $('#waitMemberService').show(); },
+                    complete: function () { $('#waitMemberService').hide(); },
+                    success: function (data) {
+                        $('#memberService').html(data);
+                    }
+                });
+            }
+        });
+
+        $('#refresh').click(function () {
+            $('#ddlMember').trigger('change');
+        });
+    });
+
+</script>

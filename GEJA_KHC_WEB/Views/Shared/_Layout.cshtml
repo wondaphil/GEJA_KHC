@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - የጌጃ ቃ/ሕ ቤ/ክ የአባላት መረጃ ማዕከል</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Styles.Render("~/Content/dataTables")
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+</head>
+<body>
+    @Html.Partial("_HeaderAndMenuBar")
+
+    <div class="container body-content">
+        @*@Html.Partial("_SearchBar")*@
+
+        @RenderBody()
+        <hr />
+        <footer>
+            <p align="center">&copy; @DateTime.Now.Year - Geja Kale Hiwot Church. የጌጃ ቃ/ሕ ቤ/ክ. All rights reserved.</p>
+        </footer>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/dataTables") @*my bundles*@
+    @Scripts.Render("~/bundles/dataTables") @*my bundles*@
+    @Styles.Render("~/Content/dropdownsubmenu") @*my bundles*@
+    @Styles.Render("~/Content/css") @*my bundles*@
+    @Styles.Render("~/Content/themes/base/css") @*my bundles*@
+    @Scripts.Render("~/bundles/modernizr") @*my bundles*@
+    @Styles.Render("~/Content/jqueryui") @*my bundles*@
+    @Scripts.Render("~/bundles/jqueryui") @*my bundles*@
+    @Scripts.Render("~/bundles/jeditable") @*my bundles*@
+    @Scripts.Render("~/bundles/canvasjs") @*my bundles*@
+    @Scripts.Render("~/bundles/chartjs") @*my bundles*@
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

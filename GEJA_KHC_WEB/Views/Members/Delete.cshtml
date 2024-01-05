@@ -1,0 +1,168 @@
+﻿@model GEJA_KHC_WEB.Models.Member
+
+<div>
+    @if (ViewBag.Success)
+    {
+        <h3>ይህንን አባል ከነሙሉ ዝርዝር መረጃው ለመሰረዝ እርግጠኛ ነዎት?</h3>
+        <h4 class="text-danger">(መሠረታዊ መረጃዎች፣ የቤተሰብ መረጃዎች፣ የሥራና የትምህርት መረጃዎች የመሳሰሉት በሙሉ አብረው ይሰረዛሉ!! ከተሰረዘ በኋላ መረጃውን በምንም መልኩ መልሰው ማግኘት አይችሉም!!)</h4>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 col-xs-6">
+                    <table class="table table-condensed">
+                        <tr>
+                            <td>የአባል መለያ ቁጥር</td>
+                            <th>@Model.MemberId</th>
+                        </tr>
+
+                        <tr>
+                            <td>ሙሉ ስም</td>
+                            <th>@Model.FullName</th>
+                        </tr>
+
+                        @{
+                            var gender = Model.Gender;
+                        }
+                        <tr>
+                            <td>ፆታ</td>
+                            <th>
+                                @if (gender != null)
+                                {
+                                    @Model.Gender.GenderName
+                                }
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <td>ምድብ</td>
+                            <th>@Model.Group.GroupName</th>
+                        </tr>
+
+                        @{
+                            int? age = null;
+                            if (Model.BirthYear != null)
+                            {
+                                age = DateTime.Now.Year - 8 - Model.BirthYear; // In Ethiopian calendar
+                            }
+                        }
+
+                        <tr>
+                            <td>ዕድሜ</td>
+                            <th>@age</th>
+                        </tr>
+
+                        <tr>
+                            <td>የአባልነት ዘመን</td>
+                            <th>@Model.MembershipYear</th>
+                        </tr>
+
+                        @{
+                            var means = Model.MembershipMeans;
+                        }
+                        <tr>
+                            <td>የአባልነት መንገድ</td>
+                            <th>
+                                @if (means != null)
+                                {
+                                    @means.MembershipMeansName
+                                }
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+
+                @if (!ViewBag.NoDetailData)
+                {
+                    <div class="col-sm-3 col-xs-6">
+                        <table class="table table-condensed">
+                            <tr>
+                                <td>ክ/ከተማ</td>
+                                <th>@Model.AddressInfo.Subcity.SubcityName</th>
+                            </tr>
+
+                            <tr>
+                                <td>ወረዳ</td>
+                                <th>@Model.AddressInfo.Woreda</th>
+                            </tr>
+
+                            <tr>
+                                <td>ቀበሌ</td>
+                                <th>@Model.AddressInfo.Woreda</th>
+                            </tr>
+
+                            <tr>
+                                <td>የቤት ቁ.</td>
+                                <th>@Model.AddressInfo.HouseNo</th>
+                            </tr>
+
+                            <tr>
+                                <td>ሞባይል ቁ.</td>
+                                <th>@Model.AddressInfo.MobilePhoneNo</th>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="clearfix visible-xs"></div> <!-- Add clearfix (or new line break) for only the xs -->
+
+                    <div class="col-sm-3 col-xs-6">
+                        <table class="table table-condensed">
+                            <tr>
+                                <td>የጋብቻ ሁኔታ</td>
+                                <th>@Model.FamilyInfo.MaritalStatus.MaritalStatusName</th>
+                            </tr>
+
+                            <tr>
+                                <td>የትዳር አጋር ስም</td>
+                                <th>@Model.FamilyInfo.SpouseName</th>
+                            </tr>
+
+                            <tr>
+                                <td>የጋብቻ ዘመን</td>
+                                <th>@Model.FamilyInfo.MarriageYear</th>
+                            </tr>
+
+                            <tr>
+                                <td>የወንድ ልጆች ብዛት</td>
+                                <th>@Model.FamilyInfo.NoOfSons</th>
+                            </tr>
+
+                            <tr>
+                                <td>የሲተ ልጆች ብዛት</td>
+                                <th>@Model.FamilyInfo.NoOfDaughters</th>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-sm-3 col-xs-6">
+                        @if (Model.MemberPhoto.Photo != null)
+                        {
+                            <img src="data:image/jpg;base64,@Convert.ToBase64String(Model.MemberPhoto.Photo)" id="photo" style="width: 70%" />
+                        }
+                        else
+                        {
+                            <img src="" id="photo" style="width: 100%" />
+                        }
+                    </div>
+                }
+                else
+                {
+                    <h5 class="col-sm-8 col-xs-6">
+                        ዝርዝር መረጃ የለም ወይም አልተሟላም: <br /><br />
+                        <b>@Model.FullName (@Model.MemberId)</b>
+                    </h5>
+                }
+            </div>
+        </div>
+
+        <div class="form-actions no-color">
+            @*<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-warning-sign"></span> Delete</button>*@
+            <a href="@Url.Action("DeleteConfirmed", new { memberid = Model.MemberId })" class="btn btn-danger"><span class="glyphicon glyphicon-warning-sign"></span> ሰርዝ</a>
+            <a href="@Url.Action("DeleteMember")" class="btn btn-primary"><span class="glyphicon glyphicon-remove"></span> ተወው</a>
+        </div>
+    }
+    else
+    {
+        <div class="text-danger">
+            <h4><b>ባስገቡት ስም ምንም የአባል መረጃ አልተገኘም!</b></h4>
+        </div>
+    }
+</div>

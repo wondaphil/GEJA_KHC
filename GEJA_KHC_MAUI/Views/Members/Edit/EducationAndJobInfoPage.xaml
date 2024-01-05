@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GEJA_KHC_MAUI.Views.EducationAndJobInfoPage"
+             Title="የሥራና የትምህርት መረጃ"
+             IconImageSource="education.png" >
+    <ScrollView>
+        <VerticalStackLayout Padding="10,0,10,0" VerticalOptions="StartAndExpand" Spacing="0">
+            <Frame BackgroundColor="{AppThemeBinding Light=White,Dark={StaticResource Black}}" BorderColor="{AppThemeBinding Light=White,Dark={StaticResource Black}}">
+                <Label x:Name="lblMemberName" FontSize="{OnIdiom Phone=Medium,Tablet=28,Desktop=Medium}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" />
+            </Frame>
+            <Grid Padding="20,0,20,0" ColumnSpacing="5" RowSpacing="15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*" />
+                    <ColumnDefinition Width="70*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Entry x:Name="entryMemberId" IsVisible="False" />
+
+                <Label Text="የትምህርት ደረጃ" Grid.Row="1" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" >
+                    <Picker x:Name="ddlEducationLevel" Grid.Row="1" Grid.Column="1" Title="{OnIdiom Phone='ይምረጡ',Tablet='ይምረጡ',Desktop=''}" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" />
+                </Frame>
+                
+                <Label Text="የትምህርት መስክ" Grid.Row="2" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1" >
+                    <Picker x:Name="ddlFieldOfStudy" Grid.Row="2" Grid.Column="1" Title="{OnIdiom Phone='ይምረጡ',Tablet='ይምረጡ',Desktop=''}" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" />
+                </Frame>
+                
+                <Label Text="የተሰማሩበት የሥራ ዘርፍ" Grid.Row="3" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" >
+                    <Picker x:Name="ddlJob" Grid.Row="3" Grid.Column="1" Title="{OnIdiom Phone='ይምረጡ',Tablet='ይምረጡ',Desktop=''}" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" />
+                </Frame>
+                
+                <Label Text="የሥራ ቦታ" Grid.Row="4" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="1" >
+                    <Picker x:Name="ddlJobType" Grid.Row="4" Grid.Column="1" Title="{OnIdiom Phone='ይምረጡ',Tablet='ይምረጡ',Desktop=''}" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" />
+                </Frame>
+            </Grid>
+
+            <Grid ColumnSpacing="20" RowSpacing="20" Padding="50,25,50,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Row="0" Padding="5,5,5,5" Text="ሴቭ አድርግ" Clicked="btnSave_Clicked" Command="{Binding SaveCommand}" 
+                        FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" WidthRequest="{OnIdiom Phone=150,Tablet=200,Desktop=150}" HorizontalOptions="End" />
+                <Button Grid.Column="1" Padding="5,5,5,5" Text="ተወው" Clicked="btnCancel_Clicked" 
+                        FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" WidthRequest="{OnIdiom Phone=150,Tablet=200,Desktop=150}" HorizontalOptions="Start" />
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

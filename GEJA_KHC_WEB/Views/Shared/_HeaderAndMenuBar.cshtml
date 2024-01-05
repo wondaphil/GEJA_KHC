@@ -1,0 +1,167 @@
+﻿@* Menu Bar *@
+
+<script>
+    $(document).ready(function () {
+        // This function traverses all "link" elements and checks two things
+        //		1. If href of the "link" element is the page itself
+        //		2. If the parent of the "link" element has class "menuitem"
+        // If both condictions are fullfilled (i.e. the "link" is the current menu item), it adds it to "highlight" class
+        //
+        // To get the complete address of the current window, use "window.location.href":
+        //      e.g. "https://localhost:44388/Admin/UserManagement?message=Error"
+        //
+        // To remove the query string:
+        //  use: loc.protocol + "//" + loc.hostname.toLowerCase() + ":" + loc.port + loc.pathname;
+        //      e.g. "https:" + "//" + "localhost" + ":" + "44388" + "/Admin/UserManagement"
+        $("[href]").each(function () {
+            var loc = window.location;
+            var addr = loc.protocol + "//" + loc.hostname.toLowerCase() + ":" + loc.port + loc.pathname;
+            
+            if (this.href.toLowerCase() == addr.toLowerCase() && $(this).parent().hasClass("menuitem")) {
+                $(this).addClass("highlightitem"); // highlight currently selected menu item
+                $(this).closest("li.dropdown-submenu").children("a").addClass("highlightsubmenu"); // highlight the dropdown-submenu of currently selected menu item
+                $(this).closest("li.mainmenu").children("a").addClass("highlightmenu"); // highlight the dropdown menu of currently selected menu item
+            }
+        });
+
+        //If it home page, highlight the home menu
+        if (document.location.pathname == "/") {
+            var homeMenu = document.getElementById("home");
+            homeMenu.classList.add("highlightmenu");
+        }
+
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+
+<div class="navbar navbar-inverse navbar-fixed-top bg-info">
+    <div class="container">
+        <nav>
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                <img src="~/images/app_logo.png" alt="Geja KHC Logo" class="menulogo" style="width: 170px" />
+            </a>
+        </nav>
+        <div class="navbar-header">
+
+            @*<form class="form-inline" action="/action_page.php">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-success" type="submit">Search</button>
+        </form>*@
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @*@Html.ActionLink("የአባላት መረጃ ማዕከል", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+        </div>
+        <div class="collapse navbar-collapse">
+            @* Disable all data entry menu if user has not logged in *@
+            @{ string menuItem = "menuitem";
+                if (!User.Identity.IsAuthenticated)
+                {
+                    menuItem = "disabled";
+                }
+            }
+
+            @* Disable "AdminMenuItem" menu items if user is not Admin *@
+            @{ string AdminMenuItem = "menuitem";
+                if (!User.IsInRole("Admin"))
+                {
+                    AdminMenuItem = "disabled";
+                }
+            }
+
+            @* Enable some "Setting" menu items if user is Admin or Manager *@
+            @*@{ string managerMenuItem = "menuitem";
+                if (!User.IsInRole("Admin") && !User.IsInRole("Manager"))
+                {
+                    managerMenuItem = "disabled";
+                }
+            }*@
+
+            <div class="navbar-collapse collapse left" style="font-family: Nyala; font-size:large">
+                <ul class="nav navbar-nav tree" id="menu">
+                    <li class="dropdown mainmenu">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            መነሻ ገጽ <b class="caret"> </b>
+                        </a>
+                        <ul class="dropdown-menu multi-level" role="menu">
+                            <li class="menuitem">@Html.ActionLink("መነሻ ገጽ", "Index", "Home", new { area = "" }, new { id = "home" })</li>
+                            <li role="separator" class="divider"></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown mainmenu">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            አባላት <b class="caret"> </b>
+                        </a>
+                        <ul class="dropdown-menu multi-level" role="menu">
+                            <li class="menuitem"><a href="@Url.Action("Index", "Search", new { area = "" })"> አባል ፈልግ<span class="glyphicon glyphicon-search navbar-right" style="font-size: 19px;"></span></a></li>
+
+                            <li role="separator" class="divider"></li>
+
+                            <li class="@menuItem"><a href="@Url.Action("NewMember", "Members", new { area = "" })">አዲስ መመዝገቢያ <span class="glyphicon glyphicon-plus navbar-right" style="font-size: 19px;"></span></a></li>
+                            <li class="@menuItem"><a href="@Url.Action("Index", "Members", new { area = "" })">መረጃ ማስተካከያ <span class="glyphicon glyphicon-edit navbar-right" style="font-size: 19px;"></span></a></li>
+
+                            <li role="separator" class="divider"></li>
+
+                            <li class="menuitem">@Html.ActionLink("ሙሉ መረጃ መመልከቻ", "Index", "MemberProfile", new { area = "" }, new { title = "የአባል መረጃ መመልከቻ" })</li>
+                            <li class="menuitem"><a href="@Url.Action("MemberList", "MemberProfile", new { area = "" })">የአባላት ዝርዝር <span class="glyphicon glyphicon-th-list navbar-right" style="font-size: 19px;"></span></a></li>
+
+                            <li role="separator" class="divider"></li>
+
+                            <li class="@AdminMenuItem"><a href="@Url.Action("DeleteMember", "Members", new { area = "" })">የአባል መሰረዢያ<span class="glyphicon glyphicon-trash navbar-right" style="font-size: 19px;"></span></a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown mainmenu">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            ሪፖርት
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu multi-level" role="menu">
+                            <li class="menuitem"><a href="@Url.Action("Index", "CensusAll", new { area = "" })">የአባላት ብዛት <span class="glyphicon glyphicon-list-alt navbar-right" style="font-size: 19px;"></span></a></li>
+                            <li class="menuitem"><a href="@Url.Action("Index", "CensusByGroup", new { area = "" })">በየምድቡ <span class="glyphicon glyphicon-list-alt navbar-right" style="font-size: 19px;"></span></a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="menuitem"><a href="@Url.Action("Index", "Charts", new { area = "" })">ቻርት <span class="glyphicon glyphicon-stats navbar-right" style="font-size: 19px;"></span></a></li>
+                        </ul>
+                    </li>
+
+
+                    <li class="dropdown mainmenu">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            መቼቶች
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu multi-level">
+                            <li class="@AdminMenuItem"><a href="@Url.Action("Index", "Groups", new { area = "Admin" })">ምድቦች <span class="glyphicon glyphicon-th-large navbar-right" style="font-size: 19px;"></span></a></li>
+                            <li class="@AdminMenuItem"><a href="@Url.Action("Index", "Services", new { area = "Admin" })">የአገልግሎት ዘርፎች <span class="glyphicon glyphicon-asterisk navbar-right" style="font-size: 19px;"></span></a></li>
+
+                            <li role="separator" class="divider"></li>
+
+                            <li class="@AdminMenuItem"><a href="@Url.Action("Index", "FieldOfStudies", new { area = "Admin" })">የትምህርት መስክ <span class="glyphicon glyphicon-education navbar-right" style="font-size: 19px;"></span></a></li>
+                            <li class="@AdminMenuItem"><a href="@Url.Action("Index", "Jobs", new { area = "Admin" })">የሥራ ዓይነቶች <span class="glyphicon glyphicon-usd navbar-right" style="font-size: 19px;"></span></a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="@AdminMenuItem"><a href="@Url.Action("Index", "UserManagement", new { area = "Admin" })">ተጠቃሚዎች <span class="glyphicon glyphicon-user navbar-right" style="font-size: 19px;"></span></a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown mainmenu">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            እርዳታ
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="menuitem"><a href="@Url.Action("Contact", "Help", new { area = "" })">Contact <span class="glyphicon glyphicon-earphone navbar-right" style="font-size: 19px;"></span></a></li> <!-- Help -> About -->
+
+                            <li role="separator" class="divider"></li>
+
+                            <li class="menuitem"><a href="@Url.Action("About", "Help", new { area = "" })">ስለ ሲስተሙ <span class="glyphicon glyphicon-info-sign navbar-right" style="font-size: 19px;"></span></a></li> <!-- Help -> About -->
+                        </ul>
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+</div>

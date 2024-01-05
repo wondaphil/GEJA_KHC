@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "የአባላት ብዛት በተለያዩ መስፈርቶች በየምድቡ";
+}
+
+<h2>የአባላት ብዛት በተለያዩ መስፈርቶች በየምድቡ</h2>
+
+
+@using (Html.BeginForm())
+{
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+
+                <div class="col-md-8 col-sm-10 col-xs-10">
+                    <div class="form-horizontal">
+                        <div class="form-group form-group-lg">
+                            <label for="ddlCountByGroupReportType" class="control-label col-md-4 col-sm-4 col-xs-4">የሪፖርት ዓይነት</label>
+                            <div class="col-md-8 col-sm-8 col-xs-8">
+                                @Html.DropDownList("ddlCountByGroupReportType", (List<SelectListItem>)ViewBag.CountReports, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class=" col-md-1 col-sm-2 col-xs-2 navbar-right">
+                    <a class="btn btn-primary" data-toggle="tooltip" title="Refresh" id="refresh"> <span class="glyphicon glyphicon-refresh"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="memberCountReportPartial">
+        <!-- Members count reports displays here -->
+    </div>
+}
+
+<div id="wait" align="center" style="display: none">
+    <img src="~/images/ajax-loader-big.gif" />
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#ddlCountByGroupReportType').change(function () {
+            var selCountReportTypeId = $('#ddlCountByGroupReportType option:selected').val();
+            $('#memberCountReportPartial').empty(); //clear the member report place holder
+            var _view;
+
+            if (selCountReportTypeId != "0") //if some count report is selected
+            {
+                switch (selCountReportTypeId) {
+                    case "1":
+                        _view = "_GetCountByMembershipMeansByGroup";
+                        break;
+
+                    case "2":
+                        _view = "_GetCountByGenderByGroup";
+                        break;
+
+                    case "3":
+                        _view = "_GetCountByMaritalStatusByGroup";
+                        break;
+
+                    case "4":
+                        _view = "_GetCountByEducationLevelByGroup";
+                        break;
+
+                    case "5":
+                        _view = "_GetCountBySubcityByGroup";
+                        break;
+                }
+
+                $.ajax({
+                    url: '/CensusByGroup/' + _view,
+                    type: 'GET',
+                    dataType: 'html',
+                    beforeSend: function () { $('#wait').show(); },
+                    complete: function () { $('#wait').hide(); },
+                    success: function (data) {
+                        $('#memberCountReportPartial').html(data);
+                    }
+                });
+
+            }
+        });
+
+        $('#refresh').click(function () {
+            var selCountReportId = $('#ddlCountByGroupReportType option:selected').val();
+            if (selCountReportId != "0")
+                $('#ddlCountByGroupReportType').trigger('change');
+        });
+    });
+
+</script>
+
+
+

@@ -1,0 +1,94 @@
+﻿@model GEJA_KHC_WEB.Models.AddressInfo
+
+<table class="table">
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.SubcityId)
+        </td>
+
+        <th>
+            @TempData["Subcity"]
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Woreda)
+        </td>
+
+        <th>
+            @Html.DisplayFor(model => model.Woreda)
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Kebele)
+        </td>
+
+        <th>
+            @Html.DisplayFor(model => model.Kebele)
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.HouseNo)
+        </td>
+
+        <th>
+            @Html.DisplayFor(model => model.HouseNo)
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.HouseOwnershipId)
+        </td>
+
+        <th>
+            @TempData["HouseOwnershipType"]
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.HomePhoneNo)
+        </td>
+
+        <th>
+            @Html.DisplayFor(model => model.HomePhoneNo)
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.OfficePhoneNo)
+        </td>
+
+        <th>
+            @Html.DisplayFor(model => model.OfficePhoneNo)
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.MobilePhoneNo)
+        </td>
+
+        <th>
+            @Html.DisplayFor(model => model.MobilePhoneNo)
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Email)
+        </td>
+
+        <th>
+            @Html.DisplayFor(model => model.Email)
+        </th>
+    </tr>
+
+</table>

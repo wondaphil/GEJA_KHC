@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GEJA_KHC_MAUI.Views.LoginPage"
+             Shell.NavBarIsVisible="False">
+    <ScrollView>
+        <VerticalStackLayout Padding="10,0,10,0" VerticalOptions="Start" Margin="30,50,30,5">
+            <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
+                <Image Source="app_logo.png" VerticalOptions="Center" HeightRequest="64" />
+            </ContentView>
+
+            <Label Text="እንኳን ደህና መጡ" TextColor="{StaticResource Primary}" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Padding="0,0,0,20" HorizontalTextAlignment="Center"/>
+
+            <Grid RowSpacing="15" ColumnSpacing="25">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40*" />
+                    <ColumnDefinition Width="60*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Text="የተጠቃሚ ስም" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" FontSize="{OnIdiom Phone=18,Tablet=18,Desktop=18}" HorizontalOptions="End" />
+                <Frame HasShadow="True" CornerRadius="0" Grid.Row="0" Grid.Column="1" Padding="15,-5,5,-5" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" WidthRequest="250" HorizontalOptions="Start" >
+                    <Entry x:Name="entryUserName" Grid.Row="0" Grid.Column="1" Text="{Binding UserName}" Placeholder="የተጠቃሚ ስም ያስገቡ" 
+                           TextColor="{AppThemeBinding Light=Black, Dark=White}" HorizontalOptions="Start" WidthRequest="250" FontSize="{OnIdiom Phone=18,Tablet=18,Desktop=18}" />
+                </Frame>
+
+                <Label Text="የይለፍ ቃል" FontAttributes="Bold" Grid.Row="1" Grid.Column="0" VerticalOptions="Center" FontSize="{OnIdiom Phone=18,Tablet=18,Desktop=18}" HorizontalOptions="End" />
+                <Frame HasShadow="True" CornerRadius="0" Grid.Row="1" Grid.Column="1" Padding="15,-5,5,-5" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" WidthRequest="250" HorizontalOptions="Start" >
+                    <Entry x:Name="entryPassword" Grid.Row="1" Grid.Column="1" Text="{Binding Password}" Placeholder="የይለፍ ቃል ያስገቡ" IsPassword="True" 
+                           TextColor="{AppThemeBinding Light=Black, Dark=White}" HorizontalOptions="Start" WidthRequest="250" FontSize="{OnIdiom Phone=18,Tablet=18,Desktop=18}" />
+                </Frame>
+            </Grid>
+
+            <Label x:Name="LoginFail" Text="{Binding LoginMessage}" TextColor="{Binding LoginStatusColor}" HorizontalOptions="Center" FontSize="{OnIdiom Phone=16,Tablet=16,Desktop=16}" Padding="10"/>
+            <Button VerticalOptions="Center" Text="ይግቡ" FontSize="20" Command="{Binding LoginCommand}" Margin="0,25,0,0" Padding="10" 
+                    Clicked="OnLoginButtonClicked" HorizontalOptions="Center" WidthRequest="150" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GEJA_KHC_MAUI.Views.FamilyInfoPage"
+             Title="የቤተሰብ መረጃ"
+             IconImageSource="family.png" >
+    <ScrollView>
+        <VerticalStackLayout Padding="10,0,10,0" VerticalOptions="StartAndExpand" Spacing="0">
+            <Frame BackgroundColor="{AppThemeBinding Light=White,Dark={StaticResource Black}}" BorderColor="{AppThemeBinding Light=White,Dark={StaticResource Black}}">
+                <Label x:Name="lblMemberName" FontSize="{OnIdiom Phone=Medium,Tablet=28,Desktop=Medium}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" />
+            </Frame>
+            <Grid Padding="20,0,20,0" ColumnSpacing="5" RowSpacing="15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*" />
+                    <ColumnDefinition Width="60*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Entry x:Name="entryMemberId" IsVisible="False" />
+
+                <Label Text="የጋብቻ ሁኔታ" Grid.Row="1" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="1" >
+                    <Picker x:Name="ddlMaritalStatus" Grid.Row="1" Grid.Column="1" Title="{OnIdiom Phone='ይምረጡ',Tablet='ይምረጡ',Desktop=''}" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" />
+               </Frame>
+                
+                <Label Text="የትዳር አጋር" Grid.Row="2" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1" >
+                    <Entry x:Name="entrySpouseName" Grid.Row="2" Grid.Column="1" Keyboard="Text" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" 
+                           Placeholder="የአባሉን ባል/ሚስት ሙሉ ስም ያስገቡ" Text="{Binding SpouseName}" />
+                </Frame>
+
+                <Label Text="የጋብቻ ዘመን" Grid.Row="3" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" >
+                    <Picker x:Name="ddlMarriageYear" Grid.Row="3" Grid.Column="1" Title="{OnIdiom Phone='ይምረጡ',Tablet='ይምረጡ',Desktop=''}" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" />
+                </Frame>
+            </Grid>
+
+            <Grid Padding="20,30,20,10" ColumnSpacing="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Frame BorderColor="{AppThemeBinding Light=LightGray,Dark=Transparent}" BackgroundColor="Transparent" Grid.Column="0" Padding="5" >
+                    <Grid Grid.Column="0" RowSpacing="15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*"/>
+                            <ColumnDefinition Width="20*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Label Text="የወንድ ልጆች ብዛት" Grid.Row="0" Grid.ColumnSpan="2" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" 
+                               FontAttributes="Italic" HorizontalOptions="Center" VerticalTextAlignment="Center" />
+                        
+                        <Label Text="ጠቅላላ" Grid.Row="1" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                        <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" >
+                            <Entry x:Name="entryNoOfSons" Grid.Row="1" Grid.Column="1" Keyboard="Numeric" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" Text="{Binding NoOfSons}" />
+                        </Frame>
+
+                        <Label Text="ዕድሜ ከ1-5" Grid.Row="2" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                        <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1" >
+                            <Entry x:Name="entryNoOfSons1to5" Grid.Row="2" Grid.Column="1" Keyboard="Numeric" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" Text="{Binding NoOfSons1to5}" />
+                        </Frame>
+
+                        <Label Text="ዕድሜ ከ6-12" Grid.Row="3" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                        <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" >
+                            <Entry x:Name="entryNoOfSons6to12" Grid.Row="3" Grid.Column="1" Keyboard="Numeric" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" Text="{Binding NoOfSons6to12}" />
+                        </Frame>
+
+                        <Label Text="ዕድሜ ከ13-20" Grid.Row="4" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                        <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="1" >
+                            <Entry x:Name="entryNoOfSons13to20" Grid.Row="4" Grid.Column="1" Keyboard="Numeric" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" Text="{Binding NoOfSons13to20}" />
+                        </Frame>
+
+                        <Label Text="ዕድሜ ከ20 በላይ" Grid.Row="5" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                        <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="1" >
+                            <Entry x:Name="entryNoOfSonsAbove20" Grid.Row="5" Grid.Column="1" Keyboard="Numeric" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" Text="{Binding NoOfSonsAbove20}" />
+                        </Frame>
+                    </Grid>
+                </Frame>
+
+                <Frame BorderColor="{AppThemeBinding Light=LightGray,Dark=Transparent}" BackgroundColor="Transparent" Grid.Column="1" Padding="5">
+                    <Grid Grid.Column="1" RowSpacing="15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*" />
+                            <ColumnDefinition Width="20*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Text="የሴት ልጆች ብዛት" Grid.ColumnSpan="2" Grid.Row="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" 
+                               FontAttributes="Italic"  HorizontalOptions="Center" VerticalTextAlignment="Center" />
+                        
+                        <Label Text="ጠቅላላ" Grid.Row="1" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                        <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" >
+                            <Entry x:Name="entryNoOfDaughters" Grid.Row="1" Grid.Column="1" Keyboard="Numeric" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" Text="{Binding NoOfDaughters}" />
+                        </Frame>
+
+                        <Label Text="ዕድሜ ከ1-5" Grid.Row="2" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                        <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1" >
+                            <Entry x:Name="entryNoOfDaughters1to5" Grid.Row="2" Grid.Column="1" Keyboard="Numeric" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" Text="{Binding NoOfDaughters1to5}" />
+                        </Frame>
+
+                        <Label Text="ዕድሜ ከ6-12" Grid.Row="3" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                        <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" >
+                            <Entry x:Name="entryNoOfDaughters6to12" Grid.Row="3" Grid.Column="1" Keyboard="Numeric" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" Text="{Binding NoOfDaughters6to12}" />
+                        </Frame>
+
+                        <Label Text="ዕድሜ ከ13-20" Grid.Row="4" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                        <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="1" >
+                            <Entry x:Name="entryNoOfDaughters13to20" Grid.Row="4" Grid.Column="1" Keyboard="Numeric" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" Text="{Binding NoOfDaughters13to20}" />
+                        </Frame>
+
+                        <Label Text="ዕድሜ ከ20 በላይ" Grid.Row="5" Grid.Column="0" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" FontAttributes="Bold"  VerticalTextAlignment="Center" />
+                        <Frame HasShadow="True" CornerRadius="0" Padding="5,0,5,0" BackgroundColor="{AppThemeBinding Light=White,Dark=Black}" BorderColor="{AppThemeBinding Light=White,Dark=Gray}" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="1" >
+                            <Entry x:Name="entryNoOfDaughtersAbove20" Grid.Row="5" Grid.Column="1" Keyboard="Numeric" FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" Text="{Binding NoOfDaughtersAbove20}" />
+                        </Frame>
+                    </Grid>
+                </Frame>
+            </Grid>
+
+            <Grid ColumnSpacing="50" RowSpacing="20" Padding="50,25,50,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Row="0" Padding="5,5,5,5" Text="ሴቭ አድርግ" Clicked="btnSave_Clicked" Command="{Binding SaveCommand}" 
+                        FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" WidthRequest="{OnIdiom Phone=150,Tablet=200,Desktop=150}" HorizontalOptions="End" />
+                <Button Grid.Column="1" Padding="5,5,5,5" Text="ተወው" Clicked="btnCancel_Clicked" 
+                        FontSize="{OnIdiom Phone=Medium,Tablet=24,Desktop=Medium}" WidthRequest="{OnIdiom Phone=150,Tablet=200,Desktop=150}" HorizontalOptions="Start" />
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

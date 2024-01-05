@@ -1,0 +1,21 @@
+﻿@model GEJA_KHC_WEB.Models.Member
+
+<div>
+    <h4>የአባል ዝርዝር መረጃ</h4>
+    <hr />
+    <div class="row">
+        <div class="col-sm-4 col-xs-12">
+            <table class="table">
+                <tr>
+                    <td colspan="2" align="center">
+                        <a href="@Model.Photo" target="_blank">
+                            <img src="@Model.Photo" onerror="this.onerror = null; this.src = '/images/error.png'; this.style.width = '90px'; this.title = 'Image Not Found';" alt="not-found" style="height:auto; width: 150px; margin: 5px;" data-toggle="tooltip" title="Preview Photo" />
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        
+    </div>
+</div>

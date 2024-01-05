@@ -1,0 +1,36 @@
+﻿@model GEJA_KHC_WEB.Models.Group
+
+<div>
+    <h4>ምድቦች</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GroupName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GroupName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pastor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pastor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remark)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remark)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("መረጃ አስተካክል", "Edit", new { id = Model.GroupId }) |
+    @Html.ActionLink("ወደ ዝርዝሩ ተመለስ", "Index")
+</p>

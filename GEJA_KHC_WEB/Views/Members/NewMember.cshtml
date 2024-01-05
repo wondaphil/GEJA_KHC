@@ -1,0 +1,142 @@
+﻿@model GEJA_KHC_WEB.Models.Member
+
+@{
+    ViewBag.Title = "የአዲስ አባል መረጃ መመዝገቢያ";
+}
+
+<h2>የአዲስ አባል መረጃ መመዝገቢያ</h2>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "registerMemberForm" }))
+{
+    <hr />
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*@Html.HiddenFor(model => model.MemberId)*@
+        
+        <div class="row">
+            <div class="col-xs-10">
+                <div class="form-group form-group-lg required">
+                    @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group-lg required">
+                    @Html.LabelFor(model => model.GroupId, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DropDownList("GroupId", new SelectList(ViewBag.Groups, "Value", "Text", ViewBag.GroupId), htmlAttributes: new { @class = "form-control" })@Html.ValidationMessageFor(model => model.GroupId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group-lg required">
+                    @Html.LabelFor(model => model.MemberId, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.MemberId, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.MemberId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group-lg">
+                    <div class="col-md-offset-4 col-md-6">
+                        <br />
+                        <button type="button" id="registerMember" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> መዝግብ</button>
+                        <button type="reset" id="resetMember" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span> ባዶ አድርግ</button>
+                        <a href="" target="_blank" class="btn btn-danger" id="GoToDataEntry" style="display: none" data-toggle="tooltip" title="ተጨማሪ የአባል መረጃ አስገባ"><span class="glyphicon glyphicon-map-marker"></span> መረጃ አስገባ</a>
+                        <div id="statusMemberInfo" class="text-success" style="font-size: large">
+                            <!-- Validation and save success or failure status text appears here-->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        $('#MemberId').attr("placeholder", "የመለያ ቁጥር ጥቆማ እዚህ ይሰጣል");
+
+        function ValidateDataEntry() {
+            if ($('#MemberId').val() == "" || $('#FullName').val() == "" || $('#GroupId').val() == 0)
+                return false;
+
+            return true;
+        }
+
+        $('#GroupId').change(function () {
+            var selGroupId = $('#GroupId option:selected').val();
+            $('#MemberId').val("");  //clear the suggested member no
+            $('#MemberId').attr("placeholder", "የመለያ ቁጥር ጥቆማ እዚህ ይሰጣል");
+
+            if (selGroupId != "0") //if some sub route is selected
+            {
+                $.ajax({
+                    url: '@Url.Action("SuggestedMemberId", "Members")',
+                    data: { groupid: selGroupId },
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        $.each(data, function (i, item) {
+                            $('#MemberId').val(item.MemberId); // suggest a member id
+                        });
+                    },
+                });
+            }
+        });
+
+        $('#registerMember').on('click', function () {
+            if (!ValidateDataEntry()) {
+                if ($('#statusMemberInfo').hasClass("text-success"))
+                    $('#statusMemberInfo').removeClass("text-success");
+                $('#statusMemberInfo').addClass("text-danger");
+                $('#statusMemberInfo').text("እባክዎን * የተደረገባቸውን መረጃዎች በሙሉ ያስገቡ");
+                return;
+            }
+
+            var member = {};
+
+            member.MemberId = $('#MemberId').val();
+            member.FullName = $('#FullName').val();
+            member.GroupId = $('#GroupId').val();
+
+            //alert(JSON.stringify(member));
+
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                url: '@Url.Action("AddNewMember", "Members")',
+                data: '{member:' + JSON.stringify(member) + '}',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'html', //'json',
+                success: function (data) {
+                    if ($('#statusMemberInfo').hasClass("text-danger"))
+                        $('#statusMemberInfo').removeClass("text-danger");
+                    $('#statusMemberInfo').addClass("text-success");
+                    $('#statusMemberInfo').text("አባሉ በትክክል ተመዝግቧል");
+
+                    $('#GoToDataEntry').show();
+                    var url = '@Url.Action("Index", "Members", new { id = "memberid" })'
+                                    .replace("memberid", encodeURIComponent(member.MemberId));
+
+                    $('#GoToDataEntry').attr("href", url);
+                },
+                error: function (xhr) {
+                    if ($('#statusMemberInfo').hasClass("text-success"))
+                        $('#statusMemberInfo').removeClass("text-success");
+                    $('#statusMemberInfo').addClass("text-danger");
+                    $('#statusMemberInfo').text("አባሉ አልተመዘገበም");
+                }
+            });
+        });
+
+        $('#resetMemberInfo').on('click', function () {
+            $('#registerMemberForm').trigger("reset"); // triger the normal reset function
+            $('#statusMemberInfo').text("");
+        });
+    });
+</script>

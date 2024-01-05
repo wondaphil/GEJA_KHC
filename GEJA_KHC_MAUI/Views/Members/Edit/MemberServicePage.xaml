@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GEJA_KHC_MAUI.Views.MemberServicePage"
+             Title="የአገልግሎት መረጃ"
+             IconImageSource="service.png" >
+    <ScrollView>
+        <StackLayout Padding="10,0,10,0" Spacing="0">
+            <Frame BackgroundColor="{AppThemeBinding Light=White,Dark={StaticResource Black}}" BorderColor="{AppThemeBinding Light=White,Dark={StaticResource Black}}">
+                <Label x:Name="lblMemberName" FontSize="{OnIdiom Phone=Medium,Tablet=28,Desktop=Medium}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" />
+            </Frame>
+            <Entry x:Name="entryMemberId" IsVisible="False" />
+
+            <VerticalStackLayout Grid.Row="2" Grid.Column="0" HorizontalOptions="Center" BackgroundColor="Transparent"  
+                    WidthRequest="{OnIdiom Phone=150,Tablet=220,Desktop=150}" HeightRequest="{OnIdiom Phone=150,Tablet=150,Desktop=150}" >
+                <Button ImageSource="{AppThemeBinding Light=icon_plus.png,Dark=icon_plus.png}" BackgroundColor="Transparent" BorderColor="White" 
+                    HorizontalOptions="CenterAndExpand" Padding="5,5,5,5" Clicked="btnNewMemberService_Clicked"/>
+                <Label Text="አገልግሎት መዝግብ" FontSize="{OnIdiom Phone=Small,Tablet=22,Desktop=Small}" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+            
+            <ListView x:Name="listViewMemberService" ItemSelected="listViewMemberService_ItemSelected" Margin="15">
+                <ListView.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*" />
+                            <ColumnDefinition Width="50*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="የአገልግሎት ዓይነት" Grid.Column="0" FontSize="{OnIdiom Phone=Medium, Tablet=28, Desktop=Medium }" FontAttributes="Bold" />
+                        <Label Text="አገልግሎት" Grid.Column="1" FontSize="{OnIdiom Phone=Medium, Tablet=28, Desktop=Medium }" FontAttributes="Bold" />
+                    </Grid>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" FontSize="{OnIdiom Phone=Medium, Tablet=28, Desktop=Medium }" Text="{Binding ServiceTypeName}" />
+                                <Label Grid.Column="1" FontSize="{OnIdiom Phone=Medium, Tablet=28, Desktop=Medium }" Text="{Binding ServiceName}" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GEJA_KHC_MAUI.Views.ServerAddressPage"
+             Title="የሰርቨር አድራሻ">
+    <ScrollView>
+        <StackLayout VerticalOptions="StartAndExpand" Margin="{OnIdiom Phone='20,35,20,20',Tablet='100,35,100,20',Desktop='100,35,100,20'}" >
+            <Frame x:Name="frmConnectivityStatus" Padding="0,5,0,5">
+                <Label x:Name="lblConnectivityStatus" TextColor="White" HorizontalOptions="Center" FontSize="18" Grid.Row="0" Grid.ColumnSpan="2" />
+            </Frame>
+
+            <Grid Padding="0,29,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25*" />
+                    <ColumnDefinition Width="75*" />
+                </Grid.ColumnDefinitions>
+
+                <Picker x:Name="ddlProtocolType" SelectedIndexChanged="OnAddressChange" FontSize="Medium">
+                    <Picker.Items>
+                        <x:String>http://</x:String>
+                        <x:String>https://</x:String>
+                    </Picker.Items>
+                    <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                </Picker>
+                <Entry x:Name="entryAddress" Grid.Column="1" Placeholder="የሰርቨር አድራሻ አስገባ" TextChanged="OnAddressChange"  FontSize="Medium"/>
+            </Grid>
+            <Button x:Name="btnSetServerAddress" Grid.Row="0" Margin="20" WidthRequest="200" Padding="5,10,5,10" Text="ሴቨ አድርግ" 
+                    Clicked="btnSetServerAddress_Clicked" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

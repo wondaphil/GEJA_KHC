@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GEJA_KHC_MAUI.Views.GroupDetailsPage"
+             Title="የምድብ ዝርዝር መረጃ">
+    <VerticalStackLayout VerticalOptions="FillAndExpand" Margin="20,35,20,20">
+        <Grid Padding="20,0,20,0" ColumnSpacing="5" RowSpacing="15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30*" />
+                <ColumnDefinition Width="70*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label Text="መ. ቁ." Grid.Row="0" Grid.Column="0" FontSize="{OnIdiom Phone=Large, Tablet=28, Desktop=Small }" Margin="0,5,0,0" />
+            <Label Text="{Binding GroupId}" Grid.Row="0" Grid.Column="1" FontSize="{OnIdiom Phone=Large, Tablet=28, Desktop=Small }" FontAttributes="Bold" Margin="0,5,0,0" />
+
+            <Label Text="ምድብ" Grid.Row="1" Grid.Column="0" FontSize="{OnIdiom Phone=Large, Tablet=28, Desktop=Small }" Margin="0,5,0,0"  />
+            <Label Text="{Binding GroupName}" Grid.Row="1" Grid.Column="1" FontSize="{OnIdiom Phone=Large, Tablet=28, Desktop=Small }" FontAttributes="Bold" Margin="0,5,0,0" />
+
+            <Label Text="የምድብ ተጠሪ" Grid.Row="2" Grid.Column="0" FontSize="{OnIdiom Phone=Large, Tablet=28, Desktop=Small }" Margin="0,5,0,0" />
+            <Label Text="{Binding Pastor}" Grid.Row="2" Grid.Column="1" FontSize="{OnIdiom Phone=Large, Tablet=28, Desktop=Small }" FontAttributes="Bold" Margin="0,5,0,0" />
+
+            <Label Text="ማብራሪያ" Grid.Row="3" Grid.Column="0" FontSize="{OnIdiom Phone=Large, Tablet=28, Desktop=Small }" Margin="0,5,0,0" />
+            <Label Text="{Binding Remark}" Grid.Row="3" Grid.Column="1" FontSize="{OnIdiom Phone=Large, Tablet=28, Desktop=Small }" FontAttributes="Bold" Margin="0,5,0,0" />
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

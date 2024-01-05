@@ -1,0 +1,117 @@
+﻿@model List<GEJA_KHC_WEB.Models.Member>
+
+<div>
+    @if (ViewBag.Success)
+    {
+        <div class="container">
+            <h4><b>'<b>@Model[0].FullName</b>' በሚለው ስም @Model.Count</b> አባል/ላት ተገኝቷል/ተዋል </h4>
+        </div>
+        foreach (var member in Model)
+        {
+            <hr />
+
+            <div class="container">
+                <div>
+                    <h4>የፍለጋ ውጤቶች <b>@(Model.IndexOf(member)+1)</b>/<b>@Model.Count</b></h4>
+                </div>
+                <div class="row mb-10">
+                    <div class="col-sm-6 col-xs-8">
+                        <table class="table table-condensed">
+                            <tr>
+                                <td>መለያ ቁጥር</td>
+                                <th>@member.MemberId</th>
+                            </tr>
+                            <tr>
+                                <td>ሙሉ ስም</td>
+                                <th>@member.FullName</th>
+                            </tr>
+
+                            @{
+                                var gender = member.Gender;
+                            }
+                            <tr>
+                                <td>ፆታ</td>
+                                <th>
+                                    @if (gender != null)
+                                    {
+                                        @member.Gender.GenderName
+                                    }
+                                </th>
+                            </tr>
+
+                            <tr>
+                                <td>ምድብ</td>
+                                <th>@member.Group.GroupName</th>
+                            </tr>
+
+                            @{
+                                int? age = null;
+                                if (member.BirthYear != null)
+                                {
+                                    age = DateTime.Now.Year - 8 - member.BirthYear; // In Ethiopian calendar
+                                }
+                            }
+
+                            <tr>
+                                <td>ዕድሜ</td>
+                                <th>@age</th>
+                            </tr>
+
+                            <tr>
+                                <td>የአባልነት ዘመን</td>
+                                <th>@member.MembershipYear</th>
+                            </tr>
+
+                            @{
+                                var means = member.MembershipMeans;
+                            }
+                            <tr>
+                                <td>የአባልነት መንገድ</td>
+                                <th>
+                                    @if (means != null)
+                                    {
+                                        @means.MembershipMeansName
+                                    }
+                                </th>
+                            </tr>
+
+                        </table>
+                    </div>
+
+                    <div class="col-sm-6 col-xs-4">
+                        @if (member.MemberPhoto.Photo != null)
+                        {
+                            <img src="data:image/jpg;base64,@Convert.ToBase64String(member.MemberPhoto.Photo)" id="photo" style="width: 50%" />
+                        }
+                        else
+                        {
+                            <img src="" id="photo" style="width: 100%" />
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                @* Hide button if user has not logged in *@
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-5 col-xs-6 padding-button">
+                        <a href="@Url.Action("Index", "Members", new { id = member.MemberId })" class="btn btn-primary" target="_blank" title="ወደ መረጃ ማስገቢያ/ማስተካከያ"><span class="glyphicon glyphicon-new-window"></span> መረጃ ማስገቢያ/ማስተካከያ</a>
+                    </div>
+                }
+                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-6 padding-button">
+                    <a href="@Url.Action("Index", "MemberProfile", new { id = member.MemberId })" class="btn btn-primary" target="_blank" title="ወደ መረጃ ማሳያ"><span class="glyphicon glyphicon-new-window"></span> መረጃ ማሳያ</a>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="text-danger">
+            <h4><b>ባስገቡት ስም ምንም የአባል መረጃ አልተገኘም!</b></h4>
+        </div>
+    }
+</div>
+<br />
+<br />
+

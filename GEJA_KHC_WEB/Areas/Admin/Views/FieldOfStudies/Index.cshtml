@@ -1,0 +1,351 @@
+﻿@model IEnumerable<GEJA_KHC_WEB.Models.FieldOfStudy>
+
+@{
+    ViewBag.Title = "የትምህርት መስኮች";
+}
+
+<h2>የትምህርት መስኮች</h2>
+
+<p id="statusmessage" class="@ViewBag.TextColor" style="font-size: large">@ViewBag.StatusMessage</p>
+
+<div class="panel panel-primary" id="fieldlist">
+    <div class="panel-heading">
+        <h3 class="panel-title panel-info">የትምህርት መስኮች ዝርዝር</h3>
+    </div>
+
+    <div class="panel-body">
+        <table class="table table-striped table-condensed table-bordered centeredtable" style="font-size: medium" id="tblFieldOfStudy">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FieldOfStudyName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EnglishName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Remark)
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <input type="hidden" value="@item.FieldOfStudyId" />  <!-- Unique Id of FieldOfStudy -->
+                        </td>
+                        <td class="FieldOfStudyName">
+                            <span>@item.FieldOfStudyName</span>
+                            <input type="text" value="@item.FieldOfStudyName" style="display:none; width:50%; max-width:50%" size="5" />
+                        </td>
+                        <td class="EnglishName">
+                            <span>@item.EnglishName</span>
+                            <input type="text" value="@item.EnglishName" style="display:none; width:50%; max-width:50%" size="5" />
+                        </td>
+                        <td class="Remark">
+                            <span>@item.Remark</span>
+                            <input type="text" value="@item.Remark" style="display:none" size="30" />
+                        </td>
+                        <td>
+                            <a class="Edit glyphicon glyphicon-edit" href="javascript:;" data-toggle="tooltip" title="Edit"></a>
+                            <a class="Update glyphicon glyphicon-ok" href="javascript:;" style="display:none" data-toggle="tooltip" title="አስተካክል"></a>
+                            <a class="Confirm glyphicon glyphicon-ok" href="javascript:;" style="display:none" data-toggle="tooltip" title="አረጋግጥ"></a>
+                        </td>
+                        <td>
+                            <a class="Cancel glyphicon glyphicon-remove" href="javascript:;" style="display:none" data-toggle="tooltip" title="ተወው"></a>
+                            <a class="Delete glyphicon glyphicon-trash" href="javascript:;" data-toggle="tooltip" title="ሰርዝ"></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer">
+        <h3 class="panel-title">የትምህርት መስኮች ብዛት: <b>@Model.Count()</b> </h3>
+    </div>
+</div>
+
+<div id="newPartial">
+    <!-- New field partial displays here-->
+</div>
+
+<p>
+    <button id="new" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> አዲስ የትምህርት መስክ መዝግብ </button>
+</p>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tblFieldOfStudy').dataTable({
+            paging: true,
+            pageLength: 15,
+            bLengthChange: true,
+            scrollY: 400,
+            searching: true,
+            oLanguage: {
+                sSearch: "<span style='font-size: large'> ፈልግ</span>",
+                sLengthMenu: "<span style='font-size: medium'>በ1 ገጽ የሚታዩ መረጃዎች _MENU_ </span>",
+                oPaginate: {
+                    sNext: "<span style='font-size: large'> ወደ ፊት →</span>",
+                    sPrevious: "<span style='font-size: large'> ← ወደ ኋላ</span>"
+                },
+                sZeroRecords: "<span style='font-size: large'>ያስገቡትን ፊደላት የሚያሟላ መረጃ የለም</span>",
+                sEmptyTable: "<span style='font-size: large'>ምንም መረጃ የለም</span>",
+                sInfo: "<span style='font-size: medium'>ከ _START_ እስከ _END_ (ጠቅላላ _TOTAL_ መረጃዎች)</span>",
+            },
+            select: true,
+            dom: 'lBfrtip',
+            //order: [[1, "asc"]] // sort by the second column (BridgeNo)
+            buttons: [
+                { extend: "copy", className: "btn btn-sm btn-primary", text: "<span style='font-size: medium'>ኮፒ አድርግ</span>" },
+                { extend: "excel", className: "btn btn-sm btn-primary", text: "<span style='font-size: medium'>ወደ Excel</span>" },
+                { extend: "pdf", className: "btn btn-sm btn-primary", text: "<span style='font-size: medium'>ወደ PDF</span>" },
+                { extend: "print", className: "btn btn-sm btn-primary", text: "<span style='font-size: medium'>ፕሪንት</span>" }
+            ]
+        });
+
+        //New event handler.
+        $("#new").on("click", function () {
+            // clear the status message
+            $('#statusmessage').text("");
+
+            $.ajax({
+                url: '@Url.Action("NewFieldOfStudyPartial", "FieldOfStudies")',
+                type: 'GET',
+                dataType: 'html',
+                success: function (data) {
+                    $('#newPartial').html(data);
+                }
+            });
+            $('#new').hide();
+            $('#fieldlist').hide();
+        });
+
+        //Edit event handler.
+        $("body").on("click", "#tblFieldOfStudy .Edit", function () {
+            // clear the status message
+            $('#statusmessage').text("");
+
+            var row = $(this).closest("tr");
+            $("td", row).each(function () {
+                if ($(this).find("input").length > 0) {
+                    $(this).find("input").show();
+                    $(this).find("span").hide();
+                }
+            });
+            row.find(".Update").show();
+            row.find(".Cancel").show();
+            row.find(".Delete").hide();
+            $(this).hide();
+        });
+
+        //Update event handler.
+        $("body").on("click", "#tblFieldOfStudy .Update", function () {
+            var row = $(this).closest("tr");
+
+            var oldFieldOfStudy = {};
+            oldFieldOfStudy.FieldOfStudyId = row.find('input[type=hidden]').val();
+            oldFieldOfStudy.FieldOfStudyName = row.find(".FieldOfStudyName").find("span").html();
+            oldFieldOfStudy.EnglishName = row.find(".EnglishName").find("span").html();
+            oldFieldOfStudy.Remark = row.find(".Remark").find("span").html();
+
+            $("td", row).each(function () {
+                if ($(this).find("input").length > 0) {
+                    var span = $(this).find("span");
+                    var input = $(this).find("input");
+                    span.html(input.val());
+                    span.show();
+                    input.hide();
+                }
+            });
+
+            row.find(".Edit").show();
+            row.find(".Delete").show();
+            row.find(".Cancel").hide();
+            $(this).hide();
+
+            var field = {};
+            field.FieldOfStudyId = row.find('input[type=hidden]').val();
+            field.FieldOfStudyName = row.find(".FieldOfStudyName").find("span").html();
+            field.EnglishName = row.find(".EnglishName").find("span").html();
+            field.Remark = row.find(".Remark").find("span").html();
+
+            //alert(JSON.stringify(oldFieldOfStudy));
+            //alert(JSON.stringify(field));
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("UpdateFieldOfStudy", "FieldOfStudies")',
+                data: '{serv:' + JSON.stringify(field) + '}',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json', //'text', //'html',
+                success: function (data) {
+                    //alert("Status: " + data.Status);
+                    var statusmessageid;
+                    var statuscolor;
+
+                    if (data.Status != 2627 && data.Status != 2601) { // error due to unique key constraint violation
+                        statusmessageid = 1; //StatusMessageId.UpdateDataSuccess = 1
+                        statuscolor = "text-success";
+
+                        $("td", row).each(function () {
+                            if ($(this).find("input").length > 0) {
+                                var span = $(this).find("span");
+                                var input = $(this).find("input");
+                                //span.html(input.val());
+                                span.show();
+                                input.hide();
+                            }
+                        });
+                    }
+                    else {
+                        statusmessageid = 4; //StatusMessageId.UpdateDataError = 4
+                        statuscolor = "text-danger";
+
+                        // Revert to old data
+                        row.find(".FieldOfStudyName").find("span").html(oldFieldOfStudy.FieldOfStudyName);
+                        row.find(".EnglishName").find("span").html(oldFieldOfStudy.EnglishName);
+                        row.find(".Remark").find("span").html(oldFieldOfStudy.Remark);
+                        row.find(".FieldOfStudyName").find("input").val(oldFieldOfStudy.FieldOfStudyName);
+                        row.find(".EnglishName").find("input").val(oldFieldOfStudy.EnglishName);
+                        row.find(".Remark").find("input").val(oldFieldOfStudy.Remark);
+                    }
+
+                    $.ajax({
+                        type: "GET",
+                        url: '/StatusMessage/GetStatusMessage',
+                        data: { id: statusmessageid }, //StatusMessageId.UpdateDataSuccess = 1
+                        dataType: "json",
+                        success: function (data) {
+                            $.each(data, function (i, item) {
+                                if ($('#statusmessage').hasClass("text-danger"))
+                                    $('#statusmessage').removeClass("text-danger");
+
+                                if ($('#statusmessage').hasClass("text-success"))
+                                    $('#statusmessage').removeClass("text-success");
+
+                                $('#statusmessage').addClass(statuscolor);
+
+                                $('#statusmessage').text(item.Message); // set the status message
+                            });
+                        },
+                    });
+                },
+                error: function (xhr) {
+                    //$('#status').text(xhr.status);
+                }
+
+            });
+        });
+
+        //Cancel event handler.
+        $("body").on("click", "#tblFieldOfStudy .Cancel", function () {
+            var row = $(this).closest("tr");
+            $("td", row).each(function () {
+                if ($(this).find("input").length > 0) {
+                    var span = $(this).find("span");
+                    var input = $(this).find("input");
+                    input.val(span.html());
+                    span.show();
+                    input.hide();
+                }
+            });
+            row.find(".Edit").show();
+            row.find(".Delete").show();
+            row.find(".Update").hide();
+            row.find(".Confirm").hide();
+            $(this).hide();
+        });
+
+        //Delete event handler.
+        $("body").on("click", "#tblFieldOfStudy .Delete", function () {
+            // clear the status message
+            $('#statusmessage').text("");
+
+            var row = $(this).closest("tr");
+            row.find(".Edit").hide();
+            row.find(".Confirm").show();
+            row.find(".Cancel").show();
+            row.find(".Delete").hide();
+            $(this).hide();
+        });
+
+        //Confirm event handler.
+        $("body").on("click", "#tblFieldOfStudy .Confirm", function () {
+            var row = $(this).closest("tr");
+            var id = row.find('input[type=hidden]').val();
+            //alert(id);
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("DeleteFieldOfStudy", "FieldOfStudies")',
+                data: '{Id: ' + id + '}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    //alert("Status: " + data.Status);
+                    var statusmessageid;
+                    var statuscolor;
+                    if (data.Status == 0) { // no error 
+                        statusmessageid = 2; // StatusMessageId.DeleteDataSuccess = 2
+                        statuscolor = "text-success";
+                        if ($("#tblFieldOfStudy tr").length > 2) {
+                            row.remove();
+
+                        } else {
+                            row.find("span").html('&nbsp;');
+                        }
+                    }
+                    else if (data.Status == 547) { // error due to foreign key constraint violation
+                        statusmessageid = 7; // StatusMessageId.ForeignKeyConstraintError = 7
+                        statuscolor = "text-danger";
+
+                        row.find(".Edit").show();
+                        row.find(".Delete").show();
+                        row.find(".Confirm").hide();
+                        row.find(".Update").hide();
+                        row.find(".Cancel").hide();
+                    }
+                    else { // generic error
+                        statusmessageid = 5; // StatusMessageId.DeleteDataError = 5
+                        statuscolor = "text-danger";
+
+                        row.find(".Edit").show();
+                        row.find(".Delete").show();
+                        row.find(".Confirm").hide();
+                        row.find(".Update").hide();
+                        row.find(".Cancel").hide();
+                    }
+
+                   //alert(statusmessageid);
+                    $.ajax({
+                        type: "GET",
+                        url: '/StatusMessage/GetStatusMessage',
+                        data: { id: statusmessageid },
+                        dataType: "json",
+                        success: function (data) {
+                            $.each(data, function (i, item) {
+                                if ($('#statusmessage').hasClass("text-danger"))
+                                    $('#statusmessage').removeClass("text-danger");
+
+                                if ($('#statusmessage').hasClass("text-success"))
+                                    $('#statusmessage').removeClass("text-success");
+
+                                $('#statusmessage').addClass(statuscolor);
+
+                                $('#statusmessage').text(item.Message); // set the status message
+                            });
+                        },
+                    });
+                },
+                error: function (xhr) {
+                    //$('#status').text(xhr.status);
+                    //alert("1st Error");
+                }
+            });
+        });
+    });
+</script>

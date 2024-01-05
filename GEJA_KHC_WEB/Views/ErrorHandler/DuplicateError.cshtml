@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "የመረጃ ድግምግሞሸ ስህተት";
+}
+
+<h2>የመረጃ ድግምግሞሸ ስህተት</h2>
+
+@{
+    string errorCode = ViewBag.ErrorCode;
+    HtmlString message1;
+    HtmlString message2;
+}
+@switch (errorCode)
+{
+    //Group
+    case "1":
+        message1 = new HtmlString("የምድብ መረጃ መመዝገብ አልተቻለም!");
+        message2 = new HtmlString("ሊመዘግቡ እየሞከሩ ያሉት <b>ምድብ</b> አስቀድሞ የተመዘገበ ስለሆነ የመረጃ ድግምግሞሸ ይፈጥራል። <br /><br />እባክዎች ሌላ የምድብ ስም ቀይረው እንደገና ይሞክሩ።");
+        break;
+
+    //Service
+    case "2":
+        message1 = new HtmlString("የአገልግሎት ዘርፍ መረጃ መመዝገብ አልተቻለም!");
+        message2 = new HtmlString("ሊመዘግቡ እየሞከሩ ያሉት <b>የአገልግሎት ዘርፍ</b> አስቀድሞ የተመዘገበ ስለሆነ የመረጃ ድግምግሞሸ ይፈጥራል። <br /><br />እባክዎች ሌላ የአገልግሎት ዘርፍ ስም ቀይረው እንደገና ይሞክሩ።");
+        break;
+
+    //Education Level
+    case "3":
+        message1 = new HtmlString("የትምህርት ደረጃ መረጃ መመዝገብ አልተቻለም!");
+        message2 = new HtmlString("ሊመዘግቡ እየሞከሩ ያሉት <b>የትምህርት ደረጃ</b> አስቀድሞ የተመዘገበ ስለሆነ የመረጃ ድግምግሞሸ ይፈጥራል። <br /><br />እባክዎች ሌላ የትምህርት ደረጃ ስም ቀይረው እንደገና ይሞክሩ።");
+        break;
+
+    //Field of Study
+    case "4":
+        message1 = new HtmlString("የትምህርት መስክ መረጃ መመዝገብ አልተቻለም!");
+        message2 = new HtmlString("ሊመዘግቡ እየሞከሩ ያሉት <b>የትምህርት መስክ</b> አስቀድሞ የተመዘገበ ስለሆነ የመረጃ ድግምግሞሸ ይፈጥራል። <br /><br />እባክዎች ሌላ የትምህርት መስክ ስም ቀይረው እንደገና ይሞክሩ።");
+        break;
+
+    //Job
+    case "5":
+        message1 = new HtmlString("የሥራ ዘርፍ መረጃ መመዝገብ አልተቻለም!");
+        message2 = new HtmlString("ሊመዘግቡ እየሞከሩ ያሉት <b>የሥራ ዘርፍ</b> አስቀድሞ የተመዘገበ ስለሆነ የመረጃ ድግምግሞሸ ይፈጥራል። <br /><br />እባክዎች ሌላ የሥራ ዘርፍ ስም ቀይረው እንደገና ይሞክሩ።");
+        break;
+
+    default:
+        message1 = new HtmlString("መረጃ መመዝገብ አልተቻለም!");
+        message2 = new HtmlString("The value you are trying to save already exists and will create a <b>duplicate</b>. <br /><br />Please choose another value and try again.");
+        message2 = new HtmlString("ሊመዘግቡ እየሞከሩ ያሉት መረጃ አስቀድሞ የተመዘገበ ስለሆነ ድግምግሞሸ ይፈጥራል። <br /><br />እባክዎች ሌላ ስም ቀይረው እንደገና ይሞክሩ።");
+        break;
+}
+
+<h3 style="color: red"><u>@message1</u></h3>
+<h4>@message2</h4>
+<br />
+<a href="javascript:history.back()" class="btn btn-primary"><span class="glyphicon glyphicon-backward"></span> ወደ ኋላ ተመለስ</a>

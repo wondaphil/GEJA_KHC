@@ -1,0 +1,214 @@
+﻿@model GEJA_KHC_WEB.Models.FamilyInfo
+
+@{
+    ViewBag.Title = "የአባል ቤተሰብ መረጃ";
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "familyInfoForm" }))
+{
+    <hr />
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*@Html.HiddenFor(model => model.MemberId)*@
+        <input type="hidden" id="MemberId" value="@TempData["MemberId"]" />
+
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-4 col-xs-4">
+                <div class="form-group form-group required">
+                    @Html.LabelFor(model => model.MaritalStatusId, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("MaritalStatusId", new SelectList((List<SelectListItem>)TempData["MaritalStatusId"], "Value", "Text", Model.MaritalStatusId), htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MaritalStatusId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group">
+                    @Html.LabelFor(model => model.SpouseName, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.SpouseName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SpouseName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group">
+                    @Html.LabelFor(model => model.MarriageYear, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("MarriageYear", new SelectList((List<SelectListItem>)TempData["YearList"], "Value", "Text", Model.MarriageYear), htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MarriageYear, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-4 col-xs-4">
+                <fieldset>
+                    <legend style="font-size: medium; font-weight:bold">የወንድ ልጆች ብዛት</legend>
+                    <div class="form-group form-group">
+                        @*@Html.LabelFor(model => model.NoOfSons, htmlAttributes: new { @class = "control-label col-md-5" })*@
+                        <label for="NoOfDaughters" class="control-label col-md-5">ጠቅላላ</label>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.NoOfSons, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NoOfSons, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group form-group">
+                        @Html.LabelFor(model => model.NoOfSons1to5, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.NoOfSons1to5, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NoOfSons1to5, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group form-group">
+                        @Html.LabelFor(model => model.NoOfSons6to12, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.NoOfSons6to12, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NoOfSons6to12, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group form-group">
+                        @Html.LabelFor(model => model.NoOfSons13to20, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.NoOfSons13to20, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NoOfSons13to20, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group form-group">
+                        @Html.LabelFor(model => model.NoOfSonsAbove20, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.NoOfSonsAbove20, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NoOfSonsAbove20, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-4 col-xs-4">
+                <fieldset>
+                    <legend style="font-size: medium; font-weight:bold">የሴት ልጆች ብዛት</legend>
+                    <div class="form-group form-group">
+                        @*@Html.LabelFor(model => model.NoOfDaughters, htmlAttributes: new { @class = "control-label col-md-5" })*@
+                        <label for="NoOfDaughters" class="control-label col-md-5">ጠቅላላ</label>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.NoOfDaughters, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NoOfDaughters, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group form-group">
+                        @Html.LabelFor(model => model.NoOfDaughters1to5, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.NoOfDaughters1to5, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NoOfDaughters1to5, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group form-group">
+                        @Html.LabelFor(model => model.NoOfDaughters6to12, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.NoOfDaughters6to12, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NoOfDaughters6to12, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group form-group">
+                        @Html.LabelFor(model => model.NoOfDaughters13to20, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.NoOfDaughters13to20, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NoOfDaughters13to20, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group form-group">
+                        @Html.LabelFor(model => model.NoOfDaughtersAbove20, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.NoOfDaughtersAbove20, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NoOfDaughtersAbove20, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <div class="form-group form-group">
+            <div class="col-md-offset-2 col-md-6">
+                <br /><br />
+                <button type="button" id="saveFamilyInfo" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> ሴቭ አድርግ</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="reset" id="resetFamilyInfo" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span> ባዶ አድርግ</button>
+                <div id="statusFamilyInfo" class="success">
+                    <!-- Save success or failure status text appears here-->
+                </div>
+            </div>
+        </div>        
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        function ValidateDataEntry(famInfo) {
+            if ($('#MaritalStatusId').val() == "0")
+                return false;
+
+            return true;
+        }
+
+        $('#saveFamilyInfo').on('click', function () {
+            var famInfo = {};
+
+            famInfo.MemberId = $('#MemberId').val();
+            famInfo.MaritalStatusId = $('#MaritalStatusId').val();
+            famInfo.SpouseName = $('#SpouseName').val().trim();
+            famInfo.MarriageYear = $('#MarriageYear').val();
+            famInfo.NoOfSons = $('#NoOfSons').val();
+            famInfo.NoOfDaughters = $('#NoOfDaughters').val();
+            famInfo.NoOfSons1to5 = $('#NoOfSons1to5').val();
+            famInfo.NoOfDaughters1to5 = $('#NoOfDaughters1to5').val();
+            famInfo.NoOfSons6to12 = $('#NoOfSons6to12').val();
+            famInfo.NoOfDaughters6to12 = $('#NoOfDaughters6to12').val();
+            famInfo.NoOfSons13to20 = $('#NoOfSons13to20').val();
+            famInfo.NoOfDaughters13to20 = $('#NoOfDaughters13to20').val();
+            famInfo.NoOfSonsAbove20 = $('#NoOfSonsAbove20').val();
+            famInfo.NoOfDaughtersAbove20 = $('#NoOfDaughtersAbove20').val();
+            
+            //alert(JSON.stringify(famInfo));
+
+            if (ValidateDataEntry(famInfo)) {
+                $.ajax({
+                    type: 'POST',
+                    cache: false,
+                    url: '@Url.Action("FamilyInfoSave", "Members")',
+                    data: '{familyInfo:' + JSON.stringify(famInfo) + '}',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'html', //'json',
+                    success: function (data) {
+                        if ($('#statusFamilyInfo').hasClass("text-danger"))
+                            $('#statusFamilyInfo').removeClass("text-danger");
+                        $('#statusFamilyInfo').addClass("text-success");
+                        $('#statusFamilyInfo').text("ያስገቡት/ያስተካከሉት መረጃ በትክክል ሴቭ ተደርጓል");
+                    },
+                    error: function (xhr) {
+                        if ($('#statusFamilyInfo').hasClass("text-success"))
+                            $('#statusFamilyInfo').removeClass("text-success");
+                        $('#statusFamilyInfo').addClass("text-danger");
+                        $('#statusFamilyInfo').text("ያስገቡት/ያስተካከሉት መረጃ በትክክል ሴቭ አልተደረገም");
+                    }
+                });
+            }
+            else {
+                if ($('#statusFamilyInfo').hasClass("text-success"))
+                    $('#statusFamilyInfo').removeClass("text-success");
+                $('#statusFamilyInfo').addClass("text-danger");
+                $('#statusFamilyInfo').text("እባክዎን * ምልክት ያለባቸውን ሳጥኖች ያስገቡ/ይምረጡ");
+            }
+        });
+
+        $('#resetFamilyInfo').on('click', function () {
+            $('#familyInfoForm').trigger("reset"); // triger the normal reset function
+            $('#statusFamilyInfo').text("");
+        });
+    });
+</script>

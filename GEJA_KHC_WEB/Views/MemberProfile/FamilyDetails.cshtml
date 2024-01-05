@@ -1,0 +1,152 @@
+﻿@model GEJA_KHC_WEB.Models.FamilyInfo
+
+<table class="table">
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.MaritalStatusId)
+        </td>
+
+        <th>
+            @TempData["MaritalStatus"]
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.SpouseName)
+        </td>
+
+        <th>
+            @Html.DisplayFor(model => model.SpouseName)
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.MarriageYear)
+        </td>
+
+        <th>
+            @Html.DisplayFor(model => model.MarriageYear)
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.NoOfSons)
+        </td>
+
+        <th>
+            @Html.DisplayFor(model => model.NoOfSons)
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            <table class="table table-bordered">
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.NoOfSons1to5)
+                    </td>
+                    <th>
+                        @Html.DisplayFor(model => model.NoOfSons1to5)
+                    </th>
+                </tr>
+
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.NoOfSons6to12)
+                    </td>
+
+                    <th>
+                        @Html.DisplayFor(model => model.NoOfSons6to12)
+                    </th>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table class="table table-bordered">
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.NoOfSons13to20)
+                    </td>
+                    <th>
+                        @Html.DisplayFor(model => model.NoOfSons13to20)
+                    </th>
+                </tr>
+
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.NoOfSonsAbove20)
+                    </td>
+
+                    <th>
+                        @Html.DisplayFor(model => model.NoOfSonsAbove20)
+                    </th>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.NoOfDaughters)
+        </td>
+
+        <th>
+            @Html.DisplayFor(model => model.NoOfDaughters)
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <table class="table table-bordered" style="border-color: white">
+                <tr>
+                    
+                </tr>
+
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.NoOfDaughters1to5)
+                    </td>
+
+                    <th>
+                        @Html.DisplayFor(model => model.NoOfDaughters1to5)
+                    </th>
+                </tr>
+
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.NoOfDaughters6to12)
+                    </td>
+
+                    <th>
+                        @Html.DisplayFor(model => model.NoOfDaughters6to12)
+                    </th>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table class="table table-bordered">
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.NoOfDaughters13to20)
+                    </td>
+
+                    <th>
+                        @Html.DisplayFor(model => model.NoOfDaughters13to20)
+                    </th>
+                </tr>
+
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.NoOfDaughtersAbove20)
+                    </td>
+
+                    <th align="right">
+                        @Html.DisplayFor(model => model.NoOfDaughtersAbove20)
+                    </th>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

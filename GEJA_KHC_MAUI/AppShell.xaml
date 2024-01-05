@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="GEJA_KHC_MAUI.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:GEJA_KHC_MAUI"
+    xmlns:views="clr-namespace:GEJA_KHC_MAUI.Views"
+    Shell.FlyoutBehavior="Flyout"
+    Shell.FlyoutWidth="300">
+
+    <!--<ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />-->
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style Class="FlyoutItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Primary}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.FontFamily" Value="Lessan" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.FontSize" Value="{OnIdiom Phone=Large,Tablet=Large,Desktop=Medium}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="White" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.FontFamily" Value="Lessan" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.FontSize" Value="{OnIdiom Phone=Large,Tablet=Large,Desktop=Medium}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style Class="MenuItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Primary}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.FontFamily" Value="Nyala" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.FontSize" Value="Medium" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="White" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.FontFamily" Value="Nyala" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.FontSize" Value="Medium" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Shell.Resources>
+    
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid HeightRequest="50" BackgroundColor="{AppThemeBinding Dark=Black, Light=White}" >
+                <Image Grid.Row="0" Grid.Column="0" Source="{AppThemeBinding Dark=app_logo.png,Light=app_logo.png}" ScaleX="0.8" ScaleY="0.8"
+                        HorizontalOptions="Start" />
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+
+    <FlyoutItem Title="መነሻ ገጽ" Icon="{AppThemeBinding Light=icon_home.png,Dark=icon_home_white.png}">
+        <ShellContent Route="HomePage" Title="መነሻ ገጽ" ContentTemplate="{DataTemplate views:MainPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="ምድቦች" Shell.TabBarIsVisible="False" FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent Route="GroupListPage" Title="ምድቦች" Icon="{AppThemeBinding Light=icon_group.png,Dark=icon_group_white.png}" ContentTemplate="{DataTemplate views:GroupPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="አባላት" Shell.TabBarIsVisible="False" FlyoutDisplayOptions="AsMultipleItems" >
+        <ShellContent Route="GroupListPage" Title="አባላት" Icon="{AppThemeBinding Light=icon_member.png,Dark=icon_member_white.png}" ContentTemplate="{DataTemplate views:MemberPage}" />
+        <ShellContent Route="MemberEditPage" Title="ዝርዝር መረጃ ማስገቢያ" Icon="{AppThemeBinding Light=icon_member_edit.png,Dark=icon_member_edit_white.png}" ContentTemplate="{DataTemplate views:MemberEditPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="ሪፖርት/ቻርት" Shell.TabBarIsVisible="False" FlyoutDisplayOptions="AsMultipleItems" >
+        <ShellContent Route="ReportsPage" Title="ሪፖርት" Icon="{AppThemeBinding Light=icon_report.png,Dark=icon_report_white.png}" ContentTemplate="{DataTemplate views:ReportsPage}" />
+        <ShellContent Route="ChartsPage" Title="ቻርት" Icon="{AppThemeBinding Light=icon_graph.png,Dark=icon_graph_white.png}" ContentTemplate="{DataTemplate views:ChartsPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="መቼቶች" Icon="{AppThemeBinding Light=icon_settings.png,Dark=icon_settings_white.png}">
+        <ShellContent Route="SettingPage" Title="መቼቶች" ContentTemplate="{DataTemplate views:SettingPage}" />
+    </FlyoutItem>
+
+    <!--<TabBar>
+        <ShellContent Title="ግላዊ" Icon="personal.png" ContentTemplate="{DataTemplate views:PhotoPage}"/>
+        <ShellContent Title="ፎቶ" Icon="photo.png" ContentTemplate="{DataTemplate local:MainPage}"/>
+        <ShellContent Title="አድራሻ" Icon="address.png" ContentTemplate="{DataTemplate views:GroupPage}"/>
+        <ShellContent Title="ቤተሰብ" Icon="family.png" ContentTemplate="{DataTemplate views:FamilyInfoPage}"/>
+        <ShellContent Title="አገልግሎት" Icon="service.png" ContentTemplate="{DataTemplate views:ServicePage}"/>
+        <ShellContent Title="ትምህርት/ሥራ" Icon="education.png" ContentTemplate="{DataTemplate views:EducationAndJobInfoPage}"/>
+    </TabBar>-->
+
+    <TabBar>
+        <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate views:LoginPage}" /> <!-- set Shell.NavBarIsVisible="False" to hide flyout menu item -->
+    </TabBar>
+</Shell>

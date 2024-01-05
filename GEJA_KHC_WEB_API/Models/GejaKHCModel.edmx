@@ -1,0 +1,1667 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Geja_KHC_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AddressInfo">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="SubcityId" Type="int" />
+          <Property Name="Woreda" Type="nvarchar" MaxLength="30" />
+          <Property Name="Kebele" Type="nvarchar" MaxLength="30" />
+          <Property Name="HouseNo" Type="nvarchar" MaxLength="30" />
+          <Property Name="HouseOwnershipId" Type="int" />
+          <Property Name="HomePhoneNo" Type="nvarchar" MaxLength="30" />
+          <Property Name="OfficePhoneNo" Type="nvarchar" MaxLength="30" />
+          <Property Name="MobilePhoneNo" Type="nvarchar" MaxLength="30" />
+          <Property Name="Email" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EducationAndJobInfo">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="EducationLevelId" Type="int" />
+          <Property Name="FieldOfStudyId" Type="int" />
+          <Property Name="JobId" Type="int" />
+          <Property Name="JobTypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="EducationLevel">
+          <Key>
+            <PropertyRef Name="EducationLevelId" />
+          </Key>
+          <Property Name="EducationLevelId" Type="int" Nullable="false" />
+          <Property Name="EducationLevelName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="FamilyInfo">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="MaritalStatusId" Type="int" Nullable="false" />
+          <Property Name="SpouseName" Type="nvarchar" MaxLength="15" />
+          <Property Name="MarriageYear" Type="int" />
+          <Property Name="NoOfSons" Type="int" />
+          <Property Name="NoOfDaughters" Type="int" />
+          <Property Name="NoOfSons1to5" Type="int" />
+          <Property Name="NoOfDaughters1to5" Type="int" />
+          <Property Name="NoOfSons6to12" Type="int" />
+          <Property Name="NoOfDaughters6to12" Type="int" />
+          <Property Name="NoOfSons13to20" Type="int" />
+          <Property Name="NoOfDaughters13to20" Type="int" />
+          <Property Name="NoOfSonsAbove20" Type="int" />
+          <Property Name="NoOfDaughtersAbove20" Type="int" />
+        </EntityType>
+        <EntityType Name="FieldOfStudy">
+          <Key>
+            <PropertyRef Name="FieldOfStudyId" />
+          </Key>
+          <Property Name="FieldOfStudyId" Type="int" Nullable="false" />
+          <Property Name="FieldOfStudyName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="EnglishName" Type="nvarchar" MaxLength="30" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="GenderId" />
+          </Key>
+          <Property Name="GenderId" Type="int" Nullable="false" />
+          <Property Name="GenderName" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Pastor" Type="nvarchar" MaxLength="30" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="HouseOwnershipType">
+          <Key>
+            <PropertyRef Name="HouseOwnershipTypeId" />
+          </Key>
+          <Property Name="HouseOwnershipTypeId" Type="int" Nullable="false" />
+          <Property Name="HouseOwnershipTypeName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="JobId" />
+          </Key>
+          <Property Name="JobId" Type="int" Nullable="false" />
+          <Property Name="JobName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="JobType">
+          <Key>
+            <PropertyRef Name="JobTypeId" />
+          </Key>
+          <Property Name="JobTypeId" Type="int" Nullable="false" />
+          <Property Name="JobTypeName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MaritalStatus">
+          <Key>
+            <PropertyRef Name="MaritalStatusId" />
+          </Key>
+          <Property Name="MaritalStatusId" Type="int" Nullable="false" />
+          <Property Name="MaritalStatusName" Type="nvarchar" MaxLength="30" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="30" />
+          <Property Name="MotherName" Type="nvarchar" MaxLength="30" />
+          <Property Name="GenderId" Type="int" />
+          <Property Name="BirthDate" Type="int" />
+          <Property Name="BirthMonthId" Type="int" />
+          <Property Name="BirthYear" Type="int" />
+          <Property Name="GroupId" Type="int" />
+          <Property Name="MembershipDate" Type="int" />
+          <Property Name="MembershipMonthId" Type="int" />
+          <Property Name="MembershipYear" Type="int" />
+          <Property Name="MembershipMeansId" Type="int" />
+          <Property Name="NoServiceReason" Type="nvarchar" MaxLength="100" />
+          <Property Name="NoServiceReason2" Type="nvarchar" MaxLength="100" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="MemberPhoto">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="PhotoFilePath" Type="nvarchar" MaxLength="50" />
+          <Property Name="Photo" Type="varbinary(max)" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="MemberService">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberId" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="ServiceTypeId" Type="int" />
+          <Property Name="ServiceId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MembershipMeans">
+          <Key>
+            <PropertyRef Name="MembershipMeansId" />
+          </Key>
+          <Property Name="MembershipMeansId" Type="int" Nullable="false" />
+          <Property Name="MembershipMeansName" Type="nvarchar" MaxLength="30" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Month">
+          <Key>
+            <PropertyRef Name="MonthId" />
+          </Key>
+          <Property Name="MonthId" Type="int" Nullable="false" />
+          <Property Name="MonthName" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="ServiceId" />
+          </Key>
+          <Property Name="ServiceId" Type="int" Nullable="false" />
+          <Property Name="ServiceName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ServiceType">
+          <Key>
+            <PropertyRef Name="ServiceTypeId" />
+          </Key>
+          <Property Name="ServiceTypeId" Type="int" Nullable="false" />
+          <Property Name="ServiceTypeName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Subcity">
+          <Key>
+            <PropertyRef Name="SubcityId" />
+          </Key>
+          <Property Name="SubcityId" Type="int" Nullable="false" />
+          <Property Name="SubcityName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Geja_KHC.dbo.EducationLevelByGroup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="EducationLevelByGroup">
+          <Key>
+            <PropertyRef Name="GroupId" />
+            <PropertyRef Name="GroupName" />
+          </Key>
+          <Property Name="RowId" Type="bigint" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Total" Type="int" />
+          <Property Name="Unknown" Type="int" />
+          <Property Name="TwelveIncomplete" Type="int" />
+          <Property Name="TwelveComplete" Type="int" />
+          <Property Name="Certificate" Type="int" />
+          <Property Name="Diploma" Type="int" />
+          <Property Name="FirstDegree" Type="int" />
+          <Property Name="SecondDegree" Type="int" />
+          <Property Name="ThirdDegree" Type="int" />
+          <Property Name="Professor" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Geja_KHC.dbo.GenderByGroup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="GenderByGroup">
+          <Key>
+            <PropertyRef Name="GroupId" />
+            <PropertyRef Name="GroupName" />
+          </Key>
+          <Property Name="RowId" Type="bigint" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Total" Type="int" />
+          <Property Name="Male" Type="int" />
+          <Property Name="Female" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Geja_KHC.dbo.MaritalStatusByGroup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MaritalStatusByGroup">
+          <Key>
+            <PropertyRef Name="GroupId" />
+            <PropertyRef Name="GroupName" />
+          </Key>
+          <Property Name="RowId" Type="bigint" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Total" Type="int" />
+          <Property Name="Unknown" Type="int" />
+          <Property Name="Single" Type="int" />
+          <Property Name="Married" Type="int" />
+          <Property Name="Divorced" Type="int" />
+          <Property Name="Widowed" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Geja_KHC.dbo.MembershipMeansByGroup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MembershipMeansByGroup">
+          <Key>
+            <PropertyRef Name="GroupId" />
+            <PropertyRef Name="GroupName" />
+          </Key>
+          <Property Name="RowId" Type="bigint" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Total" Type="int" />
+          <Property Name="Unknown" Type="int" />
+          <Property Name="FromSundaySchool" Type="int" />
+          <Property Name="Baptism" Type="int" />
+          <Property Name="Transfer" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Geja_KHC.dbo.SubcityByGroup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SubcityByGroup">
+          <Key>
+            <PropertyRef Name="GroupId" />
+            <PropertyRef Name="GroupName" />
+          </Key>
+          <Property Name="RowId" Type="bigint" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Total" Type="int" />
+          <Property Name="Unknown" Type="int" />
+          <Property Name="Lideta" Type="int" />
+          <Property Name="AddisKetema" Type="int" />
+          <Property Name="KolfeKeraniyo" Type="int" />
+          <Property Name="Arada" Type="int" />
+          <Property Name="Gulele" Type="int" />
+          <Property Name="Kirkos" Type="int" />
+          <Property Name="Yeka" Type="int" />
+          <Property Name="Bole" Type="int" />
+          <Property Name="NifasSilkLafto" Type="int" />
+          <Property Name="AkakiKality" Type="int" />
+          <Property Name="LemiKura" Type="int" />
+        </EntityType>
+        <Association Name="FK_AddressInfo_HouseOwnershipType">
+          <End Role="HouseOwnershipType" Type="Self.HouseOwnershipType" Multiplicity="0..1" />
+          <End Role="AddressInfo" Type="Self.AddressInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HouseOwnershipType">
+              <PropertyRef Name="HouseOwnershipTypeId" />
+            </Principal>
+            <Dependent Role="AddressInfo">
+              <PropertyRef Name="HouseOwnershipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AddressInfo_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AddressInfo" Type="Self.AddressInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="AddressInfo">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AddressInfo_Subcity">
+          <End Role="Subcity" Type="Self.Subcity" Multiplicity="0..1" />
+          <End Role="AddressInfo" Type="Self.AddressInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subcity">
+              <PropertyRef Name="SubcityId" />
+            </Principal>
+            <Dependent Role="AddressInfo">
+              <PropertyRef Name="SubcityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducationAndJobInfo_EducationLevel">
+          <End Role="EducationLevel" Type="Self.EducationLevel" Multiplicity="0..1" />
+          <End Role="EducationAndJobInfo" Type="Self.EducationAndJobInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EducationLevel">
+              <PropertyRef Name="EducationLevelId" />
+            </Principal>
+            <Dependent Role="EducationAndJobInfo">
+              <PropertyRef Name="EducationLevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducationAndJobInfo_FieldOfStudy">
+          <End Role="FieldOfStudy" Type="Self.FieldOfStudy" Multiplicity="0..1" />
+          <End Role="EducationAndJobInfo" Type="Self.EducationAndJobInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FieldOfStudy">
+              <PropertyRef Name="FieldOfStudyId" />
+            </Principal>
+            <Dependent Role="EducationAndJobInfo">
+              <PropertyRef Name="FieldOfStudyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducationAndJobInfo_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="0..1" />
+          <End Role="EducationAndJobInfo" Type="Self.EducationAndJobInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobId" />
+            </Principal>
+            <Dependent Role="EducationAndJobInfo">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducationAndJobInfo_JobType">
+          <End Role="JobType" Type="Self.JobType" Multiplicity="0..1" />
+          <End Role="EducationAndJobInfo" Type="Self.EducationAndJobInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobType">
+              <PropertyRef Name="JobTypeId" />
+            </Principal>
+            <Dependent Role="EducationAndJobInfo">
+              <PropertyRef Name="JobTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducationAndJobInfo_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EducationAndJobInfo" Type="Self.EducationAndJobInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="EducationAndJobInfo">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FamilyInfo_MaritalStatus">
+          <End Role="MaritalStatus" Type="Self.MaritalStatus" Multiplicity="1" />
+          <End Role="FamilyInfo" Type="Self.FamilyInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaritalStatus">
+              <PropertyRef Name="MaritalStatusId" />
+            </Principal>
+            <Dependent Role="FamilyInfo">
+              <PropertyRef Name="MaritalStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FamilyInfo_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FamilyInfo" Type="Self.FamilyInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="FamilyInfo">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MembeMembershipMonth">
+          <End Role="Month" Type="Self.Month" Multiplicity="0..1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Month">
+              <PropertyRef Name="MonthId" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="MembershipMonthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_BirthMonth">
+          <End Role="Month" Type="Self.Month" Multiplicity="0..1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Month">
+              <PropertyRef Name="MonthId" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="BirthMonthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderId" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="0..1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_MembershipMeans">
+          <End Role="MembershipMeans" Type="Self.MembershipMeans" Multiplicity="0..1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipMeans">
+              <PropertyRef Name="MembershipMeansId" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="MembershipMeansId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberPhoto_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MemberPhoto" Type="Self.MemberPhoto" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="MemberPhoto">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberService_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MemberService" Type="Self.MemberService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="MemberService">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberService_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="MemberService" Type="Self.MemberService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ServiceId" />
+            </Principal>
+            <Dependent Role="MemberService">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberService_ServiceType">
+          <End Role="ServiceType" Type="Self.ServiceType" Multiplicity="0..1" />
+          <End Role="MemberService" Type="Self.MemberService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceType">
+              <PropertyRef Name="ServiceTypeId" />
+            </Principal>
+            <Dependent Role="MemberService">
+              <PropertyRef Name="ServiceTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Geja_KHC_ModelStoreContainer">
+          <EntitySet Name="AddressInfo" EntityType="Self.AddressInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EducationAndJobInfo" EntityType="Self.EducationAndJobInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EducationLevel" EntityType="Self.EducationLevel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FamilyInfo" EntityType="Self.FamilyInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FieldOfStudy" EntityType="Self.FieldOfStudy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HouseOwnershipType" EntityType="Self.HouseOwnershipType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Job" EntityType="Self.Job" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobType" EntityType="Self.JobType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaritalStatus" EntityType="Self.MaritalStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemberPhoto" EntityType="Self.MemberPhoto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemberService" EntityType="Self.MemberService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MembershipMeans" EntityType="Self.MembershipMeans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Month" EntityType="Self.Month" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceType" EntityType="Self.ServiceType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subcity" EntityType="Self.Subcity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EducationLevelByGroup" EntityType="Self.EducationLevelByGroup" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [EducationLevelByGroup].[RowId] AS [RowId], 
+    [EducationLevelByGroup].[GroupId] AS [GroupId], 
+    [EducationLevelByGroup].[GroupName] AS [GroupName], 
+    [EducationLevelByGroup].[Total] AS [Total], 
+    [EducationLevelByGroup].[Unknown] AS [Unknown], 
+    [EducationLevelByGroup].[TwelveIncomplete] AS [TwelveIncomplete], 
+    [EducationLevelByGroup].[TwelveComplete] AS [TwelveComplete], 
+    [EducationLevelByGroup].[Certificate] AS [Certificate], 
+    [EducationLevelByGroup].[Diploma] AS [Diploma], 
+    [EducationLevelByGroup].[FirstDegree] AS [FirstDegree], 
+    [EducationLevelByGroup].[SecondDegree] AS [SecondDegree], 
+    [EducationLevelByGroup].[ThirdDegree] AS [ThirdDegree], 
+    [EducationLevelByGroup].[Professor] AS [Professor]
+    FROM [dbo].[EducationLevelByGroup] AS [EducationLevelByGroup]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="GenderByGroup" EntityType="Self.GenderByGroup" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [GenderByGroup].[RowId] AS [RowId], 
+    [GenderByGroup].[GroupId] AS [GroupId], 
+    [GenderByGroup].[GroupName] AS [GroupName], 
+    [GenderByGroup].[Total] AS [Total], 
+    [GenderByGroup].[Male] AS [Male], 
+    [GenderByGroup].[Female] AS [Female]
+    FROM [dbo].[GenderByGroup] AS [GenderByGroup]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MaritalStatusByGroup" EntityType="Self.MaritalStatusByGroup" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MaritalStatusByGroup].[RowId] AS [RowId], 
+    [MaritalStatusByGroup].[GroupId] AS [GroupId], 
+    [MaritalStatusByGroup].[GroupName] AS [GroupName], 
+    [MaritalStatusByGroup].[Total] AS [Total], 
+    [MaritalStatusByGroup].[Unknown] AS [Unknown], 
+    [MaritalStatusByGroup].[Single] AS [Single], 
+    [MaritalStatusByGroup].[Married] AS [Married], 
+    [MaritalStatusByGroup].[Divorced] AS [Divorced], 
+    [MaritalStatusByGroup].[Widowed] AS [Widowed]
+    FROM [dbo].[MaritalStatusByGroup] AS [MaritalStatusByGroup]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MembershipMeansByGroup" EntityType="Self.MembershipMeansByGroup" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MembershipMeansByGroup].[RowId] AS [RowId], 
+    [MembershipMeansByGroup].[GroupId] AS [GroupId], 
+    [MembershipMeansByGroup].[GroupName] AS [GroupName], 
+    [MembershipMeansByGroup].[Total] AS [Total], 
+    [MembershipMeansByGroup].[Unknown] AS [Unknown], 
+    [MembershipMeansByGroup].[FromSundaySchool] AS [FromSundaySchool], 
+    [MembershipMeansByGroup].[Baptism] AS [Baptism], 
+    [MembershipMeansByGroup].[Transfer] AS [Transfer]
+    FROM [dbo].[MembershipMeansByGroup] AS [MembershipMeansByGroup]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SubcityByGroup" EntityType="Self.SubcityByGroup" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SubcityByGroup].[RowId] AS [RowId], 
+    [SubcityByGroup].[GroupId] AS [GroupId], 
+    [SubcityByGroup].[GroupName] AS [GroupName], 
+    [SubcityByGroup].[Total] AS [Total], 
+    [SubcityByGroup].[Unknown] AS [Unknown], 
+    [SubcityByGroup].[Lideta] AS [Lideta], 
+    [SubcityByGroup].[AddisKetema] AS [AddisKetema], 
+    [SubcityByGroup].[KolfeKeraniyo] AS [KolfeKeraniyo], 
+    [SubcityByGroup].[Arada] AS [Arada], 
+    [SubcityByGroup].[Gulele] AS [Gulele], 
+    [SubcityByGroup].[Kirkos] AS [Kirkos], 
+    [SubcityByGroup].[Yeka] AS [Yeka], 
+    [SubcityByGroup].[Bole] AS [Bole], 
+    [SubcityByGroup].[NifasSilkLafto] AS [NifasSilkLafto], 
+    [SubcityByGroup].[AkakiKality] AS [AkakiKality], 
+    [SubcityByGroup].[LemiKura] AS [LemiKura]
+    FROM [dbo].[SubcityByGroup] AS [SubcityByGroup]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_AddressInfo_HouseOwnershipType" Association="Self.FK_AddressInfo_HouseOwnershipType">
+            <End Role="HouseOwnershipType" EntitySet="HouseOwnershipType" />
+            <End Role="AddressInfo" EntitySet="AddressInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AddressInfo_Member" Association="Self.FK_AddressInfo_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="AddressInfo" EntitySet="AddressInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AddressInfo_Subcity" Association="Self.FK_AddressInfo_Subcity">
+            <End Role="Subcity" EntitySet="Subcity" />
+            <End Role="AddressInfo" EntitySet="AddressInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducationAndJobInfo_EducationLevel" Association="Self.FK_EducationAndJobInfo_EducationLevel">
+            <End Role="EducationLevel" EntitySet="EducationLevel" />
+            <End Role="EducationAndJobInfo" EntitySet="EducationAndJobInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducationAndJobInfo_FieldOfStudy" Association="Self.FK_EducationAndJobInfo_FieldOfStudy">
+            <End Role="FieldOfStudy" EntitySet="FieldOfStudy" />
+            <End Role="EducationAndJobInfo" EntitySet="EducationAndJobInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducationAndJobInfo_Job" Association="Self.FK_EducationAndJobInfo_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="EducationAndJobInfo" EntitySet="EducationAndJobInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducationAndJobInfo_JobType" Association="Self.FK_EducationAndJobInfo_JobType">
+            <End Role="JobType" EntitySet="JobType" />
+            <End Role="EducationAndJobInfo" EntitySet="EducationAndJobInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducationAndJobInfo_Member" Association="Self.FK_EducationAndJobInfo_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="EducationAndJobInfo" EntitySet="EducationAndJobInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FamilyInfo_MaritalStatus" Association="Self.FK_FamilyInfo_MaritalStatus">
+            <End Role="MaritalStatus" EntitySet="MaritalStatus" />
+            <End Role="FamilyInfo" EntitySet="FamilyInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FamilyInfo_Member" Association="Self.FK_FamilyInfo_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="FamilyInfo" EntitySet="FamilyInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MembeMembershipMonth" Association="Self.FK_MembeMembershipMonth">
+            <End Role="Month" EntitySet="Month" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_BirthMonth" Association="Self.FK_Member_BirthMonth">
+            <End Role="Month" EntitySet="Month" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Gender" Association="Self.FK_Member_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Group" Association="Self.FK_Member_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_MembershipMeans" Association="Self.FK_Member_MembershipMeans">
+            <End Role="MembershipMeans" EntitySet="MembershipMeans" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberPhoto_Member" Association="Self.FK_MemberPhoto_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="MemberPhoto" EntitySet="MemberPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberService_Member" Association="Self.FK_MemberService_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="MemberService" EntitySet="MemberService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberService_Service" Association="Self.FK_MemberService_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="MemberService" EntitySet="MemberService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberService_ServiceType" Association="Self.FK_MemberService_ServiceType">
+            <End Role="ServiceType" EntitySet="ServiceType" />
+            <End Role="MemberService" EntitySet="MemberService" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Geja_KHC_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Geja_KHC_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AddressInfo" EntityType="Geja_KHC_Model.AddressInfo" />
+          <EntitySet Name="EducationAndJobInfo" EntityType="Geja_KHC_Model.EducationAndJobInfo" />
+          <EntitySet Name="EducationLevel" EntityType="Geja_KHC_Model.EducationLevel" />
+          <EntitySet Name="FamilyInfo" EntityType="Geja_KHC_Model.FamilyInfo" />
+          <EntitySet Name="FieldOfStudy" EntityType="Geja_KHC_Model.FieldOfStudy" />
+          <EntitySet Name="Group" EntityType="Geja_KHC_Model.Group" />
+          <EntitySet Name="HouseOwnershipType" EntityType="Geja_KHC_Model.HouseOwnershipType" />
+          <EntitySet Name="Job" EntityType="Geja_KHC_Model.Job" />
+          <EntitySet Name="JobType" EntityType="Geja_KHC_Model.JobType" />
+          <EntitySet Name="MaritalStatus" EntityType="Geja_KHC_Model.MaritalStatus" />
+          <EntitySet Name="MemberService" EntityType="Geja_KHC_Model.MemberService" />
+          <EntitySet Name="MembershipMeans" EntityType="Geja_KHC_Model.MembershipMeans" />
+          <EntitySet Name="Month" EntityType="Geja_KHC_Model.Month" />
+          <EntitySet Name="Service" EntityType="Geja_KHC_Model.Service" />
+          <EntitySet Name="ServiceType" EntityType="Geja_KHC_Model.ServiceType" />
+          <EntitySet Name="Subcity" EntityType="Geja_KHC_Model.Subcity" />
+          <AssociationSet Name="FK_AddressInfo_HouseOwnershipType" Association="Geja_KHC_Model.FK_AddressInfo_HouseOwnershipType">
+            <End Role="HouseOwnershipType" EntitySet="HouseOwnershipType" />
+            <End Role="AddressInfo" EntitySet="AddressInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AddressInfo_Subcity" Association="Geja_KHC_Model.FK_AddressInfo_Subcity">
+            <End Role="Subcity" EntitySet="Subcity" />
+            <End Role="AddressInfo" EntitySet="AddressInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducationAndJobInfo_EducationLevel" Association="Geja_KHC_Model.FK_EducationAndJobInfo_EducationLevel">
+            <End Role="EducationLevel" EntitySet="EducationLevel" />
+            <End Role="EducationAndJobInfo" EntitySet="EducationAndJobInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducationAndJobInfo_FieldOfStudy" Association="Geja_KHC_Model.FK_EducationAndJobInfo_FieldOfStudy">
+            <End Role="FieldOfStudy" EntitySet="FieldOfStudy" />
+            <End Role="EducationAndJobInfo" EntitySet="EducationAndJobInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducationAndJobInfo_Job" Association="Geja_KHC_Model.FK_EducationAndJobInfo_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="EducationAndJobInfo" EntitySet="EducationAndJobInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducationAndJobInfo_JobType" Association="Geja_KHC_Model.FK_EducationAndJobInfo_JobType">
+            <End Role="JobType" EntitySet="JobType" />
+            <End Role="EducationAndJobInfo" EntitySet="EducationAndJobInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FamilyInfo_MaritalStatus" Association="Geja_KHC_Model.FK_FamilyInfo_MaritalStatus">
+            <End Role="MaritalStatus" EntitySet="MaritalStatus" />
+            <End Role="FamilyInfo" EntitySet="FamilyInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberService_Service" Association="Geja_KHC_Model.FK_MemberService_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="MemberService" EntitySet="MemberService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberService_ServiceType" Association="Geja_KHC_Model.FK_MemberService_ServiceType">
+            <End Role="ServiceType" EntitySet="ServiceType" />
+            <End Role="MemberService" EntitySet="MemberService" />
+          </AssociationSet>
+          <EntitySet Name="Gender" EntityType="Geja_KHC_Model.Gender" />
+          <EntitySet Name="EducationLevelByGroup" EntityType="Geja_KHC_Model.EducationLevelByGroup" />
+          <EntitySet Name="GenderByGroup" EntityType="Geja_KHC_Model.GenderByGroup" />
+          <EntitySet Name="MaritalStatusByGroup" EntityType="Geja_KHC_Model.MaritalStatusByGroup" />
+          <EntitySet Name="MembershipMeansByGroup" EntityType="Geja_KHC_Model.MembershipMeansByGroup" />
+          <EntitySet Name="SubcityByGroup" EntityType="Geja_KHC_Model.SubcityByGroup" />
+          <EntitySet Name="Member" EntityType="Geja_KHC_Model.Member" />
+          <AssociationSet Name="FK_AddressInfo_Member" Association="Geja_KHC_Model.FK_AddressInfo_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="AddressInfo" EntitySet="AddressInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducationAndJobInfo_Member" Association="Geja_KHC_Model.FK_EducationAndJobInfo_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="EducationAndJobInfo" EntitySet="EducationAndJobInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FamilyInfo_Member" Association="Geja_KHC_Model.FK_FamilyInfo_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="FamilyInfo" EntitySet="FamilyInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Gender" Association="Geja_KHC_Model.FK_Member_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Group" Association="Geja_KHC_Model.FK_Member_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MembeMembershipMonth" Association="Geja_KHC_Model.FK_MembeMembershipMonth">
+            <End Role="Month" EntitySet="Month" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_BirthMonth" Association="Geja_KHC_Model.FK_Member_BirthMonth">
+            <End Role="Month" EntitySet="Month" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_MembershipMeans" Association="Geja_KHC_Model.FK_Member_MembershipMeans">
+            <End Role="MembershipMeans" EntitySet="MembershipMeans" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberService_Member" Association="Geja_KHC_Model.FK_MemberService_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="MemberService" EntitySet="MemberService" />
+          </AssociationSet>
+          <EntitySet Name="MemberPhoto" EntityType="Geja_KHC_Model.MemberPhoto" />
+          <AssociationSet Name="FK_MemberPhoto_Member" Association="Geja_KHC_Model.FK_MemberPhoto_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="MemberPhoto" EntitySet="MemberPhoto" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="AddressInfo">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="SubcityId" Type="Int32" />
+          <Property Name="Woreda" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Kebele" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="HouseNo" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="HouseOwnershipId" Type="Int32" />
+          <Property Name="HomePhoneNo" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="OfficePhoneNo" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="MobilePhoneNo" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HouseOwnershipType" Relationship="Geja_KHC_Model.FK_AddressInfo_HouseOwnershipType" FromRole="AddressInfo" ToRole="HouseOwnershipType" />
+          <NavigationProperty Name="Subcity" Relationship="Geja_KHC_Model.FK_AddressInfo_Subcity" FromRole="AddressInfo" ToRole="Subcity" />
+          <NavigationProperty Name="Member" Relationship="Geja_KHC_Model.FK_AddressInfo_Member" FromRole="AddressInfo" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="EducationAndJobInfo">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="EducationLevelId" Type="Int32" />
+          <Property Name="FieldOfStudyId" Type="Int32" />
+          <Property Name="JobId" Type="Int32" />
+          <Property Name="JobTypeId" Type="Int32" />
+          <NavigationProperty Name="EducationLevel" Relationship="Geja_KHC_Model.FK_EducationAndJobInfo_EducationLevel" FromRole="EducationAndJobInfo" ToRole="EducationLevel" />
+          <NavigationProperty Name="FieldOfStudy" Relationship="Geja_KHC_Model.FK_EducationAndJobInfo_FieldOfStudy" FromRole="EducationAndJobInfo" ToRole="FieldOfStudy" />
+          <NavigationProperty Name="Job" Relationship="Geja_KHC_Model.FK_EducationAndJobInfo_Job" FromRole="EducationAndJobInfo" ToRole="Job" />
+          <NavigationProperty Name="JobType" Relationship="Geja_KHC_Model.FK_EducationAndJobInfo_JobType" FromRole="EducationAndJobInfo" ToRole="JobType" />
+          <NavigationProperty Name="Member" Relationship="Geja_KHC_Model.FK_EducationAndJobInfo_Member" FromRole="EducationAndJobInfo" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="EducationLevel">
+          <Key>
+            <PropertyRef Name="EducationLevelId" />
+          </Key>
+          <Property Name="EducationLevelId" Type="Int32" Nullable="false" />
+          <Property Name="EducationLevelName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EducationAndJobInfo" Relationship="Geja_KHC_Model.FK_EducationAndJobInfo_EducationLevel" FromRole="EducationLevel" ToRole="EducationAndJobInfo" />
+        </EntityType>
+        <EntityType Name="FamilyInfo">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="MaritalStatusId" Type="Int32" Nullable="false" />
+          <Property Name="SpouseName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="MarriageYear" Type="Int32" />
+          <Property Name="NoOfSons" Type="Int32" />
+          <Property Name="NoOfDaughters" Type="Int32" />
+          <Property Name="NoOfSons1to5" Type="Int32" />
+          <Property Name="NoOfDaughters1to5" Type="Int32" />
+          <Property Name="NoOfSons6to12" Type="Int32" />
+          <Property Name="NoOfDaughters6to12" Type="Int32" />
+          <Property Name="NoOfSons13to20" Type="Int32" />
+          <Property Name="NoOfDaughters13to20" Type="Int32" />
+          <Property Name="NoOfSonsAbove20" Type="Int32" />
+          <Property Name="NoOfDaughtersAbove20" Type="Int32" />
+          <NavigationProperty Name="MaritalStatus" Relationship="Geja_KHC_Model.FK_FamilyInfo_MaritalStatus" FromRole="FamilyInfo" ToRole="MaritalStatus" />
+          <NavigationProperty Name="Member" Relationship="Geja_KHC_Model.FK_FamilyInfo_Member" FromRole="FamilyInfo" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="FieldOfStudy">
+          <Key>
+            <PropertyRef Name="FieldOfStudyId" />
+          </Key>
+          <Property Name="FieldOfStudyId" Type="Int32" Nullable="false" />
+          <Property Name="FieldOfStudyName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="EnglishName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EducationAndJobInfo" Relationship="Geja_KHC_Model.FK_EducationAndJobInfo_FieldOfStudy" FromRole="FieldOfStudy" ToRole="EducationAndJobInfo" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Pastor" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Member" Relationship="Geja_KHC_Model.FK_Member_Group" FromRole="Group" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="HouseOwnershipType">
+          <Key>
+            <PropertyRef Name="HouseOwnershipTypeId" />
+          </Key>
+          <Property Name="HouseOwnershipTypeId" Type="Int32" Nullable="false" />
+          <Property Name="HouseOwnershipTypeName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AddressInfo" Relationship="Geja_KHC_Model.FK_AddressInfo_HouseOwnershipType" FromRole="HouseOwnershipType" ToRole="AddressInfo" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="JobId" />
+          </Key>
+          <Property Name="JobId" Type="Int32" Nullable="false" />
+          <Property Name="JobName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EducationAndJobInfo" Relationship="Geja_KHC_Model.FK_EducationAndJobInfo_Job" FromRole="Job" ToRole="EducationAndJobInfo" />
+        </EntityType>
+        <EntityType Name="JobType">
+          <Key>
+            <PropertyRef Name="JobTypeId" />
+          </Key>
+          <Property Name="JobTypeId" Type="Int32" Nullable="false" />
+          <Property Name="JobTypeName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EducationAndJobInfo" Relationship="Geja_KHC_Model.FK_EducationAndJobInfo_JobType" FromRole="JobType" ToRole="EducationAndJobInfo" />
+        </EntityType>
+        <EntityType Name="MaritalStatus">
+          <Key>
+            <PropertyRef Name="MaritalStatusId" />
+          </Key>
+          <Property Name="MaritalStatusId" Type="Int32" Nullable="false" />
+          <Property Name="MaritalStatusName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FamilyInfo" Relationship="Geja_KHC_Model.FK_FamilyInfo_MaritalStatus" FromRole="MaritalStatus" ToRole="FamilyInfo" />
+        </EntityType>
+        <EntityType Name="MemberService">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="ServiceTypeId" Type="Int32" />
+          <Property Name="ServiceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Service" Relationship="Geja_KHC_Model.FK_MemberService_Service" FromRole="MemberService" ToRole="Service" />
+          <NavigationProperty Name="ServiceType" Relationship="Geja_KHC_Model.FK_MemberService_ServiceType" FromRole="MemberService" ToRole="ServiceType" />
+          <NavigationProperty Name="Member" Relationship="Geja_KHC_Model.FK_MemberService_Member" FromRole="MemberService" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="MembershipMeans">
+          <Key>
+            <PropertyRef Name="MembershipMeansId" />
+          </Key>
+          <Property Name="MembershipMeansId" Type="Int32" Nullable="false" />
+          <Property Name="MembershipMeansName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Member" Relationship="Geja_KHC_Model.FK_Member_MembershipMeans" FromRole="MembershipMeans" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Month">
+          <Key>
+            <PropertyRef Name="MonthId" />
+          </Key>
+          <Property Name="MonthId" Type="Int32" Nullable="false" />
+          <Property Name="MonthName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Member" Relationship="Geja_KHC_Model.FK_MembeMembershipMonth" FromRole="Month" ToRole="Member" />
+          <NavigationProperty Name="Member1" Relationship="Geja_KHC_Model.FK_Member_BirthMonth" FromRole="Month" ToRole="Member" />
+          </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="ServiceId" />
+          </Key>
+          <Property Name="ServiceId" Type="Int32" Nullable="false" />
+          <Property Name="ServiceName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MemberService" Relationship="Geja_KHC_Model.FK_MemberService_Service" FromRole="Service" ToRole="MemberService" />
+        </EntityType>
+        <EntityType Name="ServiceType">
+          <Key>
+            <PropertyRef Name="ServiceTypeId" />
+          </Key>
+          <Property Name="ServiceTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ServiceTypeName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MemberService" Relationship="Geja_KHC_Model.FK_MemberService_ServiceType" FromRole="ServiceType" ToRole="MemberService" />
+        </EntityType>
+        <EntityType Name="Subcity">
+          <Key>
+            <PropertyRef Name="SubcityId" />
+          </Key>
+          <Property Name="SubcityId" Type="Int32" Nullable="false" />
+          <Property Name="SubcityName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AddressInfo" Relationship="Geja_KHC_Model.FK_AddressInfo_Subcity" FromRole="Subcity" ToRole="AddressInfo" />
+        </EntityType>
+        <Association Name="FK_AddressInfo_HouseOwnershipType">
+          <End Type="Geja_KHC_Model.HouseOwnershipType" Role="HouseOwnershipType" Multiplicity="0..1" />
+          <End Type="Geja_KHC_Model.AddressInfo" Role="AddressInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HouseOwnershipType">
+              <PropertyRef Name="HouseOwnershipTypeId" />
+            </Principal>
+            <Dependent Role="AddressInfo">
+              <PropertyRef Name="HouseOwnershipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AddressInfo_Subcity">
+          <End Type="Geja_KHC_Model.Subcity" Role="Subcity" Multiplicity="0..1" />
+          <End Type="Geja_KHC_Model.AddressInfo" Role="AddressInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subcity">
+              <PropertyRef Name="SubcityId" />
+            </Principal>
+            <Dependent Role="AddressInfo">
+              <PropertyRef Name="SubcityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducationAndJobInfo_EducationLevel">
+          <End Type="Geja_KHC_Model.EducationLevel" Role="EducationLevel" Multiplicity="0..1" />
+          <End Type="Geja_KHC_Model.EducationAndJobInfo" Role="EducationAndJobInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EducationLevel">
+              <PropertyRef Name="EducationLevelId" />
+            </Principal>
+            <Dependent Role="EducationAndJobInfo">
+              <PropertyRef Name="EducationLevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducationAndJobInfo_FieldOfStudy">
+          <End Type="Geja_KHC_Model.FieldOfStudy" Role="FieldOfStudy" Multiplicity="0..1" />
+          <End Type="Geja_KHC_Model.EducationAndJobInfo" Role="EducationAndJobInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FieldOfStudy">
+              <PropertyRef Name="FieldOfStudyId" />
+            </Principal>
+            <Dependent Role="EducationAndJobInfo">
+              <PropertyRef Name="FieldOfStudyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducationAndJobInfo_Job">
+          <End Type="Geja_KHC_Model.Job" Role="Job" Multiplicity="0..1" />
+          <End Type="Geja_KHC_Model.EducationAndJobInfo" Role="EducationAndJobInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobId" />
+            </Principal>
+            <Dependent Role="EducationAndJobInfo">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducationAndJobInfo_JobType">
+          <End Type="Geja_KHC_Model.JobType" Role="JobType" Multiplicity="0..1" />
+          <End Type="Geja_KHC_Model.EducationAndJobInfo" Role="EducationAndJobInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobType">
+              <PropertyRef Name="JobTypeId" />
+            </Principal>
+            <Dependent Role="EducationAndJobInfo">
+              <PropertyRef Name="JobTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FamilyInfo_MaritalStatus">
+          <End Type="Geja_KHC_Model.MaritalStatus" Role="MaritalStatus" Multiplicity="1" />
+          <End Type="Geja_KHC_Model.FamilyInfo" Role="FamilyInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaritalStatus">
+              <PropertyRef Name="MaritalStatusId" />
+            </Principal>
+            <Dependent Role="FamilyInfo">
+              <PropertyRef Name="MaritalStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberService_Service">
+          <End Type="Geja_KHC_Model.Service" Role="Service" Multiplicity="1" />
+          <End Type="Geja_KHC_Model.MemberService" Role="MemberService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ServiceId" />
+            </Principal>
+            <Dependent Role="MemberService">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberService_ServiceType">
+          <End Type="Geja_KHC_Model.ServiceType" Role="ServiceType" Multiplicity="0..1" />
+          <End Type="Geja_KHC_Model.MemberService" Role="MemberService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceType">
+              <PropertyRef Name="ServiceTypeId" />
+            </Principal>
+            <Dependent Role="MemberService">
+              <PropertyRef Name="ServiceTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="GenderId" />
+          </Key>
+          <Property Name="GenderId" Type="Int32" Nullable="false" />
+          <Property Name="GenderName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Member" Relationship="Geja_KHC_Model.FK_Member_Gender" FromRole="Gender" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="EducationLevelByGroup">
+          <Key>
+            <PropertyRef Name="GroupId" />
+            <PropertyRef Name="GroupName" />
+          </Key>
+          <Property Name="RowId" Type="Int64" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Total" Type="Int32" />
+          <Property Name="Unknown" Type="Int32" />
+          <Property Name="TwelveIncomplete" Type="Int32" />
+          <Property Name="TwelveComplete" Type="Int32" />
+          <Property Name="Certificate" Type="Int32" />
+          <Property Name="Diploma" Type="Int32" />
+          <Property Name="FirstDegree" Type="Int32" />
+          <Property Name="SecondDegree" Type="Int32" />
+          <Property Name="ThirdDegree" Type="Int32" />
+          <Property Name="Professor" Type="Int32" />
+        </EntityType>
+        <EntityType Name="GenderByGroup">
+          <Key>
+            <PropertyRef Name="GroupId" />
+            <PropertyRef Name="GroupName" />
+          </Key>
+          <Property Name="RowId" Type="Int64" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Total" Type="Int32" />
+          <Property Name="Male" Type="Int32" />
+          <Property Name="Female" Type="Int32" />
+        </EntityType>
+        <EntityType Name="MaritalStatusByGroup">
+          <Key>
+            <PropertyRef Name="GroupId" />
+            <PropertyRef Name="GroupName" />
+          </Key>
+          <Property Name="RowId" Type="Int64" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Total" Type="Int32" />
+          <Property Name="Unknown" Type="Int32" />
+          <Property Name="Single" Type="Int32" />
+          <Property Name="Married" Type="Int32" />
+          <Property Name="Divorced" Type="Int32" />
+          <Property Name="Widowed" Type="Int32" />
+        </EntityType>
+        <EntityType Name="MembershipMeansByGroup">
+          <Key>
+            <PropertyRef Name="GroupId" />
+            <PropertyRef Name="GroupName" />
+          </Key>
+          <Property Name="RowId" Type="Int64" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Total" Type="Int32" />
+          <Property Name="Unknown" Type="Int32" />
+          <Property Name="FromSundaySchool" Type="Int32" />
+          <Property Name="Baptism" Type="Int32" />
+          <Property Name="Transfer" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SubcityByGroup">
+          <Key>
+            <PropertyRef Name="GroupId" />
+            <PropertyRef Name="GroupName" />
+          </Key>
+          <Property Name="RowId" Type="Int64" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Total" Type="Int32" />
+          <Property Name="Unknown" Type="Int32" />
+          <Property Name="Lideta" Type="Int32" />
+          <Property Name="AddisKetema" Type="Int32" />
+          <Property Name="KolfeKeraniyo" Type="Int32" />
+          <Property Name="Arada" Type="Int32" />
+          <Property Name="Gulele" Type="Int32" />
+          <Property Name="Kirkos" Type="Int32" />
+          <Property Name="Yeka" Type="Int32" />
+          <Property Name="Bole" Type="Int32" />
+          <Property Name="NifasSilkLafto" Type="Int32" />
+          <Property Name="AkakiKality" Type="Int32" />
+          <Property Name="LemiKura" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="MotherName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="GenderId" Type="Int32" />
+          <Property Name="BirthDate" Type="Int32" />
+          <Property Name="BirthMonthId" Type="Int32" />
+          <Property Name="BirthYear" Type="Int32" />
+          <Property Name="GroupId" Type="Int32" />
+          <Property Name="MembershipDate" Type="Int32" />
+          <Property Name="MembershipMonthId" Type="Int32" />
+          <Property Name="MembershipYear" Type="Int32" />
+          <Property Name="MembershipMeansId" Type="Int32" />
+          <Property Name="NoServiceReason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NoServiceReason2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AddressInfo" Relationship="Geja_KHC_Model.FK_AddressInfo_Member" FromRole="Member" ToRole="AddressInfo" />
+          <NavigationProperty Name="EducationAndJobInfo" Relationship="Geja_KHC_Model.FK_EducationAndJobInfo_Member" FromRole="Member" ToRole="EducationAndJobInfo" />
+          <NavigationProperty Name="FamilyInfo" Relationship="Geja_KHC_Model.FK_FamilyInfo_Member" FromRole="Member" ToRole="FamilyInfo" />
+          <NavigationProperty Name="Gender" Relationship="Geja_KHC_Model.FK_Member_Gender" FromRole="Member" ToRole="Gender" />
+          <NavigationProperty Name="Group" Relationship="Geja_KHC_Model.FK_Member_Group" FromRole="Member" ToRole="Group" />
+          <NavigationProperty Name="Month" Relationship="Geja_KHC_Model.FK_MembeMembershipMonth" FromRole="Member" ToRole="Month" />
+          <NavigationProperty Name="Month1" Relationship="Geja_KHC_Model.FK_Member_BirthMonth" FromRole="Member" ToRole="Month" />
+          <NavigationProperty Name="MembershipMeans" Relationship="Geja_KHC_Model.FK_Member_MembershipMeans" FromRole="Member" ToRole="MembershipMeans" />
+          <NavigationProperty Name="MemberService" Relationship="Geja_KHC_Model.FK_MemberService_Member" FromRole="Member" ToRole="MemberService" />
+          <NavigationProperty Name="MemberPhoto" Relationship="Geja_KHC_Model.FK_MemberPhoto_Member" FromRole="Member" ToRole="MemberPhoto" />
+        </EntityType>
+        <Association Name="FK_AddressInfo_Member">
+          <End Type="Geja_KHC_Model.Member" Role="Member" Multiplicity="1" />
+          <End Type="Geja_KHC_Model.AddressInfo" Role="AddressInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="AddressInfo">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducationAndJobInfo_Member">
+          <End Type="Geja_KHC_Model.Member" Role="Member" Multiplicity="1" />
+          <End Type="Geja_KHC_Model.EducationAndJobInfo" Role="EducationAndJobInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="EducationAndJobInfo">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FamilyInfo_Member">
+          <End Type="Geja_KHC_Model.Member" Role="Member" Multiplicity="1" />
+          <End Type="Geja_KHC_Model.FamilyInfo" Role="FamilyInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="FamilyInfo">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Gender">
+          <End Type="Geja_KHC_Model.Gender" Role="Gender" Multiplicity="0..1" />
+          <End Type="Geja_KHC_Model.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderId" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Group">
+          <End Type="Geja_KHC_Model.Group" Role="Group" Multiplicity="0..1" />
+          <End Type="Geja_KHC_Model.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MembeMembershipMonth">
+          <End Type="Geja_KHC_Model.Month" Role="Month" Multiplicity="0..1" />
+          <End Type="Geja_KHC_Model.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Month">
+              <PropertyRef Name="MonthId" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="MembershipMonthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_BirthMonth">
+          <End Type="Geja_KHC_Model.Month" Role="Month" Multiplicity="0..1" />
+          <End Type="Geja_KHC_Model.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Month">
+              <PropertyRef Name="MonthId" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="BirthMonthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_MembershipMeans">
+          <End Type="Geja_KHC_Model.MembershipMeans" Role="MembershipMeans" Multiplicity="0..1" />
+          <End Type="Geja_KHC_Model.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipMeans">
+              <PropertyRef Name="MembershipMeansId" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="MembershipMeansId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberService_Member">
+          <End Type="Geja_KHC_Model.Member" Role="Member" Multiplicity="1" />
+          <End Type="Geja_KHC_Model.MemberService" Role="MemberService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="MemberService">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MemberPhoto">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="PhotoFilePath" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Member" Relationship="Geja_KHC_Model.FK_MemberPhoto_Member" FromRole="MemberPhoto" ToRole="Member" />
+        </EntityType>
+        <Association Name="FK_MemberPhoto_Member">
+          <End Type="Geja_KHC_Model.Member" Role="Member" Multiplicity="1" />
+          <End Type="Geja_KHC_Model.MemberPhoto" Role="MemberPhoto" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="MemberPhoto">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Geja_KHC_ModelStoreContainer" CdmEntityContainer="Geja_KHC_Entities">
+          <EntitySetMapping Name="AddressInfo">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.AddressInfo">
+              <MappingFragment StoreEntitySet="AddressInfo">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobilePhoneNo" ColumnName="MobilePhoneNo" />
+                <ScalarProperty Name="OfficePhoneNo" ColumnName="OfficePhoneNo" />
+                <ScalarProperty Name="HomePhoneNo" ColumnName="HomePhoneNo" />
+                <ScalarProperty Name="HouseOwnershipId" ColumnName="HouseOwnershipId" />
+                <ScalarProperty Name="HouseNo" ColumnName="HouseNo" />
+                <ScalarProperty Name="Kebele" ColumnName="Kebele" />
+                <ScalarProperty Name="Woreda" ColumnName="Woreda" />
+                <ScalarProperty Name="SubcityId" ColumnName="SubcityId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EducationAndJobInfo">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.EducationAndJobInfo">
+              <MappingFragment StoreEntitySet="EducationAndJobInfo">
+                <ScalarProperty Name="JobTypeId" ColumnName="JobTypeId" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="FieldOfStudyId" ColumnName="FieldOfStudyId" />
+                <ScalarProperty Name="EducationLevelId" ColumnName="EducationLevelId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EducationLevel">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.EducationLevel">
+              <MappingFragment StoreEntitySet="EducationLevel">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="EducationLevelName" ColumnName="EducationLevelName" />
+                <ScalarProperty Name="EducationLevelId" ColumnName="EducationLevelId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FamilyInfo">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.FamilyInfo">
+              <MappingFragment StoreEntitySet="FamilyInfo">
+                <ScalarProperty Name="NoOfDaughtersAbove20" ColumnName="NoOfDaughtersAbove20" />
+                <ScalarProperty Name="NoOfSonsAbove20" ColumnName="NoOfSonsAbove20" />
+                <ScalarProperty Name="NoOfDaughters13to20" ColumnName="NoOfDaughters13to20" />
+                <ScalarProperty Name="NoOfSons13to20" ColumnName="NoOfSons13to20" />
+                <ScalarProperty Name="NoOfDaughters6to12" ColumnName="NoOfDaughters6to12" />
+                <ScalarProperty Name="NoOfSons6to12" ColumnName="NoOfSons6to12" />
+                <ScalarProperty Name="NoOfDaughters1to5" ColumnName="NoOfDaughters1to5" />
+                <ScalarProperty Name="NoOfSons1to5" ColumnName="NoOfSons1to5" />
+                <ScalarProperty Name="NoOfDaughters" ColumnName="NoOfDaughters" />
+                <ScalarProperty Name="NoOfSons" ColumnName="NoOfSons" />
+                <ScalarProperty Name="MarriageYear" ColumnName="MarriageYear" />
+                <ScalarProperty Name="SpouseName" ColumnName="SpouseName" />
+                <ScalarProperty Name="MaritalStatusId" ColumnName="MaritalStatusId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FieldOfStudy">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.FieldOfStudy">
+              <MappingFragment StoreEntitySet="FieldOfStudy">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="EnglishName" ColumnName="EnglishName" />
+                <ScalarProperty Name="FieldOfStudyName" ColumnName="FieldOfStudyName" />
+                <ScalarProperty Name="FieldOfStudyId" ColumnName="FieldOfStudyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Group">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Pastor" ColumnName="Pastor" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HouseOwnershipType">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.HouseOwnershipType">
+              <MappingFragment StoreEntitySet="HouseOwnershipType">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="HouseOwnershipTypeName" ColumnName="HouseOwnershipTypeName" />
+                <ScalarProperty Name="HouseOwnershipTypeId" ColumnName="HouseOwnershipTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Job">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.Job">
+              <MappingFragment StoreEntitySet="Job">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="JobName" ColumnName="JobName" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobType">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.JobType">
+              <MappingFragment StoreEntitySet="JobType">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="JobTypeName" ColumnName="JobTypeName" />
+                <ScalarProperty Name="JobTypeId" ColumnName="JobTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaritalStatus">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.MaritalStatus">
+              <MappingFragment StoreEntitySet="MaritalStatus">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="MaritalStatusName" ColumnName="MaritalStatusName" />
+                <ScalarProperty Name="MaritalStatusId" ColumnName="MaritalStatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberService">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.MemberService">
+              <MappingFragment StoreEntitySet="MemberService">
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="ServiceTypeId" ColumnName="ServiceTypeId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MembershipMeans">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.MembershipMeans">
+              <MappingFragment StoreEntitySet="MembershipMeans">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="MembershipMeansName" ColumnName="MembershipMeansName" />
+                <ScalarProperty Name="MembershipMeansId" ColumnName="MembershipMeansId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Month">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.Month">
+              <MappingFragment StoreEntitySet="Month">
+                <ScalarProperty Name="MonthName" ColumnName="MonthName" />
+                <ScalarProperty Name="MonthId" ColumnName="MonthId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Service">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceType">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.ServiceType">
+              <MappingFragment StoreEntitySet="ServiceType">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ServiceTypeName" ColumnName="ServiceTypeName" />
+                <ScalarProperty Name="ServiceTypeId" ColumnName="ServiceTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subcity">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.Subcity">
+              <MappingFragment StoreEntitySet="Subcity">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="SubcityName" ColumnName="SubcityName" />
+                <ScalarProperty Name="SubcityId" ColumnName="SubcityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gender">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="GenderName" ColumnName="GenderName" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EducationLevelByGroup">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.EducationLevelByGroup">
+              <MappingFragment StoreEntitySet="EducationLevelByGroup">
+                <ScalarProperty Name="Professor" ColumnName="Professor" />
+                <ScalarProperty Name="ThirdDegree" ColumnName="ThirdDegree" />
+                <ScalarProperty Name="SecondDegree" ColumnName="SecondDegree" />
+                <ScalarProperty Name="FirstDegree" ColumnName="FirstDegree" />
+                <ScalarProperty Name="Diploma" ColumnName="Diploma" />
+                <ScalarProperty Name="Certificate" ColumnName="Certificate" />
+                <ScalarProperty Name="TwelveComplete" ColumnName="TwelveComplete" />
+                <ScalarProperty Name="TwelveIncomplete" ColumnName="TwelveIncomplete" />
+                <ScalarProperty Name="Unknown" ColumnName="Unknown" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="RowId" ColumnName="RowId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GenderByGroup">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.GenderByGroup">
+              <MappingFragment StoreEntitySet="GenderByGroup">
+                <ScalarProperty Name="Female" ColumnName="Female" />
+                <ScalarProperty Name="Male" ColumnName="Male" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="RowId" ColumnName="RowId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaritalStatusByGroup">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.MaritalStatusByGroup">
+              <MappingFragment StoreEntitySet="MaritalStatusByGroup">
+                <ScalarProperty Name="Widowed" ColumnName="Widowed" />
+                <ScalarProperty Name="Divorced" ColumnName="Divorced" />
+                <ScalarProperty Name="Married" ColumnName="Married" />
+                <ScalarProperty Name="Single" ColumnName="Single" />
+                <ScalarProperty Name="Unknown" ColumnName="Unknown" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="RowId" ColumnName="RowId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MembershipMeansByGroup">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.MembershipMeansByGroup">
+              <MappingFragment StoreEntitySet="MembershipMeansByGroup">
+                <ScalarProperty Name="Transfer" ColumnName="Transfer" />
+                <ScalarProperty Name="Baptism" ColumnName="Baptism" />
+                <ScalarProperty Name="FromSundaySchool" ColumnName="FromSundaySchool" />
+                <ScalarProperty Name="Unknown" ColumnName="Unknown" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="RowId" ColumnName="RowId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubcityByGroup">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.SubcityByGroup">
+              <MappingFragment StoreEntitySet="SubcityByGroup">
+                <ScalarProperty Name="LemiKura" ColumnName="LemiKura" />
+                <ScalarProperty Name="AkakiKality" ColumnName="AkakiKality" />
+                <ScalarProperty Name="NifasSilkLafto" ColumnName="NifasSilkLafto" />
+                <ScalarProperty Name="Bole" ColumnName="Bole" />
+                <ScalarProperty Name="Yeka" ColumnName="Yeka" />
+                <ScalarProperty Name="Kirkos" ColumnName="Kirkos" />
+                <ScalarProperty Name="Gulele" ColumnName="Gulele" />
+                <ScalarProperty Name="Arada" ColumnName="Arada" />
+                <ScalarProperty Name="KolfeKeraniyo" ColumnName="KolfeKeraniyo" />
+                <ScalarProperty Name="AddisKetema" ColumnName="AddisKetema" />
+                <ScalarProperty Name="Lideta" ColumnName="Lideta" />
+                <ScalarProperty Name="Unknown" ColumnName="Unknown" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="RowId" ColumnName="RowId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Member">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.Member">
+              <MappingFragment StoreEntitySet="Member">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="NoServiceReason2" ColumnName="NoServiceReason2" />
+                <ScalarProperty Name="NoServiceReason" ColumnName="NoServiceReason" />
+                <ScalarProperty Name="MembershipMeansId" ColumnName="MembershipMeansId" />
+                <ScalarProperty Name="MembershipYear" ColumnName="MembershipYear" />
+                <ScalarProperty Name="MembershipMonthId" ColumnName="MembershipMonthId" />
+                <ScalarProperty Name="MembershipDate" ColumnName="MembershipDate" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="BirthYear" ColumnName="BirthYear" />
+                <ScalarProperty Name="BirthMonthId" ColumnName="BirthMonthId" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberPhoto">
+            <EntityTypeMapping TypeName="Geja_KHC_Model.MemberPhoto">
+              <MappingFragment StoreEntitySet="MemberPhoto">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="PhotoFilePath" ColumnName="PhotoFilePath" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
